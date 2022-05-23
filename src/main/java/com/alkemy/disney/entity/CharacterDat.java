@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,9 +26,10 @@ public class CharacterDat {
 
     private Float weight;
 
-    private String history;
+    @Size(max=10000)
+    private String story;
 
-    @ManyToMany(mappedBy = "characters",fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "characters",fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     Set<Film> actFilm = new HashSet<>();
 
 
