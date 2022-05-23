@@ -1,6 +1,5 @@
 package com.alkemy.disney.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +11,7 @@ import java.util.Set;
 @Table(name = "personaje")
 @Getter
 @Setter
-public class Personaje {
+public class CharacterDat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

@@ -1,9 +1,7 @@
 package com.alkemy.disney.entity;
 
 import javax.persistence.*;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -22,5 +20,5 @@ public class Film {
         this.id = id;
     }
 
-    Set<Personaje> characters = new HashSet<>();
+    Set<CharacterDat> characters = new HashSet<>();
 }
