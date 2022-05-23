@@ -26,12 +26,6 @@ public class Film {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     Set<CharacterDat> characters = new HashSet<>();
 
-    @JoinTable(
-            name = "rel_film_character",
-            joinColumns = @JoinColumn(name = "IDfilm", nullable = false),
-            inverseJoinColumns = @JoinColumn(name="IDcharacter", nullable = false)
-    )
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Genre genre;
 }
