@@ -1,7 +1,9 @@
 package com.alkemy.disney.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +14,7 @@ import java.util.Set;
 @Table(name = "films")
 @Getter
 @Setter
+@ToString
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,13 +22,18 @@ public class Film {
     private Long id;
 
     private String title;
-    private Integer rating;
+    private Double rating;
+
+    @Transient
+    private String date;
+
     private Date releaseDate;
     private String coverImage;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     Set<CharacterDat> characters = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     private Genre genre;
 }

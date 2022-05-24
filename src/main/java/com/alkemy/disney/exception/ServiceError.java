@@ -1,4 +1,4 @@
-package com.alkemy.disney.Exceptions;
+package com.alkemy.disney.exception;
 
 public class ServiceError extends Exception{
     public ServiceError(String msn) {
