@@ -4,6 +4,8 @@ import com.alkemy.disney.dto.Characters.CharactersDTO;
 import com.alkemy.disney.dto.Characters.DeleteCharactersDTO;
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 
+import java.util.List;
+
 public interface charactersServiceInterface {
 
     CharactersDTO newCharacter (PostCharactersDTO newChara );
@@ -11,5 +13,7 @@ public interface charactersServiceInterface {
     void deleteCharacter ( DeleteCharactersDTO deleteChar );
 
     CharactersDTO editCharacter ( PostCharactersDTO editCharacter );
+
+    public List<CharactersDTO> allCharacters ();
 
 }

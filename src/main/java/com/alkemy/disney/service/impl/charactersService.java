@@ -9,7 +9,12 @@ import com.alkemy.disney.mapper.CharacterMapper;
 import com.alkemy.disney.repository.CharacterDatRepository;
 import com.alkemy.disney.service.charactersServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
 public class charactersService implements charactersServiceInterface {
 
     @Autowired
@@ -18,6 +23,12 @@ public class charactersService implements charactersServiceInterface {
     @Autowired
     CharacterDatRepository characterDatRepository;
 
+    @Override
+    public List<CharactersDTO> allCharacters (){
+        return characterDatRepository.findAll()
+                .stream().map( characterMapper::charactersToDTO )
+                .collect(Collectors.toList());
+    }
 
     @Override
     public CharactersDTO newCharacter(PostCharactersDTO newChara) {
