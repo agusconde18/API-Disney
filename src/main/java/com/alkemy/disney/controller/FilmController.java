@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
 @RestController
@@ -62,7 +63,16 @@ public class FilmController {
         try {
             filmService.delete(id);
         }catch (DatabaseError e) {
-            
+
+        }
+    }
+
+    @PutMapping("/{id}/character/{charId}")
+    public void updateCharacterList(@PathVariable Long id, @PathVariable Long charId) {
+        try {
+            filmService.updateCharacters(id, charId);
+        } catch (DatabaseError e) {
+
         }
     }
 }
