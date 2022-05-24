@@ -5,7 +5,9 @@ import com.alkemy.disney.dto.Characters.DeleteCharactersDTO;
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.service.CharactersServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class CharactersController {
     }
 
     @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
     CharactersDTO newCharacter (@RequestBody PostCharactersDTO postCharactersDTO) {
         return charactersService.newCharacter(postCharactersDTO);
     }

@@ -1,12 +1,14 @@
 package com.alkemy.disney.dto.Characters;
 
 import com.alkemy.disney.entity.Film;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
 public class CharactersDTO {
 
     private Long id;

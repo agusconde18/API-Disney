@@ -16,7 +16,7 @@ public interface CharacterMapper {
 
     CharacterDat DTOToCharacter ( CharactersDTO characterDTO);
 
-    CharacterDat DTOToCharacter ( PostCharactersDTO characterPostDTO);
+    CharacterDat PostCharactersDToCharacterDat ( PostCharactersDTO characterPostDTO);
 
     CharacterDat DTOToCharacter (DeleteCharactersDTO charactersDTO );
 

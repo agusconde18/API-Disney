@@ -17,8 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class CharactersService implements CharactersServiceInterface {
 
-    @Autowired
-    CharacterMapper characterMapper;
+    CharacterMapper characterMapper = CharacterMapper.INSTANCE;
 
     @Autowired
     CharacterDatRepository characterDatRepository;
@@ -32,7 +31,7 @@ public class CharactersService implements CharactersServiceInterface {
 
     @Override
     public CharactersDTO newCharacter(PostCharactersDTO newChara) {
-        CharacterDat newCharacter = characterMapper.DTOToCharacter(newChara);
+        CharacterDat newCharacter = characterMapper.PostCharactersDToCharacterDat(newChara);
         characterDatRepository.save(newCharacter);
         return characterMapper.charactersToDTO(newCharacter);
     }
@@ -45,7 +44,7 @@ public class CharactersService implements CharactersServiceInterface {
 
     @Override
     public CharactersDTO editCharacter(PostCharactersDTO editCharacter) {
-        CharacterDat characterDat = characterMapper.DTOToCharacter(editCharacter);
+        CharacterDat characterDat = characterMapper.PostCharactersDToCharacterDat(editCharacter);
         if(characterDatRepository.findById(characterDat.getId()).isEmpty())
             return null;
         characterDatRepository.save(characterDat);
