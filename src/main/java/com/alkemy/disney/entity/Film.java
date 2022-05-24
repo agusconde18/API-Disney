@@ -30,6 +30,7 @@ public class Film {
     private Date releaseDate;
     private String coverImage;
 
+    @JsonIgnoreProperties("actFilm")
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     Set<CharacterDat> characters = new HashSet<>();
 
