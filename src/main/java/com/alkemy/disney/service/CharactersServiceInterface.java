@@ -6,7 +6,7 @@ import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 
 import java.util.List;
 
-public interface charactersServiceInterface {
+public interface CharactersServiceInterface {
 
     CharactersDTO newCharacter (PostCharactersDTO newChara );
 

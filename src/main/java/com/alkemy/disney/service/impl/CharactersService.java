@@ -7,7 +7,7 @@ import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.mapper.CharacterMapper;
 import com.alkemy.disney.repository.CharacterDatRepository;
-import com.alkemy.disney.service.charactersServiceInterface;
+import com.alkemy.disney.service.CharactersServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class charactersService implements charactersServiceInterface {
+public class CharactersService implements CharactersServiceInterface {
 
     @Autowired
     CharacterMapper characterMapper;

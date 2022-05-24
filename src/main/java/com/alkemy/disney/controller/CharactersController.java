@@ -1,23 +1,43 @@
 package com.alkemy.disney.controller;
 
 import com.alkemy.disney.dto.Characters.CharactersDTO;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.alkemy.disney.dto.Characters.DeleteCharactersDTO;
+import com.alkemy.disney.dto.Characters.PostCharactersDTO;
+import com.alkemy.disney.service.CharactersServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("characters")
+@RequestMapping("/characters")
 public class CharactersController {
 
+    @Autowired
+    CharactersServiceInterface charactersService;
 
 
     @GetMapping("/")
     List<CharactersDTO> getAllCharacters (){
-
-        return null;
+        return charactersService.allCharacters();
     }
+
+    @PostMapping("/create")
+    CharactersDTO newCharacter (@RequestBody PostCharactersDTO postCharactersDTO) {
+        return charactersService.newCharacter(postCharactersDTO);
+    }
+
+    @DeleteMapping("/")
+    String deleteCharacter (@RequestBody DeleteCharactersDTO delCharacters) {
+        charactersService.deleteCharacter(delCharacters);
+        return "oK";
+    }
+
+    @PostMapping("/edit")
+    CharactersDTO editCharacter (@RequestBody PostCharactersDTO postCharactersDTO){
+        return charactersService.editCharacter(postCharactersDTO);
+    }
+
+
 }
