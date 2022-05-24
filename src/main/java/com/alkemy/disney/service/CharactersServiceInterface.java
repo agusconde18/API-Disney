@@ -10,10 +10,12 @@ public interface CharactersServiceInterface {
 
     CharactersDTO newCharacter (PostCharactersDTO newChara );
 
-    void deleteCharacter ( DeleteCharactersDTO deleteChar );
+    void deleteCharacter ( Long deleteChar );
 
     CharactersDTO editCharacter ( PostCharactersDTO editCharacter );
 
     public List<CharactersDTO> allCharacters ();
+
+    CharactersDTO getById( long id );
 
 }

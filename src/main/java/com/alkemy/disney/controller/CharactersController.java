@@ -3,9 +3,12 @@ package com.alkemy.disney.controller;
 import com.alkemy.disney.dto.Characters.CharactersDTO;
 import com.alkemy.disney.dto.Characters.DeleteCharactersDTO;
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
+import com.alkemy.disney.exception.DatabaseError;
+import com.alkemy.disney.exception.ServiceError;
 import com.alkemy.disney.service.CharactersServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -20,26 +23,56 @@ public class CharactersController {
     CharactersServiceInterface charactersService;
 
 
-    @GetMapping("/")
-    List<CharactersDTO> getAllCharacters (){
-        return charactersService.allCharacters();
+    @GetMapping("/all")
+    ResponseEntity<?> getAllCharacters (){
+        try {
+            return new ResponseEntity<>(charactersService.allCharacters(), HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @PostMapping("/create")
+    @GetMapping("/{id}")
+    ResponseEntity<?> getById (@PathVariable Long id){
+        try {
+            return new ResponseEntity<>(charactersService.getById(id), HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    CharactersDTO newCharacter (@RequestBody PostCharactersDTO postCharactersDTO) {
-        return charactersService.newCharacter(postCharactersDTO);
+    ResponseEntity<?> newCharacter (@RequestBody PostCharactersDTO postCharactersDTO) {
+        try {
+            return new ResponseEntity<>(charactersService.newCharacter(postCharactersDTO), HttpStatus.ACCEPTED);
+        }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @DeleteMapping("/")
-    String deleteCharacter (@RequestBody DeleteCharactersDTO delCharacters) {
-        charactersService.deleteCharacter(delCharacters);
-        return "oK";
+    @DeleteMapping("/{id}")
+    ResponseEntity<?> deleteCharacter (@PathVariable Long id) {
+        try {
+            charactersService.deleteCharacter(id);
+            return new ResponseEntity<>("", HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
-    @PostMapping("/edit")
-    CharactersDTO editCharacter (@RequestBody PostCharactersDTO postCharactersDTO){
-        return charactersService.editCharacter(postCharactersDTO);
+    @PutMapping("/{id}")
+    ResponseEntity<?> editCharacter (
+            @PathVariable Long id,
+            @RequestBody PostCharactersDTO postCharactersDTO
+    ){
+        try {
+            postCharactersDTO.setId(id);
+            return new ResponseEntity<>(charactersService.editCharacter(postCharactersDTO), HttpStatus.ACCEPTED);
+        }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
 

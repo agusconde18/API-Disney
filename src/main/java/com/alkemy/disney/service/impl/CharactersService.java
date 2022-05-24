@@ -30,6 +30,11 @@ public class CharactersService implements CharactersServiceInterface {
     }
 
     @Override
+    public CharactersDTO getById(long id) {
+        return characterMapper.charactersToDTO(characterDatRepository.getById(id));
+    }
+
+    @Override
     public CharactersDTO newCharacter(PostCharactersDTO newChara) {
         CharacterDat newCharacter = characterMapper.PostCharactersDToCharacterDat(newChara);
         characterDatRepository.save(newCharacter);
@@ -37,9 +42,8 @@ public class CharactersService implements CharactersServiceInterface {
     }
 
     @Override
-    public void deleteCharacter(DeleteCharactersDTO deleteChar) {
-        CharacterDat newCharacter = characterMapper.DTOToCharacter(deleteChar);
-        characterDatRepository.deleteById(newCharacter.getId());
+    public void deleteCharacter(Long delcharId) {
+        characterDatRepository.deleteById(delcharId);
     }
 
     @Override
