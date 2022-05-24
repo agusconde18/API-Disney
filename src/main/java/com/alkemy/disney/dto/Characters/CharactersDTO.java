@@ -1,6 +1,7 @@
 package com.alkemy.disney.dto.Characters;
 
 import com.alkemy.disney.entity.Film;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,5 +24,6 @@ public class CharactersDTO {
 
     private String story;
 
+    @JsonIgnoreProperties("characters")
     Set<Film> actFilm = new HashSet<>();
 }
