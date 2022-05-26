@@ -1,7 +1,6 @@
 package com.alkemy.disney.mapper;
 
 import com.alkemy.disney.dto.Characters.CharactersDTO;
-import com.alkemy.disney.dto.Characters.DeleteCharactersDTO;
 import com.alkemy.disney.dto.Characters.ListCharactersDTO;
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.entity.CharacterDat;
@@ -19,7 +18,6 @@ public interface CharacterMapper {
 
     CharacterDat PostCharactersDToCharacterDat ( PostCharactersDTO characterPostDTO);
 
-    CharacterDat DTOToCharacter (DeleteCharactersDTO charactersDTO );
-
     ListCharactersDTO charactersToDTOList (CharacterDat category);
+
 }
