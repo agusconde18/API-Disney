@@ -13,8 +13,6 @@ public interface FilmsMapper {
 
     FilmDTO filmsToDTO(Film film);
 
-    Film DTOToFilm(FilmDTO filmDTO);
-
     Film PostFilmDTOToFilm(FilmPostDTO filmPostDTO);
 
     FilmListDTO filmsToDTOList (Film film);

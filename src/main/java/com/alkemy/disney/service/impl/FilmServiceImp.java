@@ -79,6 +79,7 @@ public class FilmServiceImp implements FilmService {
                     throw new ServiceError("Formato de fecha erroneo");
                 }
                 Film updateFilm = filmsMapper.PostFilmDTOToFilm(film);
+                updateFilm.setCharacters(filmToUpdate.getCharacters());
                 filmRepository.save(updateFilm);
                 return filmsMapper.filmsToDTO(updateFilm);
             } else {
