@@ -77,4 +77,13 @@ public class FilmController {
 
         }
     }
+
+    @DeleteMapping("/{id}/character/{charId}")
+    public void deleteCharacterFromList(@PathVariable Long id, @PathVariable Long charId){
+        try {
+            filmService.deleteCharacter(id, charId);
+        } catch (DatabaseError e){
+
+        }
+    }
 }
