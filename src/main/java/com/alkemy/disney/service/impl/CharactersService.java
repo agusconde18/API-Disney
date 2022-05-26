@@ -5,6 +5,7 @@ import com.alkemy.disney.dto.Characters.CharactersDTO;
 import com.alkemy.disney.dto.Characters.DeleteCharactersDTO;
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.entity.CharacterDat;
+import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.mapper.CharacterMapper;
 import com.alkemy.disney.repository.CharacterDatRepository;
 import com.alkemy.disney.service.CharactersServiceInterface;
@@ -43,6 +44,10 @@ public class CharactersService implements CharactersServiceInterface {
 
     @Override
     public void deleteCharacter(Long delcharId) {
+        CharacterDat characterDat = characterDatRepository.getById(delcharId);
+        for(Film film : characterDat.getActFilm()){
+            film.getCharacters().remove(characterDat);
+        }
         characterDatRepository.deleteById(delcharId);
     }
 
