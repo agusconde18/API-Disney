@@ -2,6 +2,7 @@ package com.alkemy.disney.service;
 
 import com.alkemy.disney.dto.Characters.CharactersDTO;
 import com.alkemy.disney.dto.Characters.DeleteCharactersDTO;
+import com.alkemy.disney.dto.Characters.ListCharactersDTO;
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface CharactersServiceInterface {
 
     CharactersDTO editCharacter ( PostCharactersDTO editCharacter );
 
-    public List<CharactersDTO> allCharacters ();
+    public List<ListCharactersDTO> allCharacters ();
 
     CharactersDTO getById( long id );
 

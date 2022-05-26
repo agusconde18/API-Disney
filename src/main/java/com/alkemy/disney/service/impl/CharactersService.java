@@ -2,7 +2,7 @@ package com.alkemy.disney.service.impl;
 
 
 import com.alkemy.disney.dto.Characters.CharactersDTO;
-import com.alkemy.disney.dto.Characters.DeleteCharactersDTO;
+import com.alkemy.disney.dto.Characters.ListCharactersDTO;
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.entity.Film;
@@ -24,9 +24,9 @@ public class CharactersService implements CharactersServiceInterface {
     CharacterDatRepository characterDatRepository;
 
     @Override
-    public List<CharactersDTO> allCharacters (){
+    public List<ListCharactersDTO> allCharacters (){
         return characterDatRepository.findAll()
-                .stream().map( characterMapper::charactersToDTO )
+                .stream().map( characterMapper::charactersToDTOList )
                 .collect(Collectors.toList());
     }
 
