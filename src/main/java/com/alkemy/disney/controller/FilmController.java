@@ -1,5 +1,7 @@
 package com.alkemy.disney.controller;
 
+import com.alkemy.disney.dto.Films.FilmDTO;
+import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.exception.DatabaseError;
 import com.alkemy.disney.exception.ServiceError;
@@ -15,7 +17,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/movies")
+@RequestMapping("/films")
 public class FilmController {
 
     FilmService filmService;
@@ -27,7 +29,7 @@ public class FilmController {
 
 
     @PostMapping
-    public ResponseEntity<?> newFilm(@RequestBody Film film) {
+    public ResponseEntity<?> newFilm(@RequestBody FilmDTO film) {
         try {
             return new ResponseEntity<>(filmService.save(film), HttpStatus.CREATED);
         }catch (ServiceError e) {
@@ -36,7 +38,7 @@ public class FilmController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Film>> getAll() {
+    public ResponseEntity<List<FilmListDTO>> getAll() {
         return new ResponseEntity<>(filmService.getAllFilms(), HttpStatus.OK);
     }
 
@@ -50,7 +52,7 @@ public class FilmController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateFilm(@PathVariable Long id, @RequestBody Film film) {
+    public ResponseEntity<?> updateFilm(@PathVariable Long id, @RequestBody FilmDTO film) {
         try {
             return new ResponseEntity<>(filmService.update(film, id), HttpStatus.CREATED);
         }catch (ServiceError|DatabaseError e) {

@@ -17,7 +17,7 @@ public class FilmDTO {
 
     private String title;
     private Double rating;
-
+    private String date;
     private Date releaseDate;
     private String coverImage;
 
