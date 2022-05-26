@@ -2,6 +2,7 @@ package com.alkemy.disney.service.impl;
 
 import com.alkemy.disney.dto.Films.FilmDTO;
 import com.alkemy.disney.dto.Films.FilmListDTO;
+import com.alkemy.disney.dto.Films.FilmPostDTO;
 import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.exception.DatabaseError;
 import com.alkemy.disney.exception.ServiceError;
@@ -36,7 +37,7 @@ public class FilmServiceImp implements FilmService {
     }
 
     @Override
-    public FilmDTO save(FilmDTO film) throws ServiceError {
+    public FilmDTO save(FilmPostDTO film) throws ServiceError {
         SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy");
         try {
             film.setReleaseDate(formatter.parse(film.getDate()));
@@ -44,7 +45,7 @@ public class FilmServiceImp implements FilmService {
             throw new ServiceError("Formato de fecha erroneo");
         }
         if(!film.getTitle().isEmpty() && !film.getCoverImage().isEmpty() && film.getReleaseDate() != null) {
-            Film newFilm = filmsMapper.DTOToFilm(film);
+            Film newFilm = filmsMapper.PostFilmDTOToFilm(film);
             filmRepository.save(newFilm);
             return filmsMapper.filmsToDTO(newFilm);
         } else {
@@ -65,7 +66,7 @@ public class FilmServiceImp implements FilmService {
     }
 
     @Override
-    public FilmDTO update(FilmDTO film, Long id) throws ServiceError, DatabaseError{
+    public FilmDTO update(FilmPostDTO film, Long id) throws ServiceError, DatabaseError{
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmToUpdate = res.get();
@@ -77,7 +78,8 @@ public class FilmServiceImp implements FilmService {
                 } catch(ParseException e) {
                     throw new ServiceError("Formato de fecha erroneo");
                 }
-                Film updateFilm = filmsMapper.DTOToFilm(film);
+                Film updateFilm = filmsMapper.PostFilmDTOToFilm(film);
+                updateFilm.setCharacters(filmToUpdate.getCharacters());
                 filmRepository.save(updateFilm);
                 return filmsMapper.filmsToDTO(updateFilm);
             } else {
