@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/movie")
+@RequestMapping("/movies")
 public class FilmController {
 
     FilmService filmService;
@@ -26,7 +26,7 @@ public class FilmController {
     }
 
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<?> newFilm(@RequestBody Film film) {
         try {
             return new ResponseEntity<>(filmService.save(film), HttpStatus.CREATED);
@@ -35,7 +35,7 @@ public class FilmController {
         }
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<Film>> getAll() {
         return new ResponseEntity<>(filmService.getAllFilms(), HttpStatus.OK);
     }
