@@ -15,5 +15,12 @@ public class UserDat {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    String username;
 
+    String password;
+
+    boolean enabled;
+
+    @OneToMany
+    Autorities autoritie;
 }
