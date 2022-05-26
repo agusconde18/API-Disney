@@ -34,7 +34,6 @@ public class Film {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     Set<CharacterDat> characters = new HashSet<>();
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     private Genre genre;
 }
