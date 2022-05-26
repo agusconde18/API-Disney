@@ -41,6 +41,7 @@ public class FilmServiceImp implements FilmService {
         try {
             film.setReleaseDate(formatter.parse(film.getDate()));
         } catch(ParseException e) {
+            throw new ServiceError("Formato de fecha erroneo");
         }
         if(!film.getTitle().isEmpty() && !film.getCoverImage().isEmpty() && film.getReleaseDate() != null) {
             Film newFilm = filmsMapper.DTOToFilm(film);
@@ -74,7 +75,7 @@ public class FilmServiceImp implements FilmService {
                 try {
                     film.setReleaseDate(formatter.parse(film.getDate()));
                 } catch(ParseException e) {
-
+                    throw new ServiceError("Formato de fecha erroneo");
                 }
                 Film updateFilm = filmsMapper.DTOToFilm(film);
                 filmRepository.save(updateFilm);
