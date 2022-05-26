@@ -12,11 +12,12 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class FilmDTO {
+public class FilmPostDTO {
     private Long id;
 
     private String title;
     private Double rating;
+    private String date;
     private Date releaseDate;
     private String coverImage;
 

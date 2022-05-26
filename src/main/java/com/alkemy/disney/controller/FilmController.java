@@ -2,6 +2,7 @@ package com.alkemy.disney.controller;
 
 import com.alkemy.disney.dto.Films.FilmDTO;
 import com.alkemy.disney.dto.Films.FilmListDTO;
+import com.alkemy.disney.dto.Films.FilmPostDTO;
 import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.exception.DatabaseError;
 import com.alkemy.disney.exception.ServiceError;
@@ -29,7 +30,7 @@ public class FilmController {
 
 
     @PostMapping
-    public ResponseEntity<?> newFilm(@RequestBody FilmDTO film) {
+    public ResponseEntity<?> newFilm(@RequestBody FilmPostDTO film) {
         try {
             return new ResponseEntity<>(filmService.save(film), HttpStatus.CREATED);
         }catch (ServiceError e) {
@@ -52,7 +53,7 @@ public class FilmController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateFilm(@PathVariable Long id, @RequestBody FilmDTO film) {
+    public ResponseEntity<?> updateFilm(@PathVariable Long id, @RequestBody FilmPostDTO film) {
         try {
             return new ResponseEntity<>(filmService.update(film, id), HttpStatus.CREATED);
         }catch (ServiceError|DatabaseError e) {
