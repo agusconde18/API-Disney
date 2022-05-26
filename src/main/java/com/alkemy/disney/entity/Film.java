@@ -34,6 +34,6 @@ public class Film {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     Set<CharacterDat> characters = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Genre genre;
 }
