@@ -12,6 +12,7 @@ public interface FilmService {
     void delete(Long id) throws DatabaseError;
     FilmDTO update(FilmDTO film, Long id) throws ServiceError, DatabaseError;
     void updateCharacters(Long id, Long idCharacter) throws DatabaseError;
+    void deleteCharacter(Long id, Long idCharacter) throws DatabaseError;
     FilmDTO getFilmDetails(Long id) throws DatabaseError;
     List<FilmListDTO> getAllFilms();
 }

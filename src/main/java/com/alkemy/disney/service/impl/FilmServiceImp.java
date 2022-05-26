@@ -110,6 +110,26 @@ public class FilmServiceImp implements FilmService {
     }
 
     @Override
+    public void deleteCharacter(Long id, Long idCharacter) throws DatabaseError{
+        Optional<Film> res = filmRepository.findById(id);
+        if (res.isPresent()) {
+            Film filmToUpdate = res.get();
+            Optional<CharacterDat> charRes = characterDatRepository.findById(idCharacter);
+            if (charRes.isPresent()) {
+                CharacterDat character = charRes.get();
+                Set<CharacterDat> updatedCharacters = filmToUpdate.getCharacters();
+                updatedCharacters.remove(character);
+                filmToUpdate.setCharacters(updatedCharacters);
+                filmRepository.save(filmToUpdate);
+            } else {
+                throw new DatabaseError("No se pudo encontrar un personaje con ese id");
+            }
+        } else {
+            throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
+        }
+    }
+
+    @Override
     public FilmDTO getFilmDetails(Long id) throws DatabaseError{
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
