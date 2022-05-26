@@ -23,7 +23,7 @@ public class CharactersController {
     CharactersServiceInterface charactersService;
 
 
-    @GetMapping("/all")
+    @GetMapping("")
     ResponseEntity<?> getAllCharacters (){
         try {
             return new ResponseEntity<>(charactersService.allCharacters(), HttpStatus.OK);
@@ -41,7 +41,7 @@ public class CharactersController {
         }
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<?> newCharacter (@RequestBody PostCharactersDTO postCharactersDTO) {
         try {
