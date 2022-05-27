@@ -2,19 +2,19 @@ package com.alkemy.disney.auth.service.impl;
 
 import com.alkemy.disney.auth.entity.UserDat;
 import com.alkemy.disney.auth.repository.UserRepository;
-import com.alkemy.disney.auth.service.AuthService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public class AuthServiceImpl implements AuthService {
+public class AuthServiceImpl   {
 
 
     @Autowired
     UserRepository userRepository;
 
-    @Override
+   // @Override
     public String login(String username, String password) {
         Optional<UserDat> customer = userRepository.findByUsernameAndPassword(username,password);
         if(customer.isPresent()){
@@ -28,7 +28,7 @@ public class AuthServiceImpl implements AuthService {
         return "";
     }
 
-    @Override
+   // @Override
     public Optional<UserDat> findByToken(String token) {
         Optional<UserDat> customer= userRepository.findByToken(token);
         if(customer.isPresent()){

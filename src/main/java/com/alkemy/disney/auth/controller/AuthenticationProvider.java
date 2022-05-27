@@ -23,6 +23,12 @@ public class AuthenticationProvider extends AbstractUserDetailsAuthenticationPro
     }
 
     @Override
+    protected UserDetails retrieveUser(String s, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
+        return null;
+    }
+
+    /*
+    @Override
     protected UserDetails retrieveUser(String userName, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
 
         Object token = usernamePasswordAuthenticationToken.getCredentials();
@@ -31,4 +37,5 @@ public class AuthenticationProvider extends AbstractUserDetailsAuthenticationPro
                 .map(String::valueOf)
                 .flatMap(userRepository::findByToken)
                 .orElseThrow(() -> new UsernameNotFoundException("Cannot find user with authentication token=" + token));
-    }
+    }*/
+}
