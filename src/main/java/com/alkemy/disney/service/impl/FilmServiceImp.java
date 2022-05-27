@@ -40,7 +40,7 @@ public class FilmServiceImp implements FilmService {
 
     @Override
     public FilmDTO save(FilmPostDTO film) throws ServiceError {
-        SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         try {
             film.setReleaseDate(formatter.parse(film.getDate()));
         } catch(ParseException e) {
@@ -74,7 +74,7 @@ public class FilmServiceImp implements FilmService {
             Film filmToUpdate = res.get();
             if(!film.getTitle().isEmpty() && !film.getCoverImage().isEmpty() && !film.getDate().isEmpty()) {
                 film.setId(filmToUpdate.getId());
-                SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
                 try {
                     film.setReleaseDate(formatter.parse(film.getDate()));
                 } catch(ParseException e) {
