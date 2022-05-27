@@ -1,5 +1,6 @@
 package com.alkemy.disney.controller;
 
+import com.alkemy.disney.dto.Genres.GenreDTO;
 import com.alkemy.disney.entity.Genre;
 import com.alkemy.disney.exception.DatabaseError;
 import com.alkemy.disney.exception.ServiceError;
@@ -10,17 +11,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*")
+@RequestMapping("/genre")
 public class GenreController {
 
     GenreService genreService;
 
     @Autowired
     GenreController(GenreService genreService){
-
         this.genreService = genreService;
     }
 
@@ -30,23 +32,27 @@ public class GenreController {
         return map;
     }
 
+    @GetMapping()
+    List<GenreDTO> getAllGenres(){
+        return genreService.getAll();
+    }
 
-    @PostMapping("/genre")
-    public ResponseEntity<Map<String, Object>> createGenre(@RequestBody Genre genre){
+    @PostMapping()
+    public ResponseEntity<Map<String, Object>> createGenre(@RequestBody GenreDTO genreDTO){
         try{
-            genreService.save(genre);
-            return new ResponseEntity<>(makeMap("id", genre.getId()), HttpStatus.CREATED);
+            GenreDTO response = genreService.save(genreDTO);
+            return new ResponseEntity<>(makeMap("saved", response), HttpStatus.CREATED);
 
         }catch(ServiceError e){
             return new ResponseEntity<>(makeMap("error", e.getMessage()) , HttpStatus.BAD_REQUEST);
         }
     }
 
-    @PutMapping("/genre/{id}")
-    public ResponseEntity<Map<String, Object>>updateGenre(@PathVariable Long id, @RequestBody Genre genre){
+    @PutMapping("/{id}")
+    public ResponseEntity<Map<String, Object>>updateGenre(@PathVariable Long id, @RequestBody GenreDTO genreDTO){
         try{
-            genreService.update(genre, id);
-            return new ResponseEntity<>( makeMap("id", genre.getId()), HttpStatus.CREATED);
+            GenreDTO response = genreService.update(genreDTO, id);
+            return new ResponseEntity<>(makeMap("updated", response), HttpStatus.CREATED);
         }catch(ServiceError| DatabaseError e){
             return new ResponseEntity<>(makeMap("error", e.getMessage()), HttpStatus.BAD_REQUEST);
         }

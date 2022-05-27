@@ -1,13 +1,18 @@
 package com.alkemy.disney.service;
 
+import com.alkemy.disney.dto.Genres.GenreDTO;
 import com.alkemy.disney.entity.Genre;
 import com.alkemy.disney.exception.DatabaseError;
 import com.alkemy.disney.exception.ServiceError;
 
+import java.util.List;
+
 public interface GenreService {
 
-    Genre save(Genre genre) throws ServiceError;
+    GenreDTO save(GenreDTO genreDTO) throws ServiceError;
 
-    Genre update(Genre genre, Long id) throws ServiceError, DatabaseError;
+    GenreDTO update(GenreDTO genreDTO, Long id) throws ServiceError, DatabaseError;
+
+    List<GenreDTO> getAll();
 
 }
