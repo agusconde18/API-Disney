@@ -29,7 +29,7 @@ public class RestExceptionController extends ResponseEntityExceptionHandler {
                 (Exception) ex,
                 exceptionDTO,
                 new HttpHeaders(),
-                HttpStatus.BAD_REQUEST,
+                exceptionDTO.getStatus(),
                 request
         );
     }
@@ -46,7 +46,7 @@ public class RestExceptionController extends ResponseEntityExceptionHandler {
                 (Exception) ex,
                 exceptionDTO,
                 new HttpHeaders(),
-                HttpStatus.BAD_REQUEST,
+                exceptionDTO.getStatus(),
                 request
         );
     }
@@ -54,7 +54,7 @@ public class RestExceptionController extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {ServiceError.class})
     protected ResponseEntity<Object> handleServiceError(RuntimeException ex, WebRequest request){
         ExceptionDTO exceptionDTO = new ExceptionDTO(
-                HttpStatus.,
+                HttpStatus.BAD_REQUEST,
                 ex.getMessage(),
                 Arrays.asList("")
         );
@@ -63,7 +63,7 @@ public class RestExceptionController extends ResponseEntityExceptionHandler {
                 (Exception) ex,
                 exceptionDTO,
                 new HttpHeaders(),
-                HttpStatus.BAD_REQUEST,
+                exceptionDTO.getStatus(),
                 request
         );
     }
