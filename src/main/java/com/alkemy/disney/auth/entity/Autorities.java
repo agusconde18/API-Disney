@@ -4,28 +4,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "user")
 @Getter
 @Setter
-public class UserDat {
+@Table(name = "autorities")
+public class Autorities {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    String email;
+    ERole rol;
 
-    String username;
-
-    String password;
-
-    boolean enabled;
-
-    String token;
-
-    @ManyToMany
-    Set<Autorities> roles;
 }
