@@ -1,5 +1,6 @@
 package com.alkemy.disney.service.impl;
 
+import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.dto.Films.FilmDTO;
 import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
@@ -107,6 +108,26 @@ public class FilmServiceImp implements FilmService {
                 throw new DatabaseError("No se pudo encontrar un personaje con ese id");
             }
             } else {
+            throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
+        }
+    }
+
+    @Override
+    public void updateNewCharacters(Long id, CharacterDat newChar) throws DatabaseError{
+        Optional<Film> res = filmRepository.findById(id);
+        System.out.println("ID: "+id+", Optional: "+res+ ", FilmExist?:"+res.isPresent());
+        System.out.println("res "+ res.get().toString());
+        System.out.println("ula "+ newChar.toString());
+        if (res.isPresent()) {
+            Film filmToUpdate = res.get();
+            System.out.println("film " + filmToUpdate.toString());
+                Set<CharacterDat> updatedCharacters = filmToUpdate.getCharacters();
+                updatedCharacters.add(newChar);
+                filmToUpdate.setCharacters(updatedCharacters);
+
+                System.out.println("ula "+ updatedCharacters);
+                filmRepository.save(filmToUpdate);
+        } else {
             throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
         }
     }

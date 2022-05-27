@@ -1,8 +1,10 @@
 package com.alkemy.disney.service;
 
+import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.dto.Films.FilmDTO;
 import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
+import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.exception.DatabaseError;
 import com.alkemy.disney.exception.ServiceError;
 
@@ -13,6 +15,7 @@ public interface FilmService {
     void delete(Long id) throws DatabaseError;
     FilmDTO update(FilmPostDTO film, Long id) throws ServiceError, DatabaseError;
     void updateCharacters(Long id, Long idCharacter) throws DatabaseError;
+    void updateNewCharacters(Long id, CharacterDat newChar) throws DatabaseError;
     void deleteCharacter(Long id, Long idCharacter) throws DatabaseError;
     FilmDTO getFilmDetails(Long id) throws DatabaseError;
     List<FilmListDTO> getAllFilms();
