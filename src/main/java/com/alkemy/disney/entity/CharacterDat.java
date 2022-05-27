@@ -2,6 +2,7 @@ package com.alkemy.disney.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Table(name = "personaje")
 @Getter
 @Setter
+@ToString
 public class CharacterDat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

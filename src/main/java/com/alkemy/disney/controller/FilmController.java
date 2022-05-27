@@ -1,19 +1,21 @@
 package com.alkemy.disney.controller;
 
+import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.dto.Films.FilmDTO;
 import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
+import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.exception.DatabaseError;
 import com.alkemy.disney.exception.ServiceError;
 import com.alkemy.disney.service.FilmService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.xml.crypto.Data;
 import java.util.List;
 
 @RestController
@@ -83,6 +85,14 @@ public class FilmController {
     public void deleteCharacterFromList(@PathVariable Long id, @PathVariable Long charId){
         try {
             filmService.deleteCharacter(id, charId);
+        } catch (DatabaseError e){
+
+        }
+    }
+    @PostMapping("/{id}/character")
+    public void newCharacterForFilm(@PathVariable Long id, @RequestBody CharacterDat newChar){
+        try {
+            filmService.updateNewCharacters(id, newChar);
         } catch (DatabaseError e){
 
         }

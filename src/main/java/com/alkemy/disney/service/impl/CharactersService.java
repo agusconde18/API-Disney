@@ -42,7 +42,7 @@ public class CharactersService implements CharactersServiceInterface {
 
     @Override
     public CharactersDTO newCharacter(PostCharactersDTO newChara) throws ServiceError {
-        if(newChara.getId()!=null&&newChara.getAge()!=null&&newChara.getName()!=null&&newChara.getStory()!=null) {
+        if(newChara.getAge()!=null&&newChara.getName()!=null&&newChara.getStory()!=null) {
             CharacterDat newCharacter = characterMapper.PostCharactersDToCharacterDat(newChara);
             characterDatRepository.save(newCharacter);
             return characterMapper.charactersToDTO(newCharacter);

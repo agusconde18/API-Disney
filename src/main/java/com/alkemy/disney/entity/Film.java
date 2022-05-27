@@ -14,7 +14,7 @@ import java.util.Set;
 @Table(name = "films")
 @Getter
 @Setter
-@ToString
+
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +36,6 @@ public class Film {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Genre genre;
+
+
 }
