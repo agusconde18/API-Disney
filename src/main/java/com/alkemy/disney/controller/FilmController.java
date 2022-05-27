@@ -16,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -32,7 +34,7 @@ public class FilmController {
 
 
     @PostMapping
-    public ResponseEntity<?> newFilm(@RequestBody FilmPostDTO film) {
+    public ResponseEntity<?> newFilm(@Valid  @RequestBody FilmPostDTO film) {
         try {
             return new ResponseEntity<>(filmService.save(film), HttpStatus.CREATED);
         }catch (ServiceError e) {
@@ -46,7 +48,7 @@ public class FilmController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getFilmDetails(@PathVariable Long id) {
+    public ResponseEntity<?> getFilmDetails(@Valid @PathVariable @NotNull Long id) {
         try {
             return new ResponseEntity<>(filmService.getFilmDetails(id), HttpStatus.OK);
         } catch (DatabaseError e) {
@@ -55,7 +57,10 @@ public class FilmController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateFilm(@PathVariable Long id, @RequestBody FilmPostDTO film) {
+    public ResponseEntity<?> updateFilm(
+            @Valid @PathVariable @NotNull Long id,
+            @Valid @RequestBody FilmPostDTO film
+    ) {
         try {
             return new ResponseEntity<>(filmService.update(film, id), HttpStatus.CREATED);
         }catch (ServiceError|DatabaseError e) {
@@ -64,7 +69,7 @@ public class FilmController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteFilm(@PathVariable Long id) {
+    public void deleteFilm(@Valid @PathVariable @NotNull Long id) {
         try {
             filmService.delete(id);
         }catch (DatabaseError e) {
@@ -73,7 +78,10 @@ public class FilmController {
     }
 
     @PutMapping("/{id}/character/{charId}")
-    public void updateCharacterList(@PathVariable Long id, @PathVariable Long charId) {
+    public void updateCharacterList(
+            @Valid @PathVariable @NotNull Long id,
+            @Valid @PathVariable @NotNull Long charId
+    ) {
         try {
             filmService.updateCharacters(id, charId);
         } catch (DatabaseError e) {
@@ -82,7 +90,10 @@ public class FilmController {
     }
 
     @DeleteMapping("/{id}/character/{charId}")
-    public void deleteCharacterFromList(@PathVariable Long id, @PathVariable Long charId){
+    public void deleteCharacterFromList(
+            @Valid @PathVariable @NotNull Long id,
+            @Valid @PathVariable @NotNull Long charId
+    ){
         try {
             filmService.deleteCharacter(id, charId);
         } catch (DatabaseError e){
@@ -90,7 +101,10 @@ public class FilmController {
         }
     }
     @PostMapping("/{id}/character")
-    public void newCharacterForFilm(@PathVariable Long id, @RequestBody CharacterDat newChar){
+    public void newCharacterForFilm(
+            @Valid @PathVariable @NotNull Long id,
+            @Valid @RequestBody CharacterDat newChar
+    ){
         try {
             filmService.updateNewCharacters(id, newChar);
         } catch (DatabaseError e){

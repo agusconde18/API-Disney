@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/characters")
@@ -18,16 +21,13 @@ public class CharactersController {
 
 
     @GetMapping
+
     ResponseEntity<?> getAllCharacters (){
-        try {
-            return new ResponseEntity<>(charactersService.allCharacters(), HttpStatus.OK);
-        }catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity<>(charactersService.allCharacters(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<?> getById (@PathVariable Long id){
+    ResponseEntity<?> getById (@Valid @PathVariable @NotNull Long id){
         try {
             return new ResponseEntity<>(charactersService.getById(id), HttpStatus.OK);
         }catch (Exception e) {
@@ -37,7 +37,7 @@ public class CharactersController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    ResponseEntity<?> newCharacter (@RequestBody PostCharactersDTO postCharactersDTO) {
+    ResponseEntity<?> newCharacter (@Valid @RequestBody PostCharactersDTO postCharactersDTO) {
         try {
             return new ResponseEntity<>(charactersService.newCharacter(postCharactersDTO), HttpStatus.ACCEPTED);
         }catch (Exception e) {
@@ -46,7 +46,7 @@ public class CharactersController {
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<?> deleteCharacter (@PathVariable Long id) {
+    ResponseEntity<?> deleteCharacter (@Valid @PathVariable @NotNull Long id) {
         try {
             charactersService.deleteCharacter(id);
             return new ResponseEntity<>("", HttpStatus.OK);
@@ -58,8 +58,8 @@ public class CharactersController {
 
     @PutMapping("/{id}")
     ResponseEntity<?> editCharacter (
-            @PathVariable Long id,
-            @RequestBody PostCharactersDTO postCharactersDTO
+            @Valid @PathVariable @NotNull Long id,
+            @Valid @RequestBody PostCharactersDTO postCharactersDTO
     ){
         try {
             postCharactersDTO.setId(id);
