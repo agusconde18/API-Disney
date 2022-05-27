@@ -1,5 +1,6 @@
 package com.alkemy.disney.service.impl;
 
+import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.dto.Films.FilmDTO;
 import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
@@ -10,6 +11,7 @@ import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.mapper.FilmsMapper;
 import com.alkemy.disney.repository.CharacterDatRepository;
 import com.alkemy.disney.repository.FilmRepository;
+import com.alkemy.disney.service.CharactersServiceInterface;
 import com.alkemy.disney.service.FilmService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,6 +109,20 @@ public class FilmServiceImp implements FilmService {
                 throw new DatabaseError("No se pudo encontrar un personaje con ese id");
             }
             } else {
+            throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
+        }
+    }
+
+
+    @Override
+    public void updateNewCharacters(Long id, CharacterDat newChar) throws DatabaseError{
+        Optional<Film> res = filmRepository.findById(id);
+        if (res.isPresent()) {
+                Film filmToUpdate = res.get();
+                characterDatRepository.save(newChar);
+                filmToUpdate.getCharacters().add(newChar);
+                filmRepository.save(filmToUpdate);
+        } else {
             throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
         }
     }
