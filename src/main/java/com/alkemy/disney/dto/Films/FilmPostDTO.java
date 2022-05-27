@@ -1,39 +1,28 @@
-package com.alkemy.disney.entity;
+package com.alkemy.disney.dto.Films;
 
+import com.alkemy.disney.entity.CharacterDat;
+import com.alkemy.disney.entity.Genre;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "films")
 @Getter
 @Setter
-@ToString
-public class Film {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+public class FilmPostDTO {
     private Long id;
 
     private String title;
     private Double rating;
-
-    @Transient
     private String date;
-
     private Date releaseDate;
     private String coverImage;
 
     @JsonIgnoreProperties("actFilm")
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     Set<CharacterDat> characters = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
     private Genre genre;
 }
