@@ -118,7 +118,7 @@ public class FilmServiceImp implements FilmService {
     public void updateNewCharacters(Long id, CharacterDat newChar) throws DatabaseError{
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
-            Film filmToUpdate = res.get();
+                Film filmToUpdate = res.get();
                 characterDatRepository.save(newChar);
                 filmToUpdate.getCharacters().add(newChar);
                 filmRepository.save(filmToUpdate);
