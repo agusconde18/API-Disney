@@ -11,6 +11,7 @@ import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.mapper.FilmsMapper;
 import com.alkemy.disney.repository.CharacterDatRepository;
 import com.alkemy.disney.repository.FilmRepository;
+import com.alkemy.disney.service.CharactersServiceInterface;
 import com.alkemy.disney.service.FilmService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,20 +113,14 @@ public class FilmServiceImp implements FilmService {
         }
     }
 
+
     @Override
     public void updateNewCharacters(Long id, CharacterDat newChar) throws DatabaseError{
         Optional<Film> res = filmRepository.findById(id);
-        System.out.println("ID: "+id+", Optional: "+res+ ", FilmExist?:"+res.isPresent());
-        System.out.println("res "+ res.get().toString());
-        System.out.println("ula "+ newChar.toString());
         if (res.isPresent()) {
             Film filmToUpdate = res.get();
-            System.out.println("film " + filmToUpdate.toString());
-                Set<CharacterDat> updatedCharacters = filmToUpdate.getCharacters();
-                updatedCharacters.add(newChar);
-                filmToUpdate.setCharacters(updatedCharacters);
-
-                System.out.println("ula "+ updatedCharacters);
+                characterDatRepository.save(newChar);
+                filmToUpdate.getCharacters().add(newChar);
                 filmRepository.save(filmToUpdate);
         } else {
             throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
