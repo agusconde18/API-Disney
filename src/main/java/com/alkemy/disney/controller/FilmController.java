@@ -73,11 +73,11 @@ public class FilmController {
     }
 
     @PutMapping("/{id}/character/{charId}")
-    public void updateCharacterList(@PathVariable Long id, @PathVariable Long charId) {
+    public ResponseEntity<?> updateCharacterList(@PathVariable Long id, @PathVariable Long charId) {
         try {
-            filmService.updateCharacters(id, charId);
+            return new ResponseEntity<>(filmService.updateCharacters(id, charId), HttpStatus.OK);
         } catch (DatabaseError e) {
-
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -90,11 +90,11 @@ public class FilmController {
         }
     }
     @PostMapping("/{id}/character")
-    public void newCharacterForFilm(@PathVariable Long id, @RequestBody CharacterDat newChar){
+    public ResponseEntity<?> newCharacterForFilm(@PathVariable Long id, @RequestBody PostCharactersDTO newChar){
         try {
-            filmService.updateNewCharacters(id, newChar);
+            return new ResponseEntity<>(filmService.updateNewCharacters(id, newChar), HttpStatus.OK);
         } catch (DatabaseError e){
-
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }
