@@ -31,9 +31,9 @@ public class GenreServiceImp implements GenreService {
     public GenreDTO save(GenreDTO genreDTO) throws ServiceError {
 
         if(!genreDTO.getName().isEmpty()){
-            Genre updateGenre = genreMapper.DTOToGenre(genreDTO);
-            genreRepository.save(updateGenre);
-            return genreMapper.GenreToDTO(updateGenre);
+            Genre genreToSave = genreMapper.DTOToGenre(genreDTO);
+            genreRepository.save(genreToSave);
+            return genreMapper.GenreToDTO(genreToSave);
         }else{
             throw new ServiceError("Falta el nombre del genero");
         }
