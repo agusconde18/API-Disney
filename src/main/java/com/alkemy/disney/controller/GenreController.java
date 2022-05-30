@@ -37,7 +37,7 @@ public class GenreController {
         return genreService.getAll();
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Map<String, Object>> createGenre(@RequestBody GenreDTO genreDTO){
         try{
             GenreDTO response = genreService.save(genreDTO);
