@@ -13,25 +13,27 @@ import java.util.Set;
 
 @Data
 public class PostCharactersDTO {
+
     private Long id;
 
-    @NotNull (message = "")
-    @NotEmpty (message = "")
+    @NotNull (message = ErrorMessages.NOT_NULL)
+    @NotEmpty (message = ErrorMessages.NOT_EMPTY)
     private String name;
 
-    @Min(0)
-    @Max(150)
+    @Min(value = 0 , message = ErrorMessages.MIN_VALUE_ERROR)
+    @Max(value = 150,message = ErrorMessages.MAX_VALUE_ERROR+150)
     private Long age;
 
-    @NotNull
+    @NotNull (message = ErrorMessages.NOT_NULL)
     private String image;
 
-    @Min(0)
-    @Max(1000)
+    @Min(value = 0 , message = ErrorMessages.MIN_VALUE_ERROR)
+    @Max(value = 1000,message = ErrorMessages.MAX_VALUE_ERROR+1000)
     private Float weight;
 
-    @NotNull
+    @NotNull (message = ErrorMessages.NOT_NULL)
     private String story;
 
     Set<Film> actFilm = new HashSet<>();
+
 }

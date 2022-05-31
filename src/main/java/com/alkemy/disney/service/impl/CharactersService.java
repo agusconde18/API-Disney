@@ -7,6 +7,7 @@ import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.exception.DatabaseError;
+import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.exception.ServiceError;
 import com.alkemy.disney.mapper.CharacterMapper;
 import com.alkemy.disney.repository.CharacterDatRepository;

@@ -3,6 +3,7 @@ package com.alkemy.disney.controller;
 import com.alkemy.disney.dto.Genres.GenreDTO;
 import com.alkemy.disney.entity.Genre;
 import com.alkemy.disney.exception.DatabaseError;
+import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.exception.ServiceError;
 import com.alkemy.disney.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +39,13 @@ public class GenreController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> createGenre(@RequestBody GenreDTO genreDTO){
+    public ResponseEntity<Map<String, Object>> createGenre(@RequestBody GenreDTO genreDTO) throws ServiceError {
         GenreDTO response = genreService.save(genreDTO);
         return new ResponseEntity<>(makeMap("saved", response), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>>updateGenre(@PathVariable Long id, @RequestBody GenreDTO genreDTO){
+    public ResponseEntity<Map<String, Object>>updateGenre(@PathVariable Long id, @RequestBody GenreDTO genreDTO) throws NotFound {
         GenreDTO response = genreService.update(genreDTO, id);
         return new ResponseEntity<>(makeMap("updated", response), HttpStatus.CREATED);
     }

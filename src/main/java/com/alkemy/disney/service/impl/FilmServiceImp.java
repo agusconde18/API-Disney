@@ -6,6 +6,7 @@ import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
 import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.exception.DatabaseError;
+import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.exception.ServiceError;
 import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.mapper.CharacterMapper;
@@ -140,14 +141,14 @@ public class FilmServiceImp implements FilmService {
     }
 
     @Override
-    public FilmDTO getFilmDetails(Long id) throws DatabaseError{
+    public FilmDTO getFilmDetails(Long id) throws DatabaseError {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmDetails = res.get();
             return filmsMapper.filmsToDTO(filmDetails);
-        } else {
-            throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
         }
+
+        throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
     }
 
     @Override

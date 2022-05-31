@@ -1,6 +1,8 @@
 package com.alkemy.disney.controller;
 
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
+import com.alkemy.disney.exception.DatabaseError;
+import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.service.CharactersServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -6,6 +6,7 @@ import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
 import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.exception.DatabaseError;
+import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.exception.ServiceError;
 
 import java.text.ParseException;
@@ -17,7 +18,7 @@ public interface FilmService {
     FilmDTO update(FilmPostDTO film, Long id) throws ParseException;
     FilmDTO updateCharacters(Long id, Long idCharacter);
     FilmDTO updateNewCharacters(Long id, PostCharactersDTO newChar) throws DatabaseError;
-    void deleteCharacter(Long id, Long idCharacter);
-    FilmDTO getFilmDetails(Long id);
+    void deleteCharacter(Long id, Long idCharacter) throws NotFound;
+    FilmDTO getFilmDetails(Long id) throws DatabaseError;
     List<FilmListDTO> getAllFilms();
 }

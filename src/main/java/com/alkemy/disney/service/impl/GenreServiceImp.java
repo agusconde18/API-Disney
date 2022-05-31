@@ -3,6 +3,8 @@ package com.alkemy.disney.service.impl;
 import com.alkemy.disney.dto.Genres.GenreDTO;
 import com.alkemy.disney.entity.Genre;
 import com.alkemy.disney.exception.DatabaseError;
+import com.alkemy.disney.exception.ErrorMessages;
+import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.exception.ServiceError;
 import com.alkemy.disney.mapper.GenreMapper;
 import com.alkemy.disney.repository.GenreRepository;
@@ -29,16 +31,13 @@ public class GenreServiceImp implements GenreService {
 
     @Override
     public GenreDTO save(GenreDTO genreDTO){
-
-        if(!genreDTO.getName().isEmpty()){
-            Genre genreToSave = genreMapper.DTOToGenre(genreDTO);
-            genreRepository.save(genreToSave);
-            return genreMapper.GenreToDTO(genreToSave);
-        }
+        Genre genreToSave = genreMapper.DTOToGenre(genreDTO);
+        genreRepository.save(genreToSave);
+        return genreMapper.GenreToDTO(genreToSave);
     }
 
     @Override
-    public GenreDTO update(GenreDTO genre, Long id){
+    public GenreDTO update(GenreDTO genre, Long id) throws NotFound {
         Optional<Genre> res = genreRepository.findById(id);
         if(res.isPresent()){
             Genre genreToUpdate = res.get();
@@ -49,6 +48,7 @@ public class GenreServiceImp implements GenreService {
                 return genreMapper.GenreToDTO(updateGenre);
             }
         }
+        throw new NotFound("");
     }
 
     @Override
