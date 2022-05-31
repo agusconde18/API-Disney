@@ -54,7 +54,7 @@ public class CharactersService implements CharactersServiceInterface {
             characterDatRepository.deleteById(delcharId);
             return ;
         }
-        throw new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);
+        throw  new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);
     }
 
     @Override
