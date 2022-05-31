@@ -74,23 +74,13 @@ public class FilmServiceImp implements FilmService {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmToUpdate = res.get();
-            if(!film.getTitle().isEmpty() && !film.getCoverImage().isEmpty() && !film.getDate().isEmpty()) {
-                film.setId(filmToUpdate.getId());
-                SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    film.setReleaseDate(formatter.parse(film.getDate()));
-                } catch(ParseException e) {
-                    throw new ServiceError("Formato de fecha erroneo");
-                }
-                Film updateFilm = filmsMapper.PostFilmDTOToFilm(film);
-                updateFilm.setCharacters(filmToUpdate.getCharacters());
-                filmRepository.save(updateFilm);
-                return filmsMapper.filmsToDTO(updateFilm);
-            } else {
-                throw new ServiceError("Los campos son obligatorios");
-            }
-        } else {
-            throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
+            film.setId(filmToUpdate.getId());
+            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+            film.setReleaseDate(formatter.parse(film.getDate()));
+            Film updateFilm = filmsMapper.PostFilmDTOToFilm(film);
+            updateFilm.setCharacters(filmToUpdate.getCharacters());
+            filmRepository.save(updateFilm);
+            return filmsMapper.filmsToDTO(updateFilm);
         }
 
     }

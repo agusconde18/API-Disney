@@ -28,19 +28,17 @@ public class GenreServiceImp implements GenreService {
     }
 
     @Override
-    public GenreDTO save(GenreDTO genreDTO) throws ServiceError {
+    public GenreDTO save(GenreDTO genreDTO){
 
         if(!genreDTO.getName().isEmpty()){
             Genre genreToSave = genreMapper.DTOToGenre(genreDTO);
             genreRepository.save(genreToSave);
             return genreMapper.GenreToDTO(genreToSave);
-        }else{
-            throw new ServiceError("Falta el nombre del genero");
         }
     }
 
     @Override
-    public GenreDTO update(GenreDTO genre, Long id) throws ServiceError, DatabaseError {
+    public GenreDTO update(GenreDTO genre, Long id){
         Optional<Genre> res = genreRepository.findById(id);
         if(res.isPresent()){
             Genre genreToUpdate = res.get();
@@ -49,12 +47,7 @@ public class GenreServiceImp implements GenreService {
                 Genre updateGenre = genreMapper.DTOToGenre(genre);
                 genreRepository.save(updateGenre);
                 return genreMapper.GenreToDTO(updateGenre);
-
-            }else{
-                throw new ServiceError("El nombre es obligatorio");
             }
-        }else{
-            throw new DatabaseError("No se pudo encontrar un genero con ese id");
         }
     }
 

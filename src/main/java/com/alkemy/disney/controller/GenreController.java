@@ -39,22 +39,13 @@ public class GenreController {
 
     @PostMapping
     public ResponseEntity<Map<String, Object>> createGenre(@RequestBody GenreDTO genreDTO){
-        try{
-            GenreDTO response = genreService.save(genreDTO);
-            return new ResponseEntity<>(makeMap("saved", response), HttpStatus.CREATED);
-
-        }catch(ServiceError e){
-            return new ResponseEntity<>(makeMap("error", e.getMessage()) , HttpStatus.BAD_REQUEST);
-        }
+        GenreDTO response = genreService.save(genreDTO);
+        return new ResponseEntity<>(makeMap("saved", response), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Map<String, Object>>updateGenre(@PathVariable Long id, @RequestBody GenreDTO genreDTO){
-        try{
-            GenreDTO response = genreService.update(genreDTO, id);
-            return new ResponseEntity<>(makeMap("updated", response), HttpStatus.CREATED);
-        }catch(ServiceError| DatabaseError e){
-            return new ResponseEntity<>(makeMap("error", e.getMessage()), HttpStatus.BAD_REQUEST);
-        }
+        GenreDTO response = genreService.update(genreDTO, id);
+        return new ResponseEntity<>(makeMap("updated", response), HttpStatus.CREATED);
     }
 }

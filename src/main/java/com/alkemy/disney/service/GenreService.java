@@ -11,7 +11,7 @@ public interface GenreService {
 
     GenreDTO save(GenreDTO genreDTO) throws ServiceError;
 
-    GenreDTO update(GenreDTO genreDTO, Long id) throws ServiceError, DatabaseError;
+    GenreDTO update(GenreDTO genreDTO, Long id);
 
     List<GenreDTO> getAll();
 
