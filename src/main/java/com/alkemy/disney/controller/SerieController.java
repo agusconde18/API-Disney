@@ -1,5 +1,6 @@
 package com.alkemy.disney.controller;
 
+import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.dto.Series.SerieListDTO;
 import com.alkemy.disney.dto.Series.SeriePostDTO;
 import com.alkemy.disney.entity.Serie;
