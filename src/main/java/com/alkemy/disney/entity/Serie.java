@@ -20,10 +20,8 @@ public class Serie {
 
     private String title;
     private Double rating;
-
     private Date releaseDate;
     private String coverImage;
-
     private Integer totalEpisodes;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
