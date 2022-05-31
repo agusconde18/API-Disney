@@ -9,7 +9,7 @@ import com.alkemy.disney.entity.Serie;
 public interface SerieService {
     SerieDTO save(SeriePostDTO serie);
     void delete(Long id);
-    SerieDTO update(Long id);
+    SerieDTO update(Long id, SeriePostDTO serie);
     SerieDTO updateCharacters(Long id, Long characterId);
     SerieDto updateNewCharacter(Long id, PostCharactersDTO newChar);
     SerieDTO deleteCharacter(Long id, Long characterId);
