@@ -52,20 +52,21 @@ public class FilmController {
     public ResponseEntity<?> updateFilm(
             @Valid @PathVariable @NotNull Long id,
             @Valid @RequestBody FilmPostDTO film
-    ) throws ParseException {
+    ) throws ParseException, NotFound {
             return new ResponseEntity<>(filmService.update(film, id), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteFilm(@Valid @PathVariable @NotNull Long id) {
+    public ResponseEntity<?> deleteFilm(@Valid @PathVariable @NotNull Long id) {
             filmService.delete(id);
+        return new ResponseEntity<>("deleted", HttpStatus.OK);
     }
 
     @PutMapping("/{id}/character/{charId}")
     public ResponseEntity<?> updateCharacterList(
             @Valid @PathVariable @NotNull Long id,
             @Valid @PathVariable @NotNull Long charId
-    ) {
+    ) throws NotFound {
             return new ResponseEntity<>(filmService.updateCharacters(id, charId), HttpStatus.OK);
     }
 
