@@ -145,7 +145,7 @@ public class FilmServiceImp implements FilmService {
             return filmsMapper.filmsToDTO(filmDetails);
         }
 
-        throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
+        throw new DatabaseError("");
     }
 
     @Override
