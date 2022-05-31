@@ -3,10 +3,7 @@ package com.alkemy.disney.controller;
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
-import com.alkemy.disney.exception.DatabaseError;
-import com.alkemy.disney.exception.ErrorMessages;
-import com.alkemy.disney.exception.NotFound;
-import com.alkemy.disney.exception.NotValid;
+import com.alkemy.disney.exception.*;
 import com.alkemy.disney.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +29,7 @@ public class FilmController {
 
 
     @PostMapping
-    public ResponseEntity<?> newFilm(@Valid  @RequestBody FilmPostDTO film) throws  NotValid {
+    public ResponseEntity<?> newFilm(@Valid  @RequestBody FilmPostDTO film) throws DateFormatException {
             return new ResponseEntity<>(filmService.save(film), HttpStatus.CREATED);
     }
 
@@ -56,7 +53,9 @@ public class FilmController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteFilm(@Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id) {
+    public ResponseEntity<?> deleteFilm(
+            @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id
+    ) throws NotFound {
             filmService.delete(id);
         return new ResponseEntity<>("deleted", HttpStatus.OK);
     }
