@@ -35,4 +35,5 @@ public class CharactersDTO {
 
     @JsonIgnoreProperties("characters")
     Set<Film> actFilm = new HashSet<>();
+
 }
