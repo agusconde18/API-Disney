@@ -7,6 +7,7 @@ import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -27,11 +28,31 @@ public class RestExceptionController extends ResponseEntityExceptionHandler {
 
     private ObjectError o;
 
+    /*
+    *   Todos los tipos de excepciones (Manejador general)
+     */
     @ExceptionHandler(value = {Throwable.class})
     protected ResponseEntity<Object> handleThrowable(Throwable ex, WebRequest request){
         ExceptionDTO exceptionDTO = new ExceptionDTO(
                 HttpStatus.INTERNAL_SERVER_ERROR,
-                ex.getMessage(),
+                ErrorMessages.INTERNAL_SERVER_ERROR,
+                Arrays.asList("")
+        );
+
+        return handleExceptionInternal(
+                (Exception) ex,
+                exceptionDTO,
+                new HttpHeaders(),
+                exceptionDTO.getStatus(),
+                request
+        );
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        ExceptionDTO exceptionDTO = new ExceptionDTO(
+                HttpStatus.BAD_REQUEST,
+                ErrorMessages.BAD_REQUEST,
                 Arrays.asList("")
         );
 
