@@ -51,10 +51,6 @@ public class CharactersService implements CharactersServiceInterface {
     @Override
     public void deleteCharacter(Long delcharId) throws NotFound {
         if(characterDatRepository.existsById(delcharId)) {
-            CharacterDat characterDat = characterDatRepository.getById(delcharId);
-            for (Film film : characterDat.getActFilm()) {
-                film.getCharacters().remove(characterDat);
-            }
             characterDatRepository.deleteById(delcharId);
         }
         throw new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);
