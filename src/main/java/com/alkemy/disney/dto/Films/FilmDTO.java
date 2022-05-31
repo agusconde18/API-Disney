@@ -23,5 +23,6 @@ public class FilmDTO {
     @JsonIgnoreProperties("actFilm")
     Set<CharacterDat> characters = new HashSet<>();
 
+    @JsonIgnoreProperties("hibernateLazyInitializer")
     private Genre genre;
 }
