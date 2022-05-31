@@ -2,6 +2,7 @@ package com.alkemy.disney.controller;
 
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.exception.DatabaseError;
+import com.alkemy.disney.exception.ErrorMessages;
 import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.service.CharactersServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -29,7 +31,7 @@ public class CharactersController {
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<?> getById (@Valid @PathVariable @NotNull Long id) throws NotFound {
+    ResponseEntity<?> getById (@Valid @PathVariable @NotNull(message = ErrorMessages.NOT_NULL) Long id) throws NotFound {
         return new ResponseEntity<>(charactersService.getById(id), HttpStatus.OK);
     }
 
@@ -40,14 +42,14 @@ public class CharactersController {
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<?> deleteCharacter (@Valid @PathVariable @NotNull Long id) throws NotFound {
+    ResponseEntity<?> deleteCharacter (@Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id) throws NotFound {
             charactersService.deleteCharacter(id);
             return new ResponseEntity<>("deleted", HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     ResponseEntity<?> editCharacter (
-            @Valid @PathVariable @NotNull Long id,
+            @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @RequestBody PostCharactersDTO postCharactersDTO
     ) throws DatabaseError, NotFound {
         postCharactersDTO.setId(id);

@@ -4,6 +4,7 @@ import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
 import com.alkemy.disney.exception.DatabaseError;
+import com.alkemy.disney.exception.ErrorMessages;
 import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.exception.NotValid;
 import com.alkemy.disney.service.FilmService;
@@ -41,43 +42,43 @@ public class FilmController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getFilmDetails(@Valid @PathVariable @NotNull Long id) throws NotFound {
+    public ResponseEntity<?> getFilmDetails(@Valid @PathVariable @NotNull(message = ErrorMessages.NOT_NULL) Long id) throws NotFound {
             return new ResponseEntity<>(filmService.getFilmDetails(id), HttpStatus.OK);
 
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateFilm(
-            @Valid @PathVariable @NotNull Long id,
+            @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @RequestBody FilmPostDTO film
     ) throws  NotFound, NotValid {
             return new ResponseEntity<>(filmService.update(film, id), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteFilm(@Valid @PathVariable @NotNull Long id) {
+    public ResponseEntity<?> deleteFilm(@Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id) {
             filmService.delete(id);
         return new ResponseEntity<>("deleted", HttpStatus.OK);
     }
 
-    @PutMapping("/{id}/character/{charId}")
+    @PutMapping("/{id}/character/{characterId}")
     public ResponseEntity<?> updateCharacterList(
-            @Valid @PathVariable @NotNull Long id,
-            @Valid @PathVariable @NotNull Long charId
+            @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
+            @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long characterId
     ) throws NotFound {
-            return new ResponseEntity<>(filmService.updateCharacters(id, charId), HttpStatus.OK);
+            return new ResponseEntity<>(filmService.updateCharacters(id, characterId), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}/character/{charId}")
+    @DeleteMapping("/{id}/character/{characterId}")
     public void deleteCharacterFromList(
-            @Valid @PathVariable @NotNull Long id,
-            @Valid @PathVariable @NotNull Long charId
+            @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
+            @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long characterId
     ) throws NotFound {
-            filmService.deleteCharacter(id, charId);
+            filmService.deleteCharacter(id, characterId);
     }
     @PostMapping("/{id}/character")
     public ResponseEntity<?> newCharacterForFilm(
-            @Valid @PathVariable @NotNull Long id,
+            @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @RequestBody PostCharactersDTO newChar
     ) throws DatabaseError {
 
