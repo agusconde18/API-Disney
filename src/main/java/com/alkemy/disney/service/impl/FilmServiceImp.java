@@ -49,6 +49,7 @@ public class FilmServiceImp implements FilmService {
     public FilmDTO save(FilmPostDTO film) throws ParseException {
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         film.setReleaseDate(formatter.parse(film.getDate()));
+
         Film newFilm = filmsMapper.PostFilmDTOToFilm(film);
 
         newFilm.setGenre(genreRepository.getById(newFilm.getGenre().getId()));
