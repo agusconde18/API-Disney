@@ -1,8 +1,8 @@
 package com.alkemy.disney.controller;
 
 import com.alkemy.disney.dto.Exceptions.ExceptionDTO;
-import com.alkemy.disney.exception.DatabaseError;
-import com.alkemy.disney.exception.ServiceError;
+import com.alkemy.disney.exception.*;
+import org.hibernate.validator.internal.constraintvalidators.bv.notempty.NotEmptyValidatorForArray;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -50,31 +50,15 @@ public class RestExceptionController extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
         ExceptionDTO exceptionDTO = new ExceptionDTO(
                 HttpStatus.BAD_REQUEST,
-                ex.getMessage(),
+                ErrorMessages.ERROR_VALIDATION,
                 ex.getBindingResult().getFieldErrors()
                         .stream().map( o -> {
                             String message = o.getDefaultMessage();
-                            message = (message.contains("%s")) ? String.format(message, o.getField()) : message;
+                            message = (message!=null&&message.contains("%s"))?
+                                    String.format(message, o.getField()) : message;
                             return message;
                         })
                         .collect(Collectors.toList())
-        );
-
-        return handleExceptionInternal(
-                (Exception) ex,
-                exceptionDTO,
-                new HttpHeaders(),
-                exceptionDTO.getStatus(),
-                request
-        );
-    }
-
-    //@ExceptionHandler(value = {MethodArgumentNotValidException.class})
-    protected ResponseEntity<Object> exceptionHandlerExceptionResolver(Throwable ex, WebRequest request){
-        ExceptionDTO exceptionDTO = new ExceptionDTO(
-                HttpStatus.BAD_REQUEST,
-                ex.getMessage(),
-                Arrays.asList("")
         );
 
         return handleExceptionInternal(
@@ -105,6 +89,57 @@ public class RestExceptionController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {ServiceError.class})
     protected ResponseEntity<Object> handleServiceError(RuntimeException ex, WebRequest request){
+        ExceptionDTO exceptionDTO = new ExceptionDTO(
+                HttpStatus.BAD_REQUEST,
+                ex.getMessage(),
+                Arrays.asList("")
+        );
+
+        return handleExceptionInternal(
+                (Exception) ex,
+                exceptionDTO,
+                new HttpHeaders(),
+                exceptionDTO.getStatus(),
+                request
+        );
+    }
+
+    @ExceptionHandler(value = {NotFound.class})
+    protected ResponseEntity<Object> handleNotFound(RuntimeException ex, WebRequest request){
+        ExceptionDTO exceptionDTO = new ExceptionDTO(
+                HttpStatus.BAD_REQUEST,
+                ex.getMessage(),
+                Arrays.asList("")
+        );
+
+        return handleExceptionInternal(
+                (Exception) ex,
+                exceptionDTO,
+                new HttpHeaders(),
+                exceptionDTO.getStatus(),
+                request
+        );
+    }
+
+    @ExceptionHandler(value = {NotValid.class})
+    protected ResponseEntity<Object> handleNotValid(RuntimeException ex, WebRequest request){
+        ExceptionDTO exceptionDTO = new ExceptionDTO(
+                HttpStatus.BAD_REQUEST,
+                ex.getMessage(),
+                Arrays.asList("")
+        );
+
+        return handleExceptionInternal(
+                (Exception) ex,
+                exceptionDTO,
+                new HttpHeaders(),
+                exceptionDTO.getStatus(),
+                request
+        );
+    }
+
+    @ExceptionHandler(value = {ResponseError.class})
+    protected ResponseEntity<Object> handleResponseError(RuntimeException ex, WebRequest request){
         ExceptionDTO exceptionDTO = new ExceptionDTO(
                 HttpStatus.BAD_REQUEST,
                 ex.getMessage(),
