@@ -14,8 +14,8 @@ public interface FilmService {
     FilmDTO save(FilmPostDTO film) throws ServiceError;
     void delete(Long id) throws DatabaseError;
     FilmDTO update(FilmPostDTO film, Long id) throws ServiceError, DatabaseError;
-    void updateCharacters(Long id, Long idCharacter) throws DatabaseError;
-    void updateNewCharacters(Long id, CharacterDat newChar) throws DatabaseError;
+    FilmDTO updateCharacters(Long id, Long idCharacter) throws DatabaseError;
+    FilmDTO updateNewCharacters(Long id, PostCharactersDTO newChar) throws DatabaseError;
     void deleteCharacter(Long id, Long idCharacter) throws DatabaseError;
     FilmDTO getFilmDetails(Long id) throws DatabaseError;
     List<FilmListDTO> getAllFilms();

@@ -8,6 +8,7 @@ import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.exception.DatabaseError;
 import com.alkemy.disney.exception.ServiceError;
 import com.alkemy.disney.entity.Film;
+import com.alkemy.disney.mapper.CharacterMapper;
 import com.alkemy.disney.mapper.FilmsMapper;
 import com.alkemy.disney.repository.CharacterDatRepository;
 import com.alkemy.disney.repository.FilmRepository;
@@ -31,6 +32,7 @@ public class FilmServiceImp implements FilmService {
     FilmRepository filmRepository;
     CharacterDatRepository characterDatRepository;
     FilmsMapper filmsMapper = FilmsMapper.INSTANCE;
+    CharacterMapper characterMapper = CharacterMapper.INSTANCE;
 
     @Autowired
     public FilmServiceImp(FilmRepository filmRepository, CharacterDatRepository characterDatRepository){
@@ -94,7 +96,7 @@ public class FilmServiceImp implements FilmService {
     }
 
     @Override
-    public void updateCharacters(Long id, Long idCharacter) throws DatabaseError{
+    public FilmDTO updateCharacters(Long id, Long idCharacter){
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmToUpdate = res.get();
@@ -105,8 +107,7 @@ public class FilmServiceImp implements FilmService {
                 updatedCharacters.add(character);
                 filmToUpdate.setCharacters(updatedCharacters);
                 filmRepository.save(filmToUpdate);
-            } else {
-                throw new DatabaseError("No se pudo encontrar un personaje con ese id");
+                return filmsMapper.filmsToDTO(filmToUpdate);
             }
             } else {
             throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
@@ -115,16 +116,17 @@ public class FilmServiceImp implements FilmService {
 
 
     @Override
-    public void updateNewCharacters(Long id, CharacterDat newChar) throws DatabaseError{
+    public FilmDTO updateNewCharacters(Long id, PostCharactersDTO newChar) throws DatabaseError {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
-                Film filmToUpdate = res.get();
-                characterDatRepository.save(newChar);
-                filmToUpdate.getCharacters().add(newChar);
-                filmRepository.save(filmToUpdate);
-        } else {
-            throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
+            Film filmToUpdate = res.get();
+            CharacterDat charToSave = characterMapper.PostCharactersDToCharacterDat(newChar);
+            characterDatRepository.save(charToSave);
+            filmToUpdate.getCharacters().add(charToSave);
+            filmRepository.save(filmToUpdate);
+            return filmsMapper.filmsToDTO(filmToUpdate);
         }
+        throw new DatabaseError("No existe dicha pelicula");
     }
 
     @Override

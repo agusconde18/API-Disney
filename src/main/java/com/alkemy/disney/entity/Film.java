@@ -24,9 +24,6 @@ public class Film {
     private String title;
     private Double rating;
 
-    @Transient
-    private String date;
-
     private Date releaseDate;
     private String coverImage;
 

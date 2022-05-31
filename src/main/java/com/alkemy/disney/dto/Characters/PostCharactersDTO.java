@@ -15,8 +15,8 @@ import java.util.Set;
 public class PostCharactersDTO {
     private Long id;
 
-    @NotNull
-    @NotEmpty
+    @NotNull (message = "")
+    @NotEmpty (message = "")
     private String name;
 
     @Min(0)

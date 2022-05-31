@@ -83,9 +83,9 @@ public class FilmController {
             @Valid @PathVariable @NotNull Long charId
     ) {
         try {
-            filmService.updateCharacters(id, charId);
+            return new ResponseEntity<>(filmService.updateCharacters(id, charId), HttpStatus.OK);
         } catch (DatabaseError e) {
-
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -106,9 +106,9 @@ public class FilmController {
             @Valid @RequestBody CharacterDat newChar
     ){
         try {
-            filmService.updateNewCharacters(id, newChar);
+            return new ResponseEntity<>(filmService.updateNewCharacters(id, newChar), HttpStatus.OK);
         } catch (DatabaseError e){
-
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }
