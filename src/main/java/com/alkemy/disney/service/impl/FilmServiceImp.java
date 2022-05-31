@@ -62,12 +62,14 @@ public class FilmServiceImp implements FilmService {
     }
 
     @Override
-    public void delete(Long id){
+    public void delete(Long id) throws NotFound {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmToDelete = res.get();
             filmRepository.delete(filmToDelete);
+            return;
         }
+        throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
     }
 
     @Override
@@ -139,7 +141,10 @@ public class FilmServiceImp implements FilmService {
                 updatedCharacters.remove(character);
                 filmToUpdate.setCharacters(updatedCharacters);
                 filmRepository.save(filmToUpdate);
+                return;
             }
+            else
+                throw new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);
         }
         throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
     }

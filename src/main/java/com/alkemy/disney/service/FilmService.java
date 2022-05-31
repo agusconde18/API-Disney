@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface FilmService {
     FilmDTO save(FilmPostDTO film) throws  NotValid;
-    void delete(Long id);
+    void delete(Long id) throws NotFound;
     FilmDTO update(FilmPostDTO film, Long id) throws  NotFound, NotValid;
     FilmDTO updateCharacters(Long id, Long idCharacter) throws NotFound;
     FilmDTO updateNewCharacters(Long id, PostCharactersDTO newChar) throws DatabaseError;

@@ -52,6 +52,7 @@ public class CharactersService implements CharactersServiceInterface {
     public void deleteCharacter(Long delcharId) throws NotFound {
         if(characterDatRepository.existsById(delcharId)) {
             characterDatRepository.deleteById(delcharId);
+            return ;
         }
         throw new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);
     }
