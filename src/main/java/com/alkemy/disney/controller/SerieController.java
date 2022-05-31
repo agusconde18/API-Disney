@@ -61,14 +61,14 @@ public class SerieController {
         return new ResponseEntity<>(serieService.updateNewCharacter(id, newChar), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}/character/{id}")
+    @PutMapping("/{id}/character/{characterId}")
     public ResponseEntity<?> updateCharacterList(
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long characterId
     ) throws NotFound{
         return new ResponseEntity<>(serieService.updateCharacters(id, characterId), HttpStatus.OK);
     }
-    @DeleteMapping("/{id}/character/{id}")
+    @DeleteMapping("/{id}/character/{characterId}")
     public ResponseEntity<?> deleteCharacterFromList(
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long characterId
