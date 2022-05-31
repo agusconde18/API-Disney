@@ -1,7 +1,7 @@
 package com.alkemy.disney.dto.Characters;
 
 import com.alkemy.disney.entity.Film;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.alkemy.disney.exception.ErrorMessages;
 import lombok.Data;
 
 import javax.validation.constraints.Max;

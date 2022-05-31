@@ -34,33 +34,31 @@ public class CharactersService implements CharactersServiceInterface {
     }
 
     @Override
-    public CharactersDTO getById(long id) throws DatabaseError {
+    public CharactersDTO getById(long id) throws NotFound {
         if(characterDatRepository.existsById(id))
-        return characterMapper.charactersToDTO(characterDatRepository.getById(id));
-        else
-            throw new DatabaseError("No se pudo encontrar un personaje con ese id");
+            return characterMapper.charactersToDTO(characterDatRepository.getById(id));
+        throw new NotFound("");
     }
 
     @Override
-    public CharactersDTO newCharacter(PostCharactersDTO newChara) throws ServiceError {
-        if(newChara.getAge()!=null&&newChara.getName()!=null&&newChara.getStory()!=null) {
+    public CharactersDTO newCharacter(PostCharactersDTO newChara) {
+
             CharacterDat newCharacter = characterMapper.PostCharactersDToCharacterDat(newChara);
             characterDatRepository.save(newCharacter);
             return characterMapper.charactersToDTO(newCharacter);
-        }
-        throw new ServiceError("Los campos deben ser no nulos");
+
     }
 
     @Override
-    public void deleteCharacter(Long delcharId) throws DatabaseError {
+    public void deleteCharacter(Long delcharId) throws NotFound {
         if(characterDatRepository.existsById(delcharId)) {
             CharacterDat characterDat = characterDatRepository.getById(delcharId);
             for (Film film : characterDat.getActFilm()) {
                 film.getCharacters().remove(characterDat);
             }
             characterDatRepository.deleteById(delcharId);
-        }else
-            throw new DatabaseError("No se pudo encontrar un personaje con ese id");
+        }
+        throw new NotFound("");
     }
 
     @Override

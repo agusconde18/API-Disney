@@ -11,14 +11,14 @@ import java.util.List;
 
 public interface CharactersServiceInterface {
 
-    CharactersDTO newCharacter (PostCharactersDTO newChara ) throws ServiceError;
+    CharactersDTO newCharacter (PostCharactersDTO newChara );
 
-    void deleteCharacter ( Long deleteChar ) throws DatabaseError;
+    void deleteCharacter ( Long deleteChar ) throws NotFound;
 
     CharactersDTO editCharacter ( PostCharactersDTO editCharacter ) throws DatabaseError;
 
     public List<ListCharactersDTO> allCharacters ();
 
-    CharactersDTO getById( long id ) throws DatabaseError;
+    CharactersDTO getById( long id ) throws NotFound;
 
 }

@@ -29,46 +29,29 @@ public class CharactersController {
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<?> getById (@Valid @PathVariable @NotNull Long id){
-        try {
-            return new ResponseEntity<>(charactersService.getById(id), HttpStatus.OK);
-        }catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    ResponseEntity<?> getById (@Valid @PathVariable @NotNull Long id) throws NotFound {
+        return new ResponseEntity<>(charactersService.getById(id), HttpStatus.OK);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<?> newCharacter (@Valid @RequestBody PostCharactersDTO postCharactersDTO) {
-        try {
-            return new ResponseEntity<>(charactersService.newCharacter(postCharactersDTO), HttpStatus.ACCEPTED);
-        }catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+        return new ResponseEntity<>(charactersService.newCharacter(postCharactersDTO), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteCharacter (@Valid @PathVariable @NotNull Long id) {
-        try {
-            charactersService.deleteCharacter(id);
-            return new ResponseEntity<>("", HttpStatus.OK);
-        }catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+        charactersService.deleteCharacter(id);
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     ResponseEntity<?> editCharacter (
             @Valid @PathVariable @NotNull Long id,
             @Valid @RequestBody PostCharactersDTO postCharactersDTO
-    ){
-        try {
-            postCharactersDTO.setId(id);
-            return new ResponseEntity<>(charactersService.editCharacter(postCharactersDTO), HttpStatus.ACCEPTED);
-        }catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+    ) throws DatabaseError {
+        postCharactersDTO.setId(id);
+        return new ResponseEntity<>(charactersService.editCharacter(postCharactersDTO), HttpStatus.ACCEPTED);
     }
 
 

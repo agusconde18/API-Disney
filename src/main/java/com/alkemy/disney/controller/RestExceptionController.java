@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 
 @ControllerAdvice
+@Component
 public class RestExceptionController extends ResponseEntityExceptionHandler {
 
     private ObjectError o;
