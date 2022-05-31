@@ -5,7 +5,6 @@ import com.alkemy.disney.exception.ErrorMessages;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
-import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;

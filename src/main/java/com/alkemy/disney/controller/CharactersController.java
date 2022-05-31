@@ -41,13 +41,8 @@ public class CharactersController {
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteCharacter (@Valid @PathVariable @NotNull Long id) throws NotFound {
-<<<<<<< HEAD
             charactersService.deleteCharacter(id);
             return new ResponseEntity<>("deleted", HttpStatus.OK);
-=======
-        charactersService.deleteCharacter(id);
-        return new ResponseEntity<>("", HttpStatus.OK);
->>>>>>> 9f2f4dfa5faab01a76011c2303c3c07e710a28cc
     }
 
     @PutMapping("/{id}")

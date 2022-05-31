@@ -145,14 +145,14 @@ public class FilmServiceImp implements FilmService {
     }
 
     @Override
-    public FilmDTO getFilmDetails(Long id) throws DatabaseError {
+    public FilmDTO getFilmDetails(Long id) throws NotFound {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmDetails = res.get();
             return filmsMapper.filmsToDTO(filmDetails);
         }
 
-        throw new DatabaseError(ErrorMessages.FILM_NOT_FOUND);
+        throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
     }
 
     @Override

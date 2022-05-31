@@ -1,13 +1,11 @@
 package com.alkemy.disney.controller;
 
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
-import com.alkemy.disney.dto.Films.FilmDTO;
 import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
 import com.alkemy.disney.exception.DatabaseError;
 import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.exception.NotValid;
-import com.alkemy.disney.exception.ServiceError;
 import com.alkemy.disney.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -44,7 +41,7 @@ public class FilmController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getFilmDetails(@Valid @PathVariable @NotNull Long id) throws DatabaseError {
+    public ResponseEntity<?> getFilmDetails(@Valid @PathVariable @NotNull Long id) throws NotFound {
             return new ResponseEntity<>(filmService.getFilmDetails(id), HttpStatus.OK);
 
     }

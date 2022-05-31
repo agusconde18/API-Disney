@@ -5,7 +5,6 @@ import com.alkemy.disney.dto.Characters.ListCharactersDTO;
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.exception.DatabaseError;
 import com.alkemy.disney.exception.NotFound;
-import com.alkemy.disney.exception.ServiceError;
 
 import java.util.List;
 

@@ -1,8 +1,6 @@
 package com.alkemy.disney.controller;
 
 import com.alkemy.disney.dto.Genres.GenreDTO;
-import com.alkemy.disney.entity.Genre;
-import com.alkemy.disney.exception.DatabaseError;
 import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.exception.ServiceError;
 import com.alkemy.disney.service.GenreService;

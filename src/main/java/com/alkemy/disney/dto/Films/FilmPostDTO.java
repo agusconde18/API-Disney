@@ -3,7 +3,6 @@ package com.alkemy.disney.dto.Films;
 import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.entity.Genre;
 import com.alkemy.disney.exception.ErrorMessages;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
