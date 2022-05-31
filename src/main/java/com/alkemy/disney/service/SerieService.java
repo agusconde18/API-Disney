@@ -4,15 +4,18 @@ import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.dto.Series.SerieDTO;
 import com.alkemy.disney.dto.Series.SerieListDTO;
 import com.alkemy.disney.dto.Series.SeriePostDTO;
-import com.alkemy.disney.entity.Serie;
+import com.alkemy.disney.exception.NotFound;
+import com.alkemy.disney.exception.NotValid;
+
+import java.util.List;
 
 public interface SerieService {
     SerieDTO save(SeriePostDTO serie);
     void delete(Long id);
-    SerieDTO update(Long id, SeriePostDTO serie);
-    SerieDTO updateCharacters(Long id, Long characterId);
-    SerieDto updateNewCharacter(Long id, PostCharactersDTO newChar);
-    SerieDTO deleteCharacter(Long id, Long characterId);
-    SerieDTO getSerieDetails(Long id);
+    SerieDTO update(Long id, SeriePostDTO serie) throws NotFound;
+    SerieDTO updateCharacters(Long id, Long characterId) throws NotFound;
+    SerieDTO updateNewCharacter(Long id, PostCharactersDTO newChar) throws NotFound;
+    SerieDTO deleteCharacter(Long id, Long characterId) throws NotFound;
+    SerieDTO getSerieDetails(Long id) throws NotFound;
     List<SerieListDTO> getAllSeries();
 }
