@@ -48,7 +48,7 @@ public class GenreServiceImp implements GenreService {
                 return genreMapper.GenreToDTO(updateGenre);
             }
         }
-        throw new NotFound("");
+        throw new NotFound(ErrorMessages.GENRE_NOT_FOUND);
     }
 
     @Override

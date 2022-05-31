@@ -5,9 +5,7 @@ import com.alkemy.disney.dto.Films.FilmDTO;
 import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
 import com.alkemy.disney.entity.CharacterDat;
-import com.alkemy.disney.exception.DatabaseError;
-import com.alkemy.disney.exception.NotFound;
-import com.alkemy.disney.exception.ServiceError;
+import com.alkemy.disney.exception.*;
 import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.mapper.CharacterMapper;
 import com.alkemy.disney.mapper.FilmsMapper;
@@ -46,9 +44,14 @@ public class FilmServiceImp implements FilmService {
     }
 
     @Override
-    public FilmDTO save(FilmPostDTO film) throws ParseException {
+    public FilmDTO save(FilmPostDTO film) throws NotValid {
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-        film.setReleaseDate(formatter.parse(film.getDate()));
+
+        try {
+            film.setReleaseDate(formatter.parse(film.getDate()));
+        } catch (ParseException e) {
+            throw new NotValid(ErrorMessages.ERROR_DATE);
+        }
 
         Film newFilm = filmsMapper.PostFilmDTOToFilm(film);
 
@@ -68,13 +71,17 @@ public class FilmServiceImp implements FilmService {
     }
 
     @Override
-    public FilmDTO update(FilmPostDTO film, Long id) throws ParseException, NotFound {
+    public FilmDTO update(FilmPostDTO film, Long id) throws NotFound, NotValid {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmToUpdate = res.get();
             film.setId(filmToUpdate.getId());
             SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-            film.setReleaseDate(formatter.parse(film.getDate()));
+            try {
+                film.setReleaseDate(formatter.parse(film.getDate()));
+            } catch (ParseException e) {
+                throw new NotValid(ErrorMessages.ERROR_DATE);
+            }
             Film updateFilm = filmsMapper.PostFilmDTOToFilm(film);
             updateFilm.setCharacters(filmToUpdate.getCharacters());
 
@@ -83,7 +90,7 @@ public class FilmServiceImp implements FilmService {
             filmRepository.save(updateFilm);
             return filmsMapper.filmsToDTO(updateFilm);
         }
-        throw new NotFound("");
+        throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
     }
 
     @Override
@@ -100,9 +107,9 @@ public class FilmServiceImp implements FilmService {
                 filmRepository.save(filmToUpdate);
                 return filmsMapper.filmsToDTO(filmToUpdate);
             }
-            throw new NotFound("");
+            throw new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);
         }
-        throw new NotFound("");
+        throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
     }
 
 
@@ -117,7 +124,7 @@ public class FilmServiceImp implements FilmService {
             filmRepository.save(filmToUpdate);
             return filmsMapper.filmsToDTO(filmToUpdate);
         }
-        throw new DatabaseError("No existe dicha pelicula");
+        throw new DatabaseError(ErrorMessages.FILM_NOT_FOUND);
     }
 
     @Override
@@ -134,7 +141,7 @@ public class FilmServiceImp implements FilmService {
                 filmRepository.save(filmToUpdate);
             }
         }
-        throw new NotFound("");
+        throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
     }
 
     @Override
@@ -145,7 +152,7 @@ public class FilmServiceImp implements FilmService {
             return filmsMapper.filmsToDTO(filmDetails);
         }
 
-        throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
+        throw new DatabaseError(ErrorMessages.FILM_NOT_FOUND);
     }
 
     @Override

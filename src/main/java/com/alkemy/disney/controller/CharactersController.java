@@ -40,7 +40,7 @@ public class CharactersController {
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<?> deleteCharacter (@Valid @PathVariable @NotNull Long id) {
+    ResponseEntity<?> deleteCharacter (@Valid @PathVariable @NotNull Long id) throws NotFound {
         charactersService.deleteCharacter(id);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
@@ -49,7 +49,7 @@ public class CharactersController {
     ResponseEntity<?> editCharacter (
             @Valid @PathVariable @NotNull Long id,
             @Valid @RequestBody PostCharactersDTO postCharactersDTO
-    ) throws DatabaseError {
+    ) throws DatabaseError, NotFound {
         postCharactersDTO.setId(id);
         return new ResponseEntity<>(charactersService.editCharacter(postCharactersDTO), HttpStatus.ACCEPTED);
     }
