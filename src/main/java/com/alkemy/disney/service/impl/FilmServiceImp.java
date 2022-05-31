@@ -29,16 +29,15 @@ import java.util.stream.Collectors;
 @Service
 public class FilmServiceImp implements FilmService {
 
-    @Autowired
     GenreRepository genreRepository;
-
     FilmRepository filmRepository;
     CharacterDatRepository characterDatRepository;
     FilmsMapper filmsMapper = FilmsMapper.INSTANCE;
     CharacterMapper characterMapper = CharacterMapper.INSTANCE;
 
     @Autowired
-    public FilmServiceImp(FilmRepository filmRepository, CharacterDatRepository characterDatRepository){
+    public FilmServiceImp(GenreRepository genreRepository, FilmRepository filmRepository, CharacterDatRepository characterDatRepository){
+        this.genreRepository = genreRepository;
         this.filmRepository = filmRepository;
         this.characterDatRepository = characterDatRepository;
     }
