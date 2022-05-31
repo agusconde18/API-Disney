@@ -44,13 +44,13 @@ public class FilmServiceImp implements FilmService {
     }
 
     @Override
-    public FilmDTO save(FilmPostDTO film) throws NotValid {
+    public FilmDTO save(FilmPostDTO film) throws DateFormatException {
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
 
         try {
             film.setReleaseDate(formatter.parse(film.getDate()));
         } catch (ParseException e) {
-            throw new NotValid(ErrorMessages.ERROR_DATE);
+            throw new DateFormatException(ErrorMessages.ERROR_DATE, e.getErrorOffset());
         }
 
         Film newFilm = filmsMapper.PostFilmDTOToFilm(film);
