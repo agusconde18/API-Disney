@@ -52,7 +52,7 @@ public class FilmController {
     public ResponseEntity<?> updateFilm(
             @Valid @PathVariable @NotNull Long id,
             @Valid @RequestBody FilmPostDTO film
-    ) throws ParseException {
+    ) throws ParseException, NotFound {
             return new ResponseEntity<>(filmService.update(film, id), HttpStatus.CREATED);
     }
 
@@ -65,7 +65,7 @@ public class FilmController {
     public ResponseEntity<?> updateCharacterList(
             @Valid @PathVariable @NotNull Long id,
             @Valid @PathVariable @NotNull Long charId
-    ) {
+    ) throws NotFound {
             return new ResponseEntity<>(filmService.updateCharacters(id, charId), HttpStatus.OK);
     }
 

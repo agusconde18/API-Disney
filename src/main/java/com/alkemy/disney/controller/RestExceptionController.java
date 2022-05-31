@@ -45,7 +45,7 @@ public class RestExceptionController extends ResponseEntityExceptionHandler {
     }
 
     /*
-    * Error en la validacion de parametros
+     * Error en la validacion de parametros
      */
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
