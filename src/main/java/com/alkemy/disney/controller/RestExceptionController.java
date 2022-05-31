@@ -28,11 +28,14 @@ public class RestExceptionController extends ResponseEntityExceptionHandler {
 
     private ObjectError o;
 
+    /*
+    *   Todos los tipos de excepciones (Manejador general)
+     */
     @ExceptionHandler(value = {Throwable.class})
     protected ResponseEntity<Object> handleThrowable(Throwable ex, WebRequest request){
         ExceptionDTO exceptionDTO = new ExceptionDTO(
                 HttpStatus.INTERNAL_SERVER_ERROR,
-                ex.getMessage(),
+                ErrorMessages.INTERNAL_SERVER_ERROR,
                 Arrays.asList("")
         );
 
