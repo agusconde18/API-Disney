@@ -44,7 +44,7 @@ public class SerieServiceImp implements SerieService {
 
 
     @Override
-    public SerieDTO save(SeriePostDTO serie) throws NotValid{
+    public SerieDTO save(SeriePostDTO serie) throws DateFormatException{
         formatSeriesDate(serie);
         Serie newSerie = serieMapper.PostSerieDTOToSerie(serie);
         newSerie.setGenre(genreRepository.getById(newSerie.getGenre().getId()));
@@ -62,7 +62,7 @@ public class SerieServiceImp implements SerieService {
     }
 
     @Override
-    public SerieDTO update(Long id, SeriePostDTO serie) throws NotFound, NotValid{
+    public SerieDTO update(Long id, SeriePostDTO serie) throws NotFound, DateFormatException{
         Optional<Serie> res = serieRepository.findById(id);
         if(res.isPresent()){
             Serie serieToUpdate = res.get();
@@ -153,12 +153,12 @@ public class SerieServiceImp implements SerieService {
                 .collect(Collectors.toList());
     }
 
-    private void formatSeriesDate(SeriePostDTO serie) throws NotValid{
+    private void formatSeriesDate(SeriePostDTO serie) throws DateFormatException{
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try{
             serie.setReleaseDate(formatter.parse(serie.getDate()));
         } catch (ParseException e){
-            throw new NotValid(ErrorMessages.ERROR_DATE);
+            throw new DateFormatException(ErrorMessages.ERROR_DATE, e.getErrorOffset());
         }
     }
 }

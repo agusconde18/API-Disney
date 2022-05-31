@@ -28,7 +28,7 @@ public class SerieController {
     }
 
     @PostMapping
-    public ResponseEntity<?> newSerie(@Valid @RequestBody SeriePostDTO serie) throws NotValid{
+    public ResponseEntity<?> newSerie(@Valid @RequestBody SeriePostDTO serie) throws DateFormatException{
         return new ResponseEntity<>(serieService.save(serie), HttpStatus.CREATED);
     }
     @GetMapping
@@ -44,7 +44,7 @@ public class SerieController {
     public ResponseEntity<?> updateFilm(
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @RequestBody SeriePostDTO serie
-    ) throws NotFound, NotValid{
+    ) throws NotFound, DateFormatException{
         return new ResponseEntity<>(serieService.update(id, serie), HttpStatus.CREATED);
     }
     @DeleteMapping("/{id}")
