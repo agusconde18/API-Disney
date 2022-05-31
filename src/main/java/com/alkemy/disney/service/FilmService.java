@@ -15,8 +15,8 @@ import java.util.List;
 public interface FilmService {
     FilmDTO save(FilmPostDTO film) throws ParseException;
     void delete(Long id);
-    FilmDTO update(FilmPostDTO film, Long id) throws ParseException;
-    FilmDTO updateCharacters(Long id, Long idCharacter);
+    FilmDTO update(FilmPostDTO film, Long id) throws ParseException, NotFound;
+    FilmDTO updateCharacters(Long id, Long idCharacter) throws NotFound;
     FilmDTO updateNewCharacters(Long id, PostCharactersDTO newChar) throws DatabaseError;
     void deleteCharacter(Long id, Long idCharacter) throws NotFound;
     FilmDTO getFilmDetails(Long id) throws DatabaseError;

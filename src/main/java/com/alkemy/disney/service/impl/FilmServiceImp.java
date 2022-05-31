@@ -87,7 +87,7 @@ public class FilmServiceImp implements FilmService {
     }
 
     @Override
-    public FilmDTO updateCharacters(Long id, Long idCharacter){
+    public FilmDTO updateCharacters(Long id, Long idCharacter) throws NotFound {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmToUpdate = res.get();

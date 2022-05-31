@@ -16,6 +16,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -143,6 +144,23 @@ public class RestExceptionController extends ResponseEntityExceptionHandler {
         ExceptionDTO exceptionDTO = new ExceptionDTO(
                 HttpStatus.BAD_REQUEST,
                 ex.getMessage(),
+                Arrays.asList("")
+        );
+
+        return handleExceptionInternal(
+                (Exception) ex,
+                exceptionDTO,
+                new HttpHeaders(),
+                exceptionDTO.getStatus(),
+                request
+        );
+    }
+
+    @ExceptionHandler(value = {ParseException.class})
+    protected ResponseEntity<Object> handleParseException(RuntimeException ex, WebRequest request){
+        ExceptionDTO exceptionDTO = new ExceptionDTO(
+                HttpStatus.BAD_REQUEST,
+                ErrorMessages.ERROR_DATE,
                 Arrays.asList("")
         );
 

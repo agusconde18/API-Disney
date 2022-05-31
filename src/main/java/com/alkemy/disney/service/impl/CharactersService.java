@@ -70,7 +70,7 @@ public class CharactersService implements CharactersServiceInterface {
             characterDatRepository.save(characterDat);
             return characterMapper.charactersToDTO(characterDat);
         }
-        else
-            throw new DatabaseError("No se pudo encontrar un personaje con ese id");
+
+        throw new DatabaseError("No se pudo encontrar un personaje con ese id");
     }
 }
