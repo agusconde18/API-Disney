@@ -44,7 +44,7 @@ public class SerieServiceImp implements SerieService {
 
 
     @Override
-    public SerieDTO save(SeriePostDTO serie) {
+    public SerieDTO save(SeriePostDTO serie) throws NotValid{
         formatSeriesDate(serie);
         Serie newSerie = serieMapper.PostSerieDTOToSerie(serie);
         newSerie.setGenre(genreRepository.getById(newSerie.getGenre().getId()));
@@ -62,7 +62,7 @@ public class SerieServiceImp implements SerieService {
     }
 
     @Override
-    public SerieDTO update(Long id, SeriePostDTO serie) throws NotFound{
+    public SerieDTO update(Long id, SeriePostDTO serie) throws NotFound, NotValid{
         Optional<Serie> res = serieRepository.findById(id);
         if(res.isPresent()){
             Serie serieToUpdate = res.get();
@@ -143,7 +143,7 @@ public class SerieServiceImp implements SerieService {
             Serie serieDetails = res.get();
             return serieMapper.seriesToDTO(serieDetails);
         }
-        throw new NotFound(ErrorMessage.SERIE_NOT_FOUND);
+        throw new NotFound(ErrorMessages.SERIE_NOT_FOUND);
     }
 
     @Override

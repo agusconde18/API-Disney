@@ -10,9 +10,9 @@ import com.alkemy.disney.exception.NotValid;
 import java.util.List;
 
 public interface SerieService {
-    SerieDTO save(SeriePostDTO serie);
+    SerieDTO save(SeriePostDTO serie) throws NotValid;
     void delete(Long id);
-    SerieDTO update(Long id, SeriePostDTO serie) throws NotFound;
+    SerieDTO update(Long id, SeriePostDTO serie) throws NotFound, NotValid;
     SerieDTO updateCharacters(Long id, Long characterId) throws NotFound;
     SerieDTO updateNewCharacter(Long id, PostCharactersDTO newChar) throws NotFound;
     SerieDTO deleteCharacter(Long id, Long characterId) throws NotFound;

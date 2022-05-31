@@ -2,6 +2,7 @@ package com.alkemy.disney.dto.Series;
 
 import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.entity.Genre;
+import com.alkemy.disney.exception.ErrorMessages;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
