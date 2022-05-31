@@ -13,6 +13,7 @@ import com.alkemy.disney.mapper.CharacterMapper;
 import com.alkemy.disney.mapper.FilmsMapper;
 import com.alkemy.disney.repository.CharacterDatRepository;
 import com.alkemy.disney.repository.FilmRepository;
+import com.alkemy.disney.repository.GenreRepository;
 import com.alkemy.disney.service.CharactersServiceInterface;
 import com.alkemy.disney.service.FilmService;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,9 @@ import java.util.stream.Collectors;
 @Service
 public class FilmServiceImp implements FilmService {
 
+    @Autowired
+    GenreRepository genreRepository;
+
     FilmRepository filmRepository;
     CharacterDatRepository characterDatRepository;
     FilmsMapper filmsMapper = FilmsMapper.INSTANCE;
@@ -45,9 +49,12 @@ public class FilmServiceImp implements FilmService {
     public FilmDTO save(FilmPostDTO film) throws ParseException {
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         film.setReleaseDate(formatter.parse(film.getDate()));
-            Film newFilm = filmsMapper.PostFilmDTOToFilm(film);
-            filmRepository.save(newFilm);
-            return filmsMapper.filmsToDTO(newFilm);
+        Film newFilm = filmsMapper.PostFilmDTOToFilm(film);
+
+        newFilm.setGenre(genreRepository.getById(newFilm.getGenre().getId()));
+
+        filmRepository.save(newFilm);
+        return filmsMapper.filmsToDTO(newFilm);
     }
 
     @Override
@@ -69,6 +76,9 @@ public class FilmServiceImp implements FilmService {
             film.setReleaseDate(formatter.parse(film.getDate()));
             Film updateFilm = filmsMapper.PostFilmDTOToFilm(film);
             updateFilm.setCharacters(filmToUpdate.getCharacters());
+
+            updateFilm.setGenre(genreRepository.getById(updateFilm.getGenre().getId()));
+
             filmRepository.save(updateFilm);
             return filmsMapper.filmsToDTO(updateFilm);
         }
