@@ -2,6 +2,7 @@ package com.alkemy.disney.dto.Characters;
 
 import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.exception.ErrorMessages;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import javax.validation.constraints.Max;
@@ -12,6 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PostCharactersDTO {
 
     private Long id;
