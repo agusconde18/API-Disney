@@ -6,6 +6,7 @@ import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
 import com.alkemy.disney.exception.DatabaseError;
 import com.alkemy.disney.exception.NotFound;
+import com.alkemy.disney.exception.NotValid;
 import com.alkemy.disney.exception.ServiceError;
 import com.alkemy.disney.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class FilmController {
 
 
     @PostMapping
-    public ResponseEntity<?> newFilm(@Valid  @RequestBody FilmPostDTO film) throws ParseException {
+    public ResponseEntity<?> newFilm(@Valid  @RequestBody FilmPostDTO film) throws  NotValid {
             return new ResponseEntity<>(filmService.save(film), HttpStatus.CREATED);
     }
 
@@ -52,7 +53,7 @@ public class FilmController {
     public ResponseEntity<?> updateFilm(
             @Valid @PathVariable @NotNull Long id,
             @Valid @RequestBody FilmPostDTO film
-    ) throws ParseException, NotFound {
+    ) throws  NotFound, NotValid {
             return new ResponseEntity<>(filmService.update(film, id), HttpStatus.CREATED);
     }
 

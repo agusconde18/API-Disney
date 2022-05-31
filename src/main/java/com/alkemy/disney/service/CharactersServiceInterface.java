@@ -15,7 +15,7 @@ public interface CharactersServiceInterface {
 
     void deleteCharacter ( Long deleteChar ) throws NotFound;
 
-    CharactersDTO editCharacter ( PostCharactersDTO editCharacter ) throws DatabaseError;
+    CharactersDTO editCharacter ( PostCharactersDTO editCharacter ) throws DatabaseError, NotFound;
 
     public List<ListCharactersDTO> allCharacters ();
 
