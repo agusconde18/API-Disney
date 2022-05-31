@@ -40,7 +40,7 @@ public class FilmServiceImp implements FilmService {
     public FilmServiceImp(GenreRepository genreRepository, FilmRepository filmRepository, CharacterDatRepository characterDatRepository){
         this.genreRepository = genreRepository;
         this.characterDatRepository = characterDatRepository;
-        this.genreRepository = genreRepository;
+        this.filmRepository = filmRepository;
     }
 
     @Override
