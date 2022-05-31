@@ -5,13 +5,13 @@ import com.alkemy.disney.dto.Films.FilmDTO;
 import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
 import com.alkemy.disney.entity.CharacterDat;
-import com.alkemy.disney.exception.DatabaseError;
-import com.alkemy.disney.exception.ServiceError;
+import com.alkemy.disney.exception.*;
 import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.mapper.CharacterMapper;
 import com.alkemy.disney.mapper.FilmsMapper;
 import com.alkemy.disney.repository.CharacterDatRepository;
 import com.alkemy.disney.repository.FilmRepository;
+import com.alkemy.disney.repository.GenreRepository;
 import com.alkemy.disney.service.CharactersServiceInterface;
 import com.alkemy.disney.service.FilmService;
 import lombok.NoArgsConstructor;
@@ -29,74 +29,72 @@ import java.util.stream.Collectors;
 @Service
 public class FilmServiceImp implements FilmService {
 
+    GenreRepository genreRepository;
     FilmRepository filmRepository;
     CharacterDatRepository characterDatRepository;
+
     FilmsMapper filmsMapper = FilmsMapper.INSTANCE;
     CharacterMapper characterMapper = CharacterMapper.INSTANCE;
 
     @Autowired
-    public FilmServiceImp(FilmRepository filmRepository, CharacterDatRepository characterDatRepository){
-        this.filmRepository = filmRepository;
+    public FilmServiceImp(GenreRepository genreRepository, FilmRepository filmRepository, CharacterDatRepository characterDatRepository){
+        this.genreRepository = genreRepository;
         this.characterDatRepository = characterDatRepository;
+        this.genreRepository = genreRepository;
     }
 
     @Override
-    public FilmDTO save(FilmPostDTO film) throws ServiceError {
-        SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy");
+    public FilmDTO save(FilmPostDTO film) throws NotValid {
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+
         try {
             film.setReleaseDate(formatter.parse(film.getDate()));
-        } catch(ParseException e) {
-            throw new ServiceError("Formato de fecha erroneo");
-        }
-        if(!film.getTitle().isEmpty() && !film.getCoverImage().isEmpty() && film.getReleaseDate() != null) {
-            Film newFilm = filmsMapper.PostFilmDTOToFilm(film);
-            filmRepository.save(newFilm);
-            return filmsMapper.filmsToDTO(newFilm);
-        } else {
-            throw new ServiceError("Los campos son obligatorios");
+        } catch (ParseException e) {
+            throw new NotValid(ErrorMessages.ERROR_DATE);
         }
 
+        Film newFilm = filmsMapper.PostFilmDTOToFilm(film);
+
+        newFilm.setGenre(genreRepository.getById(newFilm.getGenre().getId()));
+
+        filmRepository.save(newFilm);
+        return filmsMapper.filmsToDTO(newFilm);
     }
 
     @Override
-    public void delete(Long id) throws DatabaseError{
+    public void delete(Long id){
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmToDelete = res.get();
             filmRepository.delete(filmToDelete);
-        } else {
-            throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
         }
     }
 
     @Override
-    public FilmDTO update(FilmPostDTO film, Long id) throws ServiceError, DatabaseError{
+    public FilmDTO update(FilmPostDTO film, Long id) throws NotFound, NotValid {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmToUpdate = res.get();
-            if(!film.getTitle().isEmpty() && !film.getCoverImage().isEmpty() && !film.getDate().isEmpty()) {
-                film.setId(filmToUpdate.getId());
-                SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy");
-                try {
-                    film.setReleaseDate(formatter.parse(film.getDate()));
-                } catch(ParseException e) {
-                    throw new ServiceError("Formato de fecha erroneo");
-                }
-                Film updateFilm = filmsMapper.PostFilmDTOToFilm(film);
-                updateFilm.setCharacters(filmToUpdate.getCharacters());
-                filmRepository.save(updateFilm);
-                return filmsMapper.filmsToDTO(updateFilm);
-            } else {
-                throw new ServiceError("Los campos son obligatorios");
+            film.setId(filmToUpdate.getId());
+            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                film.setReleaseDate(formatter.parse(film.getDate()));
+            } catch (ParseException e) {
+                throw new NotValid(ErrorMessages.ERROR_DATE);
             }
-        } else {
-            throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
-        }
+            Film updateFilm = filmsMapper.PostFilmDTOToFilm(film);
+            updateFilm.setCharacters(filmToUpdate.getCharacters());
 
+            updateFilm.setGenre(genreRepository.getById(updateFilm.getGenre().getId()));
+
+            filmRepository.save(updateFilm);
+            return filmsMapper.filmsToDTO(updateFilm);
+        }
+        throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
     }
 
     @Override
-    public FilmDTO updateCharacters(Long id, Long idCharacter) throws DatabaseError{
+    public FilmDTO updateCharacters(Long id, Long idCharacter) throws NotFound {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmToUpdate = res.get();
@@ -108,32 +106,29 @@ public class FilmServiceImp implements FilmService {
                 filmToUpdate.setCharacters(updatedCharacters);
                 filmRepository.save(filmToUpdate);
                 return filmsMapper.filmsToDTO(filmToUpdate);
-            } else {
-                throw new DatabaseError("No se pudo encontrar un personaje con ese id");
             }
-            } else {
-            throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
+            throw new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);
         }
+        throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
     }
 
 
     @Override
-    public FilmDTO updateNewCharacters(Long id, PostCharactersDTO newChar) throws DatabaseError{
+    public FilmDTO updateNewCharacters(Long id, PostCharactersDTO newChar) throws DatabaseError {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
-                Film filmToUpdate = res.get();
-                CharacterDat charToSave = characterMapper.PostCharactersDToCharacterDat(newChar);
-                characterDatRepository.save(charToSave);
-                filmToUpdate.getCharacters().add(charToSave);
-                filmRepository.save(filmToUpdate);
-                return filmsMapper.filmsToDTO(filmToUpdate);
-        } else {
-            throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
+            Film filmToUpdate = res.get();
+            CharacterDat charToSave = characterMapper.PostCharactersDToCharacterDat(newChar);
+            characterDatRepository.save(charToSave);
+            filmToUpdate.getCharacters().add(charToSave);
+            filmRepository.save(filmToUpdate);
+            return filmsMapper.filmsToDTO(filmToUpdate);
         }
+        throw new DatabaseError(ErrorMessages.FILM_NOT_FOUND);
     }
 
     @Override
-    public void deleteCharacter(Long id, Long idCharacter) throws DatabaseError{
+    public void deleteCharacter(Long id, Long idCharacter) throws NotFound {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmToUpdate = res.get();
@@ -144,23 +139,20 @@ public class FilmServiceImp implements FilmService {
                 updatedCharacters.remove(character);
                 filmToUpdate.setCharacters(updatedCharacters);
                 filmRepository.save(filmToUpdate);
-            } else {
-                throw new DatabaseError("No se pudo encontrar un personaje con ese id");
             }
-        } else {
-            throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
         }
+        throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
     }
 
     @Override
-    public FilmDTO getFilmDetails(Long id) throws DatabaseError{
+    public FilmDTO getFilmDetails(Long id) throws NotFound {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmDetails = res.get();
             return filmsMapper.filmsToDTO(filmDetails);
-        } else {
-            throw new DatabaseError("No se pudo encontrar una pelicula con ese id");
         }
+
+        throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
     }
 
     @Override

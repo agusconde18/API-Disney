@@ -1,21 +1,21 @@
 package com.alkemy.disney.controller;
 
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
-import com.alkemy.disney.dto.Films.FilmDTO;
 import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
-import com.alkemy.disney.entity.CharacterDat;
-import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.exception.DatabaseError;
-import com.alkemy.disney.exception.ServiceError;
+import com.alkemy.disney.exception.ErrorMessages;
+import com.alkemy.disney.exception.NotFound;
+import com.alkemy.disney.exception.NotValid;
 import com.alkemy.disney.service.FilmService;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -32,12 +32,8 @@ public class FilmController {
 
 
     @PostMapping
-    public ResponseEntity<?> newFilm(@RequestBody FilmPostDTO film) {
-        try {
+    public ResponseEntity<?> newFilm(@Valid  @RequestBody FilmPostDTO film) throws  NotValid {
             return new ResponseEntity<>(filmService.save(film), HttpStatus.CREATED);
-        }catch (ServiceError e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
     }
 
     @GetMapping
@@ -46,55 +42,47 @@ public class FilmController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getFilmDetails(@PathVariable Long id) {
-        try {
+    public ResponseEntity<?> getFilmDetails(@Valid @PathVariable @NotNull(message = ErrorMessages.NOT_NULL) Long id) throws NotFound {
             return new ResponseEntity<>(filmService.getFilmDetails(id), HttpStatus.OK);
-        } catch (DatabaseError e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateFilm(@PathVariable Long id, @RequestBody FilmPostDTO film) {
-        try {
+    public ResponseEntity<?> updateFilm(
+            @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
+            @Valid @RequestBody FilmPostDTO film
+    ) throws  NotFound, NotValid {
             return new ResponseEntity<>(filmService.update(film, id), HttpStatus.CREATED);
-        }catch (ServiceError|DatabaseError e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
     }
 
     @DeleteMapping("/{id}")
-    public void deleteFilm(@PathVariable Long id) {
-        try {
+    public ResponseEntity<?> deleteFilm(@Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id) {
             filmService.delete(id);
-        }catch (DatabaseError e) {
-
-        }
+        return new ResponseEntity<>("deleted", HttpStatus.OK);
     }
 
-    @PutMapping("/{id}/character/{charId}")
-    public ResponseEntity<?> updateCharacterList(@PathVariable Long id, @PathVariable Long charId) {
-        try {
-            return new ResponseEntity<>(filmService.updateCharacters(id, charId), HttpStatus.OK);
-        } catch (DatabaseError e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+    @PutMapping("/{id}/character/{characterId}")
+    public ResponseEntity<?> updateCharacterList(
+            @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
+            @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long characterId
+    ) throws NotFound {
+            return new ResponseEntity<>(filmService.updateCharacters(id, characterId), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}/character/{charId}")
-    public void deleteCharacterFromList(@PathVariable Long id, @PathVariable Long charId){
-        try {
-            filmService.deleteCharacter(id, charId);
-        } catch (DatabaseError e){
-
-        }
+    @DeleteMapping("/{id}/character/{characterId}")
+    public void deleteCharacterFromList(
+            @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
+            @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long characterId
+    ) throws NotFound {
+            filmService.deleteCharacter(id, characterId);
     }
     @PostMapping("/{id}/character")
-    public ResponseEntity<?> newCharacterForFilm(@PathVariable Long id, @RequestBody PostCharactersDTO newChar){
-        try {
+    public ResponseEntity<?> newCharacterForFilm(
+            @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
+            @Valid @RequestBody PostCharactersDTO newChar
+    ) throws DatabaseError {
+
             return new ResponseEntity<>(filmService.updateNewCharacters(id, newChar), HttpStatus.OK);
-        } catch (DatabaseError e){
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+
     }
 }
