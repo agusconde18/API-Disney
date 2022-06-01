@@ -7,7 +7,7 @@ import com.alkemy.disney.entity.Film;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring")
+//@Mapper(componentModel = "spring")
 public interface FilmsMapper {
     FilmsMapper INSTANCE = Mappers.getMapper(FilmsMapper.class);
 
