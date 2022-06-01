@@ -28,7 +28,6 @@ public class CharactersController {
 
 
     @GetMapping
-
     ResponseEntity<List<ListCharactersDTO>> getAllCharacters (){
         return new ResponseEntity<>(charactersService.allCharacters(), HttpStatus.OK);
     }
