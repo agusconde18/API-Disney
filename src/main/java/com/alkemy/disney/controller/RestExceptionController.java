@@ -6,11 +6,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -20,7 +23,7 @@ import java.util.stream.Collectors;
 
 
 @ControllerAdvice
-@Component
+@ResponseBody
 public class RestExceptionController extends ResponseEntityExceptionHandler {
 
     private ObjectError o;
@@ -28,8 +31,8 @@ public class RestExceptionController extends ResponseEntityExceptionHandler {
     /*
     *   Todos los tipos de excepciones (Manejador general)
      */
-    @ExceptionHandler(value = {Throwable.class})
-    protected ResponseEntity<Object> handleThrowable(Throwable ex, WebRequest request){
+    @ExceptionHandler({Throwable.class})
+    protected ResponseEntity<Object> handleAllUncaughtException(Throwable ex, WebRequest request){
         ExceptionDTO exceptionDTO = new ExceptionDTO(
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 ErrorMessages.INTERNAL_SERVER_ERROR,
