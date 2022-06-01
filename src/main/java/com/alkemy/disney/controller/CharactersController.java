@@ -1,6 +1,7 @@
 package com.alkemy.disney.controller;
 
 import com.alkemy.disney.dto.Characters.CharactersDTO;
+import com.alkemy.disney.dto.Characters.ListCharactersDTO;
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.exception.DatabaseError;
 import com.alkemy.disney.exception.ErrorMessages;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 @RestController
@@ -27,7 +29,7 @@ public class CharactersController {
 
     @GetMapping
 
-    ResponseEntity<CharactersDTO> getAllCharacters (){
+    ResponseEntity<List<ListCharactersDTO>> getAllCharacters (){
         return new ResponseEntity<>(charactersService.allCharacters(), HttpStatus.OK);
     }
 
