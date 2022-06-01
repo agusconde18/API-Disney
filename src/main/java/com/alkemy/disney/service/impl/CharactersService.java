@@ -5,9 +5,8 @@ import com.alkemy.disney.dto.Characters.CharactersDTO;
 import com.alkemy.disney.dto.Characters.ListCharactersDTO;
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.entity.CharacterDat;
-import com.alkemy.disney.entity.Film;
-import com.alkemy.disney.exception.DatabaseError;
-import com.alkemy.disney.exception.ServiceError;
+import com.alkemy.disney.exception.ErrorMessages;
+import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.mapper.CharacterMapper;
 import com.alkemy.disney.repository.CharacterDatRepository;
 import com.alkemy.disney.service.CharactersServiceInterface;
@@ -20,7 +19,8 @@ import java.util.stream.Collectors;
 @Service
 public class CharactersService implements CharactersServiceInterface {
 
-    CharacterMapper characterMapper = CharacterMapper.INSTANCE;
+    @Autowired
+    CharacterMapper characterMapper;
 
     @Autowired
     CharacterDatRepository characterDatRepository;
@@ -28,48 +28,43 @@ public class CharactersService implements CharactersServiceInterface {
     @Override
     public List<ListCharactersDTO> allCharacters (){
         return characterDatRepository.findAll()
-                .stream().map( characterMapper::charactersToDTOList )
+                .stream().map( characterMapper::CharactersToDTOList)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public CharactersDTO getById(long id) throws DatabaseError {
+    public CharactersDTO getById(long id) throws NotFound {
         if(characterDatRepository.existsById(id))
-        return characterMapper.charactersToDTO(characterDatRepository.getById(id));
-        else
-            throw new DatabaseError("No se pudo encontrar un personaje con ese id");
+            return characterMapper.CharactersToDTO(characterDatRepository.getById(id));
+        throw new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);
     }
 
     @Override
-    public CharactersDTO newCharacter(PostCharactersDTO newChara) throws ServiceError {
-        if(newChara.getId()!=null&&newChara.getAge()!=null&&newChara.getName()!=null&&newChara.getStory()!=null) {
+    public CharactersDTO newCharacter(PostCharactersDTO newChara) {
+
             CharacterDat newCharacter = characterMapper.PostCharactersDToCharacterDat(newChara);
             characterDatRepository.save(newCharacter);
-            return characterMapper.charactersToDTO(newCharacter);
-        }
-        throw new ServiceError("Los campos deben ser no nulos");
+            return characterMapper.CharactersToDTO(newCharacter);
+
     }
 
     @Override
-    public void deleteCharacter(Long delcharId) throws DatabaseError {
+    public void deleteCharacter(Long delcharId) throws NotFound {
         if(characterDatRepository.existsById(delcharId)) {
-            CharacterDat characterDat = characterDatRepository.getById(delcharId);
-            for (Film film : characterDat.getActFilm()) {
-                film.getCharacters().remove(characterDat);
-            }
             characterDatRepository.deleteById(delcharId);
-        }else
-            throw new DatabaseError("No se pudo encontrar un personaje con ese id");
+            return ;
+        }
+        throw  new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);
     }
 
     @Override
-    public CharactersDTO editCharacter(PostCharactersDTO editCharacter) throws DatabaseError {
+    public CharactersDTO editCharacter(PostCharactersDTO editCharacter) throws NotFound {
         if(characterDatRepository.existsById(editCharacter.getId())) {
             CharacterDat characterDat = characterMapper.PostCharactersDToCharacterDat(editCharacter);
             characterDatRepository.save(characterDat);
-            return characterMapper.charactersToDTO(characterDat);
+            return characterMapper.CharactersToDTO(characterDat);
         }
-        else
-            throw new DatabaseError("No se pudo encontrar un personaje con ese id");
+
+        throw new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);
     }
 }

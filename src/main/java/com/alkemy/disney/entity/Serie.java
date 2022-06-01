@@ -12,12 +12,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "films")
+@Table(name = "series")
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE films set deleted = true WHERE id=?")
+@SQLDelete(sql = "UPDATE personaje set deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-public class Film {
+public class Serie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -25,18 +25,16 @@ public class Film {
 
     private String title;
     private Double rating;
-
     private Date releaseDate;
     private String coverImage;
+    private Integer totalEpisodes;
 
     private boolean deleted = false;
 
-    @JsonIgnoreProperties("actFilm")
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties("actFilm")
     Set<CharacterDat> characters = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Genre genre;
-
-
 }

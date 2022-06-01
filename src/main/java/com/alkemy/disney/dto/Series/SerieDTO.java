@@ -1,6 +1,5 @@
-package com.alkemy.disney.dto.Films;
+package com.alkemy.disney.dto.Series;
 
-import com.alkemy.disney.dto.Characters.CharactersDTO;
 import com.alkemy.disney.dto.Characters.CharactersDTOSet;
 import com.alkemy.disney.dto.Genres.GenreDTO;
 import com.alkemy.disney.entity.CharacterDat;
@@ -17,14 +16,16 @@ import java.util.Set;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FilmDTO {
+public class SerieDTO {
     private Long id;
 
     private String title;
     private Double rating;
     private Date releaseDate;
     private String coverImage;
+    private Integer totalEpisodes;
 
+    @JsonIgnoreProperties("actFilm")
     Set<CharactersDTOSet> characters = new HashSet<>();
 
     @JsonIgnoreProperties("hibernateLazyInitializer")

@@ -1,10 +1,11 @@
-package com.alkemy.disney.dto.Films;
+package com.alkemy.disney.dto.Series;
 
 import com.alkemy.disney.dto.Characters.CharactersDTOSet;
 import com.alkemy.disney.dto.Genres.GenreDTO;
 import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.entity.Genre;
 import com.alkemy.disney.exception.ErrorMessages;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,15 +22,15 @@ import java.util.Set;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FilmPostDTO {
+public class SeriePostDTO {
     private Long id;
 
-    @NotNull (message = ErrorMessages.NOT_NULL)
-    @NotEmpty (message = ErrorMessages.NOT_EMPTY)
+    @NotNull(message = ErrorMessages.NOT_NULL)
+    @NotEmpty(message = ErrorMessages.NOT_EMPTY)
     private String title;
 
     @Min(value = 0 , message = ErrorMessages.MIN_VALUE_ERROR)
-    @Max(value = 10 ,message = ErrorMessages.MAX_VALUE_ERROR + 10)
+    @Max(value = 10 , message = ErrorMessages.MAX_VALUE_ERROR + 10)
     private Double rating;
 
     @NotNull (message = ErrorMessages.NOT_NULL)
@@ -39,10 +40,14 @@ public class FilmPostDTO {
 
     private Date releaseDate;
 
-    @NotNull (message = ErrorMessages.NOT_NULL)
-    @NotEmpty (message = ErrorMessages.NOT_EMPTY)
+    @NotNull(message = ErrorMessages.NOT_NULL)
+    @NotEmpty(message = ErrorMessages.NOT_EMPTY)
     private String coverImage;
 
+    @Min(value = 1 , message = ErrorMessages.MIN_VALUE_ERROR)
+    private Integer totalEpisodes;
+
+    @JsonIgnoreProperties("actFilm")
     @NotNull (message = ErrorMessages.NOT_NULL)
     Set<CharactersDTOSet> characters = new HashSet<>();
 
