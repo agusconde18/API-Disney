@@ -11,9 +11,9 @@ import org.mapstruct.factory.Mappers;
 public interface FilmsMapper {
     FilmsMapper INSTANCE = Mappers.getMapper(FilmsMapper.class);
 
-    FilmDTO filmsToDTO(Film film);
+    FilmDTO FilmsToDTO(Film film);
 
     Film PostFilmDTOToFilm(FilmPostDTO filmPostDTO);
 
-    FilmListDTO filmsToDTOList (Film film);
+    FilmListDTO FilmsToDTOList(Film film);
 }
