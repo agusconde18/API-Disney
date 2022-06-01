@@ -54,7 +54,7 @@ public class FilmController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<FilmDTO> deleteFilm(
+    public ResponseEntity<String> deleteFilm(
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id
     ) throws NotFound {
             filmService.delete(id);
