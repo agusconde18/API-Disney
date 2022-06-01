@@ -12,7 +12,6 @@ import com.alkemy.disney.mapper.FilmsMapper;
 import com.alkemy.disney.repository.CharacterDatRepository;
 import com.alkemy.disney.repository.FilmRepository;
 import com.alkemy.disney.repository.GenreRepository;
-import com.alkemy.disney.service.CharactersServiceInterface;
 import com.alkemy.disney.service.FilmService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +57,7 @@ public class FilmServiceImp implements FilmService {
         newFilm.setGenre(genreRepository.getById(newFilm.getGenre().getId()));
 
         filmRepository.save(newFilm);
-        return filmsMapper.filmsToDTO(newFilm);
+        return filmsMapper.FilmsToDTO(newFilm);
     }
 
     @Override
@@ -90,7 +89,7 @@ public class FilmServiceImp implements FilmService {
             updateFilm.setGenre(genreRepository.getById(updateFilm.getGenre().getId()));
 
             filmRepository.save(updateFilm);
-            return filmsMapper.filmsToDTO(updateFilm);
+            return filmsMapper.FilmsToDTO(updateFilm);
         }
         throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
     }
@@ -107,7 +106,7 @@ public class FilmServiceImp implements FilmService {
                 updatedCharacters.add(character);
                 filmToUpdate.setCharacters(updatedCharacters);
                 filmRepository.save(filmToUpdate);
-                return filmsMapper.filmsToDTO(filmToUpdate);
+                return filmsMapper.FilmsToDTO(filmToUpdate);
             }
             throw new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);
         }
@@ -124,7 +123,7 @@ public class FilmServiceImp implements FilmService {
             characterDatRepository.save(charToSave);
             filmToUpdate.getCharacters().add(charToSave);
             filmRepository.save(filmToUpdate);
-            return filmsMapper.filmsToDTO(filmToUpdate);
+            return filmsMapper.FilmsToDTO(filmToUpdate);
         }
         throw new DatabaseError(ErrorMessages.FILM_NOT_FOUND);
     }
@@ -154,7 +153,7 @@ public class FilmServiceImp implements FilmService {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmDetails = res.get();
-            return filmsMapper.filmsToDTO(filmDetails);
+            return filmsMapper.FilmsToDTO(filmDetails);
         }
 
         throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
@@ -163,7 +162,7 @@ public class FilmServiceImp implements FilmService {
     @Override
     public List<FilmListDTO> getAllFilms() {
         return filmRepository.findAll()
-                .stream().map( filmsMapper::filmsToDTOList )
+                .stream().map( filmsMapper::FilmsToDTOList)
                 .collect(Collectors.toList());
     }
 }

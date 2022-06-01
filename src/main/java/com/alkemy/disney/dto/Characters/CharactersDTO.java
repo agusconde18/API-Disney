@@ -1,5 +1,6 @@
 package com.alkemy.disney.dto.Characters;
 
+import com.alkemy.disney.dto.Films.FilmDTO;
 import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.exception.ErrorMessages;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -35,6 +36,6 @@ public class CharactersDTO {
     private String story;
 
     @JsonIgnoreProperties("characters")
-    Set<Film> actFilm = new HashSet<>();
+    Set<FilmDTO> actFilm = new HashSet<>();
 
 }
