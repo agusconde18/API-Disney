@@ -25,4 +25,6 @@ public class ErrorMessages {
         public static final String INTERNAL_SERVER_ERROR = "Existe un problema interno con su peticion, intente mas tarde";
 
         public static final String INTERNAL_DB_ERROR = "Existe un problema con los datos, intente nuevamente.";
+        public static final String ID_GENERO_INDEXISTENT = "El id de genero proporcionado no corresponde a ninguno existente";
+
 }

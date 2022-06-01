@@ -12,6 +12,8 @@ import com.alkemy.disney.mapper.FilmsMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,10 +40,13 @@ public class FilmsMapperImpl implements FilmsMapper {
     }
 
     @Override
-    public Film PostFilmDTOToFilm(FilmPostDTO filmPostDTO) {
+    public Film PostFilmDTOToFilm(FilmPostDTO filmPostDTO) throws ParseException {
         if ( filmPostDTO == null ) {
             return null;
         }
+
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        filmPostDTO.setReleaseDate(formatter.parse(filmPostDTO.getDate()));
 
         Film film = new Film();
 

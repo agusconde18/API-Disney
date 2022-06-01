@@ -8,12 +8,13 @@ import com.alkemy.disney.exception.DateFormatException;
 import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.exception.NotValid;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface SerieService {
-    SerieDTO save(SeriePostDTO serie) throws DateFormatException;
+    SerieDTO save(SeriePostDTO serie) throws ParseException;
     void delete(Long id);
-    SerieDTO update(Long id, SeriePostDTO serie) throws NotFound, DateFormatException;
+    SerieDTO update(Long id, SeriePostDTO serie) throws NotFound, ParseException;
     SerieDTO updateCharacters(Long id, Long characterId) throws NotFound;
     SerieDTO updateNewCharacter(Long id, PostCharactersDTO newChar) throws NotFound;
     SerieDTO deleteCharacter(Long id, Long characterId) throws NotFound;

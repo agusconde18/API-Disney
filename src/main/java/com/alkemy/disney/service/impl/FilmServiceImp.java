@@ -21,7 +21,6 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.text.SimpleDateFormat;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
@@ -38,6 +37,7 @@ public class FilmServiceImp implements FilmService {
     @Autowired
     CharacterMapper characterMapper;
 
+
     @Autowired
     public FilmServiceImp(GenreRepository genreRepository, FilmRepository filmRepository, CharacterDatRepository characterDatRepository){
         this.genreRepository = genreRepository;
@@ -46,15 +46,7 @@ public class FilmServiceImp implements FilmService {
     }
 
     @Override
-    public FilmDTO save(FilmPostDTO film) throws DateFormatException {
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-
-        try {
-            film.setReleaseDate(formatter.parse(film.getDate()));
-        } catch (ParseException e) {
-            throw new DateFormatException(ErrorMessages.ERROR_DATE, e.getErrorOffset());
-        }
-
+    public FilmDTO save(FilmPostDTO film) throws ParseException {
         Film newFilm = filmsMapper.PostFilmDTOToFilm(film);
 
         newFilm.setGenre(genreRepository.getById(newFilm.getGenre().getId()));
@@ -75,22 +67,25 @@ public class FilmServiceImp implements FilmService {
     }
 
     @Override
-    public FilmDTO update(FilmPostDTO film, Long id) throws NotFound, NotValid {
+    public FilmDTO update(FilmPostDTO film, Long id) throws NotFound, ParseException {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmToUpdate = res.get();
             film.setId(filmToUpdate.getId());
-            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                film.setReleaseDate(formatter.parse(film.getDate()));
-            } catch (ParseException e) {
-                throw new NotValid(ErrorMessages.ERROR_DATE);
-            }
             Film updateFilm = filmsMapper.PostFilmDTOToFilm(film);
-            updateFilm.setCharacters(filmToUpdate.getCharacters());
 
-            updateFilm.setGenre(genreRepository.getById(updateFilm.getGenre().getId()));
-
+            /*
+            *   En caso que se envie un cambio de genero se envia por ID
+            *   Por lo tanto DEBO buscar en la BD el nombre perteneciente a dicho genero
+             */
+            Long newGenreId = updateFilm.getGenre().getId();
+            if(genreRepository.existsById(newGenreId)) {
+                updateFilm.getGenre().setName(
+                        genreRepository.getById(newGenreId).getName()
+                );
+            }
+            else
+                throw new NotFound(ErrorMessages.ID_GENERO_INDEXISTENT);
             filmRepository.save(updateFilm);
             return filmsMapper.FilmsToDTO(updateFilm);
         }
@@ -105,9 +100,7 @@ public class FilmServiceImp implements FilmService {
             Optional<CharacterDat> charRes = characterDatRepository.findById(idCharacter);
             if (charRes.isPresent()) {
                 CharacterDat character = charRes.get();
-                Set<CharacterDat> updatedCharacters = filmToUpdate.getCharacters();
-                updatedCharacters.add(character);
-                filmToUpdate.setCharacters(updatedCharacters);
+                filmToUpdate.getCharacters().add(character);
                 filmRepository.save(filmToUpdate);
                 return filmsMapper.FilmsToDTO(filmToUpdate);
             }

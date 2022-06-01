@@ -13,6 +13,8 @@ import com.alkemy.disney.mapper.SerieMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -43,10 +45,13 @@ public class SerieMapperImpl implements SerieMapper {
     }
 
     @Override
-    public Serie PostSerieDTOToSerie(SeriePostDTO seriePostDTO) {
+    public Serie PostSerieDTOToSerie(SeriePostDTO seriePostDTO) throws ParseException {
         if ( seriePostDTO == null ) {
             return null;
         }
+
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        seriePostDTO.setReleaseDate(formatter.parse(seriePostDTO.getDate()));
 
         Serie serie = new Serie();
 
