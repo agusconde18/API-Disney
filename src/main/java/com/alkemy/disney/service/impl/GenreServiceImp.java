@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
 public class GenreServiceImp implements GenreService {
 
     GenreRepository genreRepository;
-    GenreMapper genreMapper = GenreMapper.INSTANCE;
+    @Autowired
+    GenreMapper genreMapper;
 
     @Autowired
     public GenreServiceImp(GenreRepository genreRepository){

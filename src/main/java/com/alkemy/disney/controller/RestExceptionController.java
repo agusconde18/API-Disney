@@ -178,10 +178,10 @@ public class RestExceptionController extends ResponseEntityExceptionHandler {
         );
     }
 
-    @ExceptionHandler(value = {DateFormatException.class})
+    @ExceptionHandler(value = {ParseException.class})
     protected ResponseEntity<Object> handleParseException(ParseException ex, WebRequest request){
         ExceptionDTO exceptionDTO = new ExceptionDTO(
-                HttpStatus.BAD_REQUEST,
+                HttpStatus.INTERNAL_SERVER_ERROR,
                 ErrorMessages.ERROR_DATE,
                 Arrays.asList("")
         );

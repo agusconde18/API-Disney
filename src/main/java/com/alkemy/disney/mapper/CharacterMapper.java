@@ -7,17 +7,17 @@ import com.alkemy.disney.entity.CharacterDat;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring")
+//@Mapper(componentModel = "spring")
 public interface CharacterMapper {
 
     CharacterMapper INSTANCE = Mappers.getMapper(CharacterMapper.class);
 
-    CharactersDTO charactersToDTO(CharacterDat category);
+    CharactersDTO CharactersToDTO(CharacterDat category);
 
     CharacterDat DTOToCharacter ( CharactersDTO characterDTO);
 
     CharacterDat PostCharactersDToCharacterDat ( PostCharactersDTO characterPostDTO);
 
-    ListCharactersDTO charactersToDTOList (CharacterDat category);
+    ListCharactersDTO CharactersToDTOList(CharacterDat category);
 
 }

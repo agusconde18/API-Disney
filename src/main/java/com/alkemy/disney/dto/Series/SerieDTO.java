@@ -1,5 +1,7 @@
 package com.alkemy.disney.dto.Series;
 
+import com.alkemy.disney.dto.Characters.CharactersDTOSet;
+import com.alkemy.disney.dto.Genres.GenreDTO;
 import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.entity.Genre;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -24,8 +26,8 @@ public class SerieDTO {
     private Integer totalEpisodes;
 
     @JsonIgnoreProperties("actFilm")
-    Set<CharacterDat> characters = new HashSet<>();
+    Set<CharactersDTOSet> characters = new HashSet<>();
 
     @JsonIgnoreProperties("hibernateLazyInitializer")
-    private Genre genre;
+    private GenreDTO genre;
 }
