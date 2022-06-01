@@ -9,12 +9,13 @@ import com.alkemy.disney.exception.DateFormatException;
 import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.exception.NotValid;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface FilmService {
-    FilmDTO save(FilmPostDTO film) throws DateFormatException;
+    FilmDTO save(FilmPostDTO film) throws ParseException;
     void delete(Long id) throws NotFound;
-    FilmDTO update(FilmPostDTO film, Long id) throws  NotFound, NotValid;
+    FilmDTO update(FilmPostDTO film, Long id) throws  NotFound, ParseException;
     FilmDTO updateCharacters(Long id, Long idCharacter) throws NotFound;
     FilmDTO updateNewCharacters(Long id, PostCharactersDTO newChar) throws DatabaseError;
     void deleteCharacter(Long id, Long idCharacter) throws NotFound;
