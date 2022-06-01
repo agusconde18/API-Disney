@@ -70,8 +70,7 @@ public class FilmServiceImp implements FilmService {
     public FilmDTO update(FilmPostDTO film, Long id) throws NotFound, ParseException {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
-            Film filmToUpdate = res.get();
-            film.setId(filmToUpdate.getId());
+            film.setId(id);
             Film updateFilm = filmsMapper.PostFilmDTOToFilm(film);
 
             /*

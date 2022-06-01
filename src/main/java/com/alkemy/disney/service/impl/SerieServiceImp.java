@@ -5,6 +5,7 @@ import com.alkemy.disney.dto.Series.SerieDTO;
 import com.alkemy.disney.dto.Series.SerieListDTO;
 import com.alkemy.disney.dto.Series.SeriePostDTO;
 import com.alkemy.disney.entity.CharacterDat;
+import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.entity.Serie;
 import com.alkemy.disney.mapper.CharacterMapper;
 import com.alkemy.disney.mapper.SerieMapper;
@@ -66,8 +67,10 @@ public class SerieServiceImp implements SerieService {
     @Override
     public SerieDTO update(Long id, SeriePostDTO serie) throws NotFound, ParseException{
         Optional<Serie> res = serieRepository.findById(id);
-        if(serieRepository.existsById(serie.getId())){
+        if(res.isPresent()){
+            serie.setId(id);
             Serie updateSerie = serieMapper.PostSerieDTOToSerie(serie);
+            updateSerie.setCharacters(res.get().getCharacters());
             serieRepository.save(updateSerie);
             return serieMapper.seriesToDTO(updateSerie);
         }
