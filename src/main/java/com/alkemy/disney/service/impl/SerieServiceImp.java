@@ -66,13 +66,8 @@ public class SerieServiceImp implements SerieService {
     @Override
     public SerieDTO update(Long id, SeriePostDTO serie) throws NotFound, ParseException{
         Optional<Serie> res = serieRepository.findById(id);
-        if(res.isPresent()){
-            Serie serieToUpdate = res.get();
-
+        if(serieRepository.existsById(serie.getId())){
             Serie updateSerie = serieMapper.PostSerieDTOToSerie(serie);
-            updateSerie.setCharacters(serieToUpdate.getCharacters());
-            updateSerie.setGenre(serieToUpdate.getGenre());
-
             serieRepository.save(updateSerie);
             return serieMapper.seriesToDTO(updateSerie);
         }
