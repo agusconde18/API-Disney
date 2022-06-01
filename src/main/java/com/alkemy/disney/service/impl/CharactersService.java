@@ -19,7 +19,8 @@ import java.util.stream.Collectors;
 @Service
 public class CharactersService implements CharactersServiceInterface {
 
-    CharacterMapper characterMapper = CharacterMapper.INSTANCE;
+    @Autowired
+    CharacterMapper characterMapper;
 
     @Autowired
     CharacterDatRepository characterDatRepository;

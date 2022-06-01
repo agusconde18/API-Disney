@@ -33,7 +33,9 @@ public class FilmServiceImp implements FilmService {
     CharacterDatRepository characterDatRepository;
 
     FilmsMapper filmsMapper = FilmsMapper.INSTANCE;
-    CharacterMapper characterMapper = CharacterMapper.INSTANCE;
+
+    @Autowired
+    CharacterMapper characterMapper;
 
     @Autowired
     public FilmServiceImp(GenreRepository genreRepository, FilmRepository filmRepository, CharacterDatRepository characterDatRepository){

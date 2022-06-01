@@ -33,7 +33,9 @@ public class SerieServiceImp implements SerieService {
     CharacterDatRepository characterDatRepository;
 
     SerieMapper serieMapper = SerieMapper.INSTANCE;
-    CharacterMapper characterMapper = CharacterMapper.INSTANCE;
+
+    @Autowired
+    CharacterMapper characterMapper;
 
     @Autowired
     public SerieServiceImp(SerieRepository serieRepository, GenreRepository genreRepository, CharacterDatRepository characterDatRepository){
