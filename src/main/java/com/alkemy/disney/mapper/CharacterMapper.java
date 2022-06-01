@@ -12,12 +12,12 @@ public interface CharacterMapper {
 
     CharacterMapper INSTANCE = Mappers.getMapper(CharacterMapper.class);
 
-    CharactersDTO charactersToDTO(CharacterDat category);
+    CharactersDTO CharactersToDTO(CharacterDat category);
 
     CharacterDat DTOToCharacter ( CharactersDTO characterDTO);
 
     CharacterDat PostCharactersDToCharacterDat ( PostCharactersDTO characterPostDTO);
 
-    ListCharactersDTO charactersToDTOList (CharacterDat category);
+    ListCharactersDTO CharactersToDTOList(CharacterDat category);
 
 }

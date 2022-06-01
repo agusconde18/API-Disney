@@ -11,9 +11,9 @@ import java.text.ParseException;
 @Component
 public interface FilmsMapper {
 
-    FilmDTO filmsToDTO(Film film);
+    FilmDTO FilmsToDTO(Film film);
 
     Film PostFilmDTOToFilm(FilmPostDTO filmPostDTO) throws ParseException;
 
-    FilmListDTO filmsToDTOList (Film film);
+    FilmListDTO FilmsToDTOList(Film film);
 }
