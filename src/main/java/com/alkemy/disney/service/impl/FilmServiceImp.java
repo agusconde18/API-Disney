@@ -9,6 +9,7 @@ import com.alkemy.disney.exception.*;
 import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.mapper.CharacterMapper;
 import com.alkemy.disney.mapper.FilmsMapper;
+import com.alkemy.disney.mapper.imp.FilmsMapperImp;
 import com.alkemy.disney.repository.CharacterDatRepository;
 import com.alkemy.disney.repository.FilmRepository;
 import com.alkemy.disney.repository.GenreRepository;
@@ -32,21 +33,20 @@ public class FilmServiceImp implements FilmService {
     GenreRepository genreRepository;
     FilmRepository filmRepository;
     CharacterDatRepository characterDatRepository;
+    FilmsMapperImp filmsMapper;
 
-    FilmsMapper filmsMapper = FilmsMapper.INSTANCE;
     CharacterMapper characterMapper = CharacterMapper.INSTANCE;
 
     @Autowired
-    public FilmServiceImp(GenreRepository genreRepository, FilmRepository filmRepository, CharacterDatRepository characterDatRepository){
+    public FilmServiceImp(GenreRepository genreRepository, FilmRepository filmRepository, CharacterDatRepository characterDatRepository, FilmsMapperImp filmsMapper){
         this.genreRepository = genreRepository;
         this.characterDatRepository = characterDatRepository;
         this.filmRepository = filmRepository;
+        this.filmsMapper = filmsMapper;
     }
 
     @Override
     public FilmDTO save(FilmPostDTO film) throws ParseException {
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-        film.setReleaseDate(formatter.parse(film.getDate()));
         Film newFilm = filmsMapper.PostFilmDTOToFilm(film);
 
         newFilm.setGenre(genreRepository.getById(newFilm.getGenre().getId()));
@@ -71,8 +71,6 @@ public class FilmServiceImp implements FilmService {
         Optional<Film> res = filmRepository.findById(id);
         if (res.isPresent()) {
             Film filmToUpdate = res.get();
-            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-            film.setReleaseDate(formatter.parse(film.getDate()));
             Film updateFilm = filmsMapper.PostFilmDTOToFilm(film);
             updateFilm.setCharacters(filmToUpdate.getCharacters());
             updateFilm.setGenre(genreRepository.getById(updateFilm.getGenre().getId()));
