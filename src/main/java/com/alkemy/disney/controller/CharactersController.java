@@ -41,6 +41,7 @@ public class CharactersController {
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<CharactersDTO> newCharacter (@Valid @RequestBody PostCharactersDTO postCharactersDTO) {
         return new ResponseEntity<>(charactersService.newCharacter(postCharactersDTO), HttpStatus.ACCEPTED);
+
     }
 
     @DeleteMapping("/{id}")
