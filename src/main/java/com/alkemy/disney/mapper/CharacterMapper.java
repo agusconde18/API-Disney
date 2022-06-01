@@ -7,7 +7,7 @@ import com.alkemy.disney.entity.CharacterDat;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring")
+//@Mapper(componentModel = "spring")
 public interface CharacterMapper {
 
     CharacterMapper INSTANCE = Mappers.getMapper(CharacterMapper.class);

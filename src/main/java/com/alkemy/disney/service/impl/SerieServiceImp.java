@@ -32,8 +32,11 @@ public class SerieServiceImp implements SerieService {
     GenreRepository genreRepository;
     CharacterDatRepository characterDatRepository;
 
-    SerieMapper serieMapper = SerieMapper.INSTANCE;
-    CharacterMapper characterMapper = CharacterMapper.INSTANCE;
+    @Autowired
+    SerieMapper serieMapper;
+
+    @Autowired
+    CharacterMapper characterMapper;
 
     @Autowired
     public SerieServiceImp(SerieRepository serieRepository, GenreRepository genreRepository, CharacterDatRepository characterDatRepository){
@@ -45,7 +48,6 @@ public class SerieServiceImp implements SerieService {
 
     @Override
     public SerieDTO save(SeriePostDTO serie) throws ParseException{
-        formatSeriesDate(serie);
         Serie newSerie = serieMapper.PostSerieDTOToSerie(serie);
         newSerie.setGenre(genreRepository.getById(newSerie.getGenre().getId()));
         serieRepository.save(newSerie);
@@ -66,8 +68,6 @@ public class SerieServiceImp implements SerieService {
         Optional<Serie> res = serieRepository.findById(id);
         if(res.isPresent()){
             Serie serieToUpdate = res.get();
-            serie.setId(serieToUpdate.getId());
-            formatSeriesDate(serie);
 
             Serie updateSerie = serieMapper.PostSerieDTOToSerie(serie);
             updateSerie.setCharacters(serieToUpdate.getCharacters());
@@ -87,9 +87,7 @@ public class SerieServiceImp implements SerieService {
             Optional<CharacterDat> charRes = characterDatRepository.findById(characterId);
             if (charRes.isPresent()){
                 CharacterDat character = charRes.get();
-                Set<CharacterDat> updatedCharacters = serieToUpdate.getCharacters();
-                updatedCharacters.add(character);
-                serieToUpdate.setCharacters(updatedCharacters);
+                serieToUpdate.getCharacters().add(character);
                 serieRepository.save(serieToUpdate);
                 return serieMapper.seriesToDTO(serieToUpdate);
             }
@@ -153,12 +151,4 @@ public class SerieServiceImp implements SerieService {
                 .collect(Collectors.toList());
     }
 
-    private void formatSeriesDate(SeriePostDTO serie) throws DateFormatException{
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        try{
-            serie.setReleaseDate(formatter.parse(serie.getDate()));
-        } catch (ParseException e){
-            throw new DateFormatException(ErrorMessages.ERROR_DATE, e.getErrorOffset());
-        }
-    }
 }

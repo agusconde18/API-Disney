@@ -1,6 +1,7 @@
 package com.alkemy.disney.controller;
 
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
+import com.alkemy.disney.dto.Series.SerieDTO;
 import com.alkemy.disney.dto.Series.SerieListDTO;
 import com.alkemy.disney.dto.Series.SeriePostDTO;
 import com.alkemy.disney.entity.Serie;
@@ -29,7 +30,7 @@ public class SerieController {
     }
 
     @PostMapping
-    public ResponseEntity<?> newSerie(@Valid @RequestBody SeriePostDTO serie) throws ParseException{
+    public ResponseEntity<SerieDTO> newSerie(@Valid @RequestBody SeriePostDTO serie) throws ParseException{
         return new ResponseEntity<>(serieService.save(serie), HttpStatus.CREATED);
     }
     @GetMapping
@@ -38,24 +39,24 @@ public class SerieController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getFilmDetails(@Valid @PathVariable @NotNull(message=ErrorMessages.NOT_NULL) Long id) throws NotFound{
+    public ResponseEntity<SerieDTO> getFilmDetails(@Valid @PathVariable @NotNull(message=ErrorMessages.NOT_NULL) Long id) throws NotFound{
         return new ResponseEntity<>(serieService.getSerieDetails(id), HttpStatus.OK);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateFilm(
+    public ResponseEntity<SerieDTO> updateSerie(
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @RequestBody SeriePostDTO serie
     ) throws NotFound, ParseException {
         return new ResponseEntity<>(serieService.update(id, serie), HttpStatus.CREATED);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteFilm(@Valid @PathVariable @NotNull(message=ErrorMessages.NOT_NULL) Long id){
+    public ResponseEntity<String> deleteFilm(@Valid @PathVariable @NotNull(message=ErrorMessages.NOT_NULL) Long id){
         serieService.delete(id);
         return new ResponseEntity<>("Deleted Series with id: "+ id, HttpStatus.OK);
     }
 
     @PostMapping("/{id}/character")
-    public ResponseEntity<?> newCharacterForSerie(
+    public ResponseEntity<SerieDTO> newCharacterForSerie(
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @RequestBody PostCharactersDTO newChar
     ) throws NotFound{
@@ -63,14 +64,14 @@ public class SerieController {
     }
 
     @PutMapping("/{id}/character/{characterId}")
-    public ResponseEntity<?> updateCharacterList(
+    public ResponseEntity<SerieDTO> updateCharacterList(
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long characterId
     ) throws NotFound{
         return new ResponseEntity<>(serieService.updateCharacters(id, characterId), HttpStatus.OK);
     }
     @DeleteMapping("/{id}/character/{characterId}")
-    public ResponseEntity<?> deleteCharacterFromList(
+    public ResponseEntity<SerieDTO> deleteCharacterFromList(
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long characterId
     ) throws NotFound{

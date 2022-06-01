@@ -9,7 +9,6 @@ import com.alkemy.disney.exception.*;
 import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.mapper.CharacterMapper;
 import com.alkemy.disney.mapper.FilmsMapper;
-import com.alkemy.disney.mapper.imp.FilmsMapperImp;
 import com.alkemy.disney.repository.CharacterDatRepository;
 import com.alkemy.disney.repository.FilmRepository;
 import com.alkemy.disney.repository.GenreRepository;
@@ -22,7 +21,6 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.text.SimpleDateFormat;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
@@ -32,16 +30,19 @@ public class FilmServiceImp implements FilmService {
     GenreRepository genreRepository;
     FilmRepository filmRepository;
     CharacterDatRepository characterDatRepository;
-    FilmsMapperImp filmsMapper;
-
-    CharacterMapper characterMapper = CharacterMapper.INSTANCE;
 
     @Autowired
-    public FilmServiceImp(GenreRepository genreRepository, FilmRepository filmRepository, CharacterDatRepository characterDatRepository, FilmsMapperImp filmsMapper){
+    FilmsMapper filmsMapper;
+
+    @Autowired
+    CharacterMapper characterMapper;
+
+
+    @Autowired
+    public FilmServiceImp(GenreRepository genreRepository, FilmRepository filmRepository, CharacterDatRepository characterDatRepository){
         this.genreRepository = genreRepository;
         this.characterDatRepository = characterDatRepository;
         this.filmRepository = filmRepository;
-        this.filmsMapper = filmsMapper;
     }
 
     @Override
