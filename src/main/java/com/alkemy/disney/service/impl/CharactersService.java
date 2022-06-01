@@ -5,7 +5,6 @@ import com.alkemy.disney.dto.Characters.CharactersDTO;
 import com.alkemy.disney.dto.Characters.ListCharactersDTO;
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.entity.CharacterDat;
-import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.exception.ErrorMessages;
 import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.mapper.CharacterMapper;
@@ -20,7 +19,8 @@ import java.util.stream.Collectors;
 @Service
 public class CharactersService implements CharactersServiceInterface {
 
-    CharacterMapper characterMapper = CharacterMapper.INSTANCE;
+    @Autowired
+    CharacterMapper characterMapper;
 
     @Autowired
     CharacterDatRepository characterDatRepository;
@@ -28,14 +28,14 @@ public class CharactersService implements CharactersServiceInterface {
     @Override
     public List<ListCharactersDTO> allCharacters (){
         return characterDatRepository.findAll()
-                .stream().map( characterMapper::charactersToDTOList )
+                .stream().map( characterMapper::CharactersToDTOList)
                 .collect(Collectors.toList());
     }
 
     @Override
     public CharactersDTO getById(long id) throws NotFound {
         if(characterDatRepository.existsById(id))
-            return characterMapper.charactersToDTO(characterDatRepository.getById(id));
+            return characterMapper.CharactersToDTO(characterDatRepository.getById(id));
         throw new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);
     }
 
@@ -44,7 +44,7 @@ public class CharactersService implements CharactersServiceInterface {
 
             CharacterDat newCharacter = characterMapper.PostCharactersDToCharacterDat(newChara);
             characterDatRepository.save(newCharacter);
-            return characterMapper.charactersToDTO(newCharacter);
+            return characterMapper.CharactersToDTO(newCharacter);
 
     }
 
@@ -62,7 +62,7 @@ public class CharactersService implements CharactersServiceInterface {
         if(characterDatRepository.existsById(editCharacter.getId())) {
             CharacterDat characterDat = characterMapper.PostCharactersDToCharacterDat(editCharacter);
             characterDatRepository.save(characterDat);
-            return characterMapper.charactersToDTO(characterDat);
+            return characterMapper.CharactersToDTO(characterDat);
         }
 
         throw new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);

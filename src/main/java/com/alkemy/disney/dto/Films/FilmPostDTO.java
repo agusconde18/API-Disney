@@ -1,5 +1,7 @@
 package com.alkemy.disney.dto.Films;
 
+import com.alkemy.disney.dto.Characters.CharactersDTOSet;
+import com.alkemy.disney.dto.Genres.GenreDTO;
 import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.entity.Genre;
 import com.alkemy.disney.exception.ErrorMessages;
@@ -42,8 +44,8 @@ public class FilmPostDTO {
     private String coverImage;
 
     @NotNull (message = ErrorMessages.NOT_NULL)
-    Set<CharacterDat> characters = new HashSet<>();
+    Set<CharactersDTOSet> characters = new HashSet<>();
 
     @NotNull (message = ErrorMessages.NOT_NULL)
-    private Genre genre;
+    private GenreDTO genre;
 }

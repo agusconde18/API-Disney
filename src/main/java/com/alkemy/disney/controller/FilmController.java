@@ -1,6 +1,7 @@
 package com.alkemy.disney.controller;
 
 import com.alkemy.disney.dto.Characters.PostCharactersDTO;
+import com.alkemy.disney.dto.Films.FilmDTO;
 import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
 import com.alkemy.disney.exception.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -29,7 +31,7 @@ public class FilmController {
 
 
     @PostMapping
-    public ResponseEntity<?> newFilm(@Valid  @RequestBody FilmPostDTO film) throws DateFormatException {
+    public ResponseEntity<FilmDTO> newFilm(@Valid  @RequestBody FilmPostDTO film) throws ParseException {
             return new ResponseEntity<>(filmService.save(film), HttpStatus.CREATED);
     }
 
@@ -39,21 +41,21 @@ public class FilmController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getFilmDetails(@Valid @PathVariable @NotNull(message = ErrorMessages.NOT_NULL) Long id) throws NotFound {
+    public ResponseEntity<FilmDTO> getFilmDetails(@Valid @PathVariable @NotNull(message = ErrorMessages.NOT_NULL) Long id) throws NotFound {
             return new ResponseEntity<>(filmService.getFilmDetails(id), HttpStatus.OK);
 
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateFilm(
+    public ResponseEntity<FilmDTO> updateFilm(
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @RequestBody FilmPostDTO film
-    ) throws  NotFound, NotValid {
+    ) throws  NotFound, ParseException {
             return new ResponseEntity<>(filmService.update(film, id), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteFilm(
+    public ResponseEntity<String> deleteFilm(
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id
     ) throws NotFound {
             filmService.delete(id);
@@ -61,7 +63,7 @@ public class FilmController {
     }
 
     @PutMapping("/{id}/character/{characterId}")
-    public ResponseEntity<?> updateCharacterList(
+    public ResponseEntity<FilmDTO> updateCharacterList(
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long characterId
     ) throws NotFound {
@@ -76,7 +78,7 @@ public class FilmController {
             filmService.deleteCharacter(id, characterId);
     }
     @PostMapping("/{id}/character")
-    public ResponseEntity<?> newCharacterForFilm(
+    public ResponseEntity<FilmDTO> newCharacterForFilm(
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @RequestBody PostCharactersDTO newChar
     ) throws DatabaseError {
