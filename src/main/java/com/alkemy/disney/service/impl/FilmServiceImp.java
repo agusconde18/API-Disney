@@ -85,7 +85,6 @@ public class FilmServiceImp implements FilmService {
             film.setReleaseDate(formatter.parse(film.getDate()));
 
             Film updateFilm = filmsMapper.PostFilmDTOToFilm(film);
-            updateFilm.setCharacters(filmToUpdate.getCharacters());
 
             /*
             *   En caso que se envie un cambio de genero se envia por ID
