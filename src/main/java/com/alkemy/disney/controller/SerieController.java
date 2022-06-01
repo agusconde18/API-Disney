@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -29,7 +30,7 @@ public class SerieController {
     }
 
     @PostMapping
-    public ResponseEntity<SerieDTO> newSerie(@Valid @RequestBody SeriePostDTO serie) throws DateFormatException{
+    public ResponseEntity<SerieDTO> newSerie(@Valid @RequestBody SeriePostDTO serie) throws ParseException{
         return new ResponseEntity<>(serieService.save(serie), HttpStatus.CREATED);
     }
     @GetMapping
@@ -42,10 +43,10 @@ public class SerieController {
         return new ResponseEntity<>(serieService.getSerieDetails(id), HttpStatus.OK);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<SerieDTO> updateFilm(
+    public ResponseEntity<SerieDTO> updateSerie(
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @RequestBody SeriePostDTO serie
-    ) throws NotFound, DateFormatException{
+    ) throws NotFound, ParseException {
         return new ResponseEntity<>(serieService.update(id, serie), HttpStatus.CREATED);
     }
     @DeleteMapping("/{id}")

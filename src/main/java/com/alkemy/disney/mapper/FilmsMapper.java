@@ -4,16 +4,16 @@ import com.alkemy.disney.dto.Films.FilmDTO;
 import com.alkemy.disney.dto.Films.FilmListDTO;
 import com.alkemy.disney.dto.Films.FilmPostDTO;
 import com.alkemy.disney.entity.Film;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Component;
 
-//@Mapper(componentModel = "spring")
+import java.text.ParseException;
+
+@Component
 public interface FilmsMapper {
-    FilmsMapper INSTANCE = Mappers.getMapper(FilmsMapper.class);
 
     FilmDTO FilmsToDTO(Film film);
 
-    Film PostFilmDTOToFilm(FilmPostDTO filmPostDTO);
+    Film PostFilmDTOToFilm(FilmPostDTO filmPostDTO) throws ParseException;
 
     FilmListDTO FilmsToDTOList(Film film);
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,7 @@ public class FilmController {
 
 
     @PostMapping
-    public ResponseEntity<FilmDTO> newFilm(@Valid  @RequestBody FilmPostDTO film) throws DateFormatException {
+    public ResponseEntity<FilmDTO> newFilm(@Valid  @RequestBody FilmPostDTO film) throws ParseException {
             return new ResponseEntity<>(filmService.save(film), HttpStatus.CREATED);
     }
 
@@ -49,7 +50,7 @@ public class FilmController {
     public ResponseEntity<FilmDTO> updateFilm(
             @Valid @PathVariable @NotNull (message = ErrorMessages.NOT_NULL) Long id,
             @Valid @RequestBody FilmPostDTO film
-    ) throws  NotFound, NotValid {
+    ) throws  NotFound, ParseException {
             return new ResponseEntity<>(filmService.update(film, id), HttpStatus.CREATED);
     }
 

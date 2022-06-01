@@ -47,8 +47,7 @@ public class SerieServiceImp implements SerieService {
 
 
     @Override
-    public SerieDTO save(SeriePostDTO serie) throws DateFormatException{
-        formatSeriesDate(serie);
+    public SerieDTO save(SeriePostDTO serie) throws ParseException{
         Serie newSerie = serieMapper.PostSerieDTOToSerie(serie);
         newSerie.setGenre(genreRepository.getById(newSerie.getGenre().getId()));
         serieRepository.save(newSerie);
@@ -65,7 +64,7 @@ public class SerieServiceImp implements SerieService {
     }
 
     @Override
-    public SerieDTO update(Long id, SeriePostDTO serie) throws NotFound, DateFormatException{
+    public SerieDTO update(Long id, SeriePostDTO serie) throws NotFound, ParseException{
         Optional<Serie> res = serieRepository.findById(id);
         if(serieRepository.existsById(serie.getId())){
             Serie updateSerie = serieMapper.PostSerieDTOToSerie(serie);
@@ -83,9 +82,7 @@ public class SerieServiceImp implements SerieService {
             Optional<CharacterDat> charRes = characterDatRepository.findById(characterId);
             if (charRes.isPresent()){
                 CharacterDat character = charRes.get();
-                Set<CharacterDat> updatedCharacters = serieToUpdate.getCharacters();
-                updatedCharacters.add(character);
-                serieToUpdate.setCharacters(updatedCharacters);
+                serieToUpdate.getCharacters().add(character);
                 serieRepository.save(serieToUpdate);
                 return serieMapper.seriesToDTO(serieToUpdate);
             }
@@ -149,12 +146,4 @@ public class SerieServiceImp implements SerieService {
                 .collect(Collectors.toList());
     }
 
-    private void formatSeriesDate(SeriePostDTO serie) throws DateFormatException{
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        try{
-            serie.setReleaseDate(formatter.parse(serie.getDate()));
-        } catch (ParseException e){
-            throw new DateFormatException(ErrorMessages.ERROR_DATE, e.getErrorOffset());
-        }
-    }
 }
