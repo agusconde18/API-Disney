@@ -4,6 +4,7 @@ import com.alkemy.disney.dto.Characters.PostCharactersDTO;
 import com.alkemy.disney.dto.Series.SerieDTO;
 import com.alkemy.disney.dto.Series.SerieListDTO;
 import com.alkemy.disney.dto.Series.SeriePostDTO;
+import com.alkemy.disney.exception.DateFormatException;
 import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.exception.NotValid;
 

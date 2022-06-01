@@ -7,7 +7,7 @@ import com.alkemy.disney.entity.Serie;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring")
+//@Mapper(componentModel = "spring")
 public interface SerieMapper {
     SerieMapper INSTANCE = Mappers.getMapper(SerieMapper.class);
 
