@@ -25,7 +25,6 @@ public class CharactersController {
 
 
     @GetMapping
-
     ResponseEntity<?> getAllCharacters (){
         return new ResponseEntity<>(charactersService.allCharacters(), HttpStatus.OK);
     }
