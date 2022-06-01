@@ -16,4 +16,6 @@ public interface FilmsMapper {
     Film PostFilmDTOToFilm(FilmPostDTO filmPostDTO) throws ParseException;
 
     FilmListDTO FilmsToDTOList(Film film);
+
+    Film refreshValues(Film film, FilmPostDTO filmPostDTO) throws ParseException;
 }

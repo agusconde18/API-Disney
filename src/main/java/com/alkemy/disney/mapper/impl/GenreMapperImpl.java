@@ -37,4 +37,10 @@ public class GenreMapperImpl implements GenreMapper {
         return genre;
     }
 
+    @Override
+    public Genre refreshValues(Genre genre, GenreDTO genreDTO) {
+        genre.setName(genreDTO.getName());
+        return genre;
+    }
+
 }

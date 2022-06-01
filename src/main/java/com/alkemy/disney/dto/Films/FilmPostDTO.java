@@ -2,8 +2,6 @@ package com.alkemy.disney.dto.Films;
 
 import com.alkemy.disney.dto.Characters.CharactersDTOSet;
 import com.alkemy.disney.dto.Genres.GenreDTO;
-import com.alkemy.disney.entity.CharacterDat;
-import com.alkemy.disney.entity.Genre;
 import com.alkemy.disney.exception.ErrorMessages;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

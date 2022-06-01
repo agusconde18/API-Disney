@@ -13,4 +13,6 @@ public interface GenreMapper {
     GenreDTO GenreToDTO(Genre genre);
 
     Genre DTOToGenre (GenreDTO genreDTO);
+
+    Genre refreshValues (Genre genre, GenreDTO genreDTO);
 }
