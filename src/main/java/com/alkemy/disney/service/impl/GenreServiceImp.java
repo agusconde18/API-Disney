@@ -7,6 +7,7 @@ import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.mapper.GenreMapper;
 import com.alkemy.disney.repository.GenreRepository;
 import com.alkemy.disney.service.GenreService;
+import javassist.NotFoundException;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,17 +38,11 @@ public class GenreServiceImp implements GenreService {
 
     @Override
     public GenreDTO update(GenreDTO genre, Long id) throws NotFound {
-        Optional<Genre> res = genreRepository.findById(id);
-        if(res.isPresent()){
-            Genre genreToUpdate = res.get();
-            if(!genre.getName().isEmpty()){
-                genre.setId(genreToUpdate.getId());
-                Genre updateGenre = genreMapper.DTOToGenre(genre);
+        Genre res = this.genreRepository.findById(id)
+                .orElseThrow(() -> new NotFound(ErrorMessages.GENRE_NOT_FOUND));
+                Genre updateGenre = genreMapper.refreshValues(res, genre);
                 genreRepository.save(updateGenre);
                 return genreMapper.GenreToDTO(updateGenre);
-            }
-        }
-        throw new NotFound(ErrorMessages.GENRE_NOT_FOUND);
     }
 
     @Override

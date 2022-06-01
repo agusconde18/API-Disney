@@ -8,8 +8,9 @@ import com.alkemy.disney.dto.Genres.GenreDTO;
 import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.entity.Genre;
+import com.alkemy.disney.exception.ErrorMessages;
+import com.alkemy.disney.exception.NotFound;
 import com.alkemy.disney.mapper.FilmsMapper;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
@@ -75,6 +76,18 @@ public class FilmsMapperImpl implements FilmsMapper {
         filmListDTO.setCoverImage( film.getCoverImage() );
 
         return filmListDTO;
+    }
+
+    @Override
+    public Film refreshValues(Film film, FilmPostDTO filmPostDTO) throws ParseException{
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+
+        film.setTitle(filmPostDTO.getTitle());
+        film.setReleaseDate(formatter.parse(filmPostDTO.getDate()));
+        film.setCoverImage(filmPostDTO.getCoverImage());
+        film.setRating(filmPostDTO.getRating());
+
+        return film;
     }
 
     protected CharactersDTOSet characterDatToCharactersDTOSet(CharacterDat characterDat) {

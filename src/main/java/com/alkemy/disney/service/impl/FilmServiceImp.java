@@ -57,21 +57,17 @@ public class FilmServiceImp implements FilmService {
 
     @Override
     public void delete(Long id) throws NotFound {
-        Optional<Film> res = filmRepository.findById(id);
-        if (res.isPresent()) {
-            Film filmToDelete = res.get();
+        Film filmToDelete = this.filmRepository.findById(id)
+                .orElseThrow(()-> new NotFound(ErrorMessages.FILM_NOT_FOUND));
             filmRepository.delete(filmToDelete);
-            return;
-        }
-        throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
+
     }
 
     @Override
     public FilmDTO update(FilmPostDTO film, Long id) throws NotFound, ParseException {
-        Optional<Film> res = filmRepository.findById(id);
-        if (res.isPresent()) {
-            film.setId(id);
-            Film updateFilm = filmsMapper.PostFilmDTOToFilm(film);
+        Film res = this.filmRepository.findById(id)
+                .orElseThrow(()-> new NotFound(ErrorMessages.FILM_NOT_FOUND));
+            Film updateFilm = filmsMapper.refreshValues(res, film);
 
             /*
             *   En caso que se envie un cambio de genero se envia por ID
@@ -83,75 +79,52 @@ public class FilmServiceImp implements FilmService {
                         genreRepository.getById(newGenreId).getName()
                 );
             }
-            else
-                throw new NotFound(ErrorMessages.ID_GENERO_INDEXISTENT);
+            else throw new NotFound(ErrorMessages.ID_GENERO_INDEXISTENT);
+
             filmRepository.save(updateFilm);
             return filmsMapper.FilmsToDTO(updateFilm);
-        }
-        throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
     }
 
     @Override
     public FilmDTO updateCharacters(Long id, Long idCharacter) throws NotFound {
-        Optional<Film> res = filmRepository.findById(id);
-        if (res.isPresent()) {
-            Film filmToUpdate = res.get();
-            Optional<CharacterDat> charRes = characterDatRepository.findById(idCharacter);
-            if (charRes.isPresent()) {
-                CharacterDat character = charRes.get();
+        Film filmToUpdate = this.filmRepository.findById(id)
+                .orElseThrow(()-> new NotFound(ErrorMessages.FILM_NOT_FOUND));
+        CharacterDat character = this.characterDatRepository.findById(idCharacter)
+                .orElseThrow(()-> new NotFound(ErrorMessages.CHARACTER_NOT_FOUND));
                 filmToUpdate.getCharacters().add(character);
                 filmRepository.save(filmToUpdate);
                 return filmsMapper.FilmsToDTO(filmToUpdate);
-            }
-            throw new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);
-        }
-        throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
     }
 
 
     @Override
     public FilmDTO updateNewCharacters(Long id, PostCharactersDTO newChar) throws DatabaseError {
-        Optional<Film> res = filmRepository.findById(id);
-        if (res.isPresent()) {
-            Film filmToUpdate = res.get();
+        Film filmToUpdate = this.filmRepository.findById(id)
+                .orElseThrow(()-> new NotFound(ErrorMessages.FILM_NOT_FOUND));
             CharacterDat charToSave = characterMapper.PostCharactersDToCharacterDat(newChar);
             characterDatRepository.save(charToSave);
             filmToUpdate.getCharacters().add(charToSave);
             filmRepository.save(filmToUpdate);
             return filmsMapper.FilmsToDTO(filmToUpdate);
-        }
-        throw new DatabaseError(ErrorMessages.FILM_NOT_FOUND);
     }
 
     @Override
     public void deleteCharacter(Long id, Long idCharacter) throws NotFound {
-        Optional<Film> res = filmRepository.findById(id);
-        if (res.isPresent()) {
-            Film filmToUpdate = res.get();
-            Optional<CharacterDat> charRes = characterDatRepository.findById(idCharacter);
-            if (charRes.isPresent()) {
-                CharacterDat character = charRes.get();
-                Set<CharacterDat> updatedCharacters = filmToUpdate.getCharacters();
-                updatedCharacters.remove(character);
-                filmToUpdate.setCharacters(updatedCharacters);
-                filmRepository.save(filmToUpdate);
-                return;
-            }
-            else
-                throw new NotFound(ErrorMessages.CHARACTER_NOT_FOUND);
-        }
-        throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
+        Film filmToUpdate = this.filmRepository.findById(id)
+                .orElseThrow(()-> new NotFound(ErrorMessages.FILM_NOT_FOUND));
+
+        CharacterDat character = this.characterDatRepository.findById(idCharacter)
+                .orElseThrow(()-> new NotFound(ErrorMessages.CHARACTER_NOT_FOUND));
+
+        filmToUpdate.getCharacters().remove(character);
+        filmRepository.save(filmToUpdate);
     }
 
     @Override
     public FilmDTO getFilmDetails(Long id) throws NotFound {
-        Optional<Film> res = filmRepository.findById(id);
-        if (res.isPresent()) {
-            Film filmDetails = res.get();
+        Film filmDetails = this.filmRepository.findById(id)
+                .orElseThrow(()-> new NotFound(ErrorMessages.FILM_NOT_FOUND));
             return filmsMapper.FilmsToDTO(filmDetails);
-        }
-
-        throw new NotFound(ErrorMessages.FILM_NOT_FOUND);
     }
 
     @Override
