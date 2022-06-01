@@ -19,6 +19,7 @@ public class ErrorMessages {
         public static final String FILM_NOT_FOUND = "No se pudo encontrar una pelicula con dicho ID";
         public static final String CHARACTER_NOT_FOUND = "No se pudo encontrar un personaje con dicho ID";
         public static final String GENRE_NOT_FOUND = "No se pudo encontrar un genero con dicho ID";
+        public static final String SERIE_NOT_FOUND = "No se pudo encontrar una serie con dicho ID";
         public static final String BAD_REQUEST = "La informacion JSON no fue enviada de forma adecuada";
 
         public static final String INTERNAL_SERVER_ERROR = "Existe un problema interno con su peticion, intente mas tarde";
