@@ -1,2 +1,4 @@
-package com.alkemy.disney.mapper.impl;public class GenreMapperImpl {
+package com.alkemy.disney.mapper.impl;
+
+public class GenreMapperImpl {
 }

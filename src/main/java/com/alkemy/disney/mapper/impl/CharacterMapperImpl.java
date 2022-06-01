@@ -1,2 +1,5 @@
-package com.alkemy.disney.mapper.impl;public class CharacterMapperImpl {
+package com.alkemy.disney.mapper.impl;
+
+public class CharacterMapperImpl {
+
 }
