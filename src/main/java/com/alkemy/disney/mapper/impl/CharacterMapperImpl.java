@@ -10,7 +10,6 @@ import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.entity.Genre;
 import com.alkemy.disney.mapper.CharacterMapper;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
