@@ -4,8 +4,9 @@ import com.alkemy.disney.dto.Genres.GenreDTO;
 import com.alkemy.disney.entity.Genre;
 import com.alkemy.disney.mapper.GenreMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
-@Qualifier
+@Component
 public class GenreMapperImpl implements GenreMapper {
 
     @Override

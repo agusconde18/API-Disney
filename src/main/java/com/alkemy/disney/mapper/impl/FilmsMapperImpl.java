@@ -10,11 +10,12 @@ import com.alkemy.disney.entity.Film;
 import com.alkemy.disney.entity.Genre;
 import com.alkemy.disney.mapper.FilmsMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Qualifier
+@Component
 public class FilmsMapperImpl implements FilmsMapper {
 
     @Override

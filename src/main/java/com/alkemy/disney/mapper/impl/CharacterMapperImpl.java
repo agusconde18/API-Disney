@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashSet;
 import java.util.Set;
 
-@Qualifier
+@Component
 public class CharacterMapperImpl implements CharacterMapper {
 
     @Override

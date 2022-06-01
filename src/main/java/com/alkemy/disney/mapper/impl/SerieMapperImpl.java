@@ -7,11 +7,12 @@ import com.alkemy.disney.entity.CharacterDat;
 import com.alkemy.disney.entity.Serie;
 import com.alkemy.disney.mapper.SerieMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Qualifier
+@Component
 public class SerieMapperImpl implements SerieMapper {
 
     @Override
