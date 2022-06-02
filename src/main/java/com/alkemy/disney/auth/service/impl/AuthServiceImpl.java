@@ -3,6 +3,7 @@ package com.alkemy.disney.auth.service.impl;
 import com.alkemy.disney.auth.Mapper.RoleMapper;
 import com.alkemy.disney.auth.Mapper.UserMapper;
 import com.alkemy.disney.auth.dto.RoleDTO;
+import com.alkemy.disney.auth.dto.UserDTO;
 import com.alkemy.disney.auth.entity.Autorities;
 import com.alkemy.disney.auth.entity.ERole;
 import com.alkemy.disney.auth.entity.UserDat;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import javax.management.relation.Role;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthServiceImpl  implements AuthService, UserDetailsService {
@@ -49,8 +51,18 @@ public class AuthServiceImpl  implements AuthService, UserDetailsService {
     }
 
     @Override
-    public UserDat saveUser(UserDat user) {
-        return null;
+    public UserDTO saveUser(UserDTO user) {
+        UserDat usuario = userMapper.DTOToUser(user);
+        if(userRepository.findByUsername(usuario.getUsername()).isPresent())
+            throw new NotValid("El usuario ya existe.");
+        if(usuario.getRoles().stream()
+                .anyMatch(rol -> autoritiesRepository.findByRole(rol.getRole()) == null)
+        )
+            throw new NotValid("Algun/os roles no existen");
+
+        userRepository.save(usuario);
+
+        return userMapper.UserToDTO(usuario);
     }
 
     @Override
@@ -66,7 +78,7 @@ public class AuthServiceImpl  implements AuthService, UserDetailsService {
     }
 
     @Override
-    public UserDat addRoleToUser(String username, String roleName) {
+    public UserDTO addRoleToUser(String username, String roleName) {
         Autorities rol = autoritiesRepository.findByRole(roleName);
         if(rol == null)
             throw new NotFound("Rol no encontrado, primero debe crearse");
@@ -79,22 +91,22 @@ public class AuthServiceImpl  implements AuthService, UserDetailsService {
         userDetails.get().getRoles().add(rol);
         userRepository.save(userDetails.get());
 
-        return userDetails.get();
+        return userMapper.UserToDTO(userDetails.get());
     }
 
     @Override
-    public Optional<UserDat> findByToken(String token) {
+    public Optional<UserDTO> findByToken(String token) {
         Optional<UserDat> customer= userRepository.findByToken(token);
         if(customer.isPresent()){
             UserDat user = customer.get();
-            return Optional.of(user);
+            return Optional.of(userMapper.UserToDTO(user));
         }
         return  Optional.empty();
     }
 
     @Override
-    public List<UserDat> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDTO> getAllUsers() {
+        return userMapper.UserToDTO(userRepository.findAll());
     }
 
 

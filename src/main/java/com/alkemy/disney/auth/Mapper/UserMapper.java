@@ -7,6 +7,10 @@ import com.alkemy.disney.auth.entity.UserDat;
 import com.alkemy.disney.mapper.CharacterMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+
+import java.util.Collection;
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
@@ -15,4 +19,5 @@ public interface UserMapper {
 
     UserDTO UserToDTO (UserDat userDat);
 
+    List<UserDTO> UserToDTO (List<UserDat> userDat);
 }
