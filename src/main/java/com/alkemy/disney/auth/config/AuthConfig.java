@@ -1,12 +1,14 @@
 package com.alkemy.disney.auth.config;
 
 import com.alkemy.disney.auth.entity.UserDat;
+import com.alkemy.disney.auth.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,25 +24,26 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class AuthConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserDat userRepo;
+    private final UserRepository userRepo;
 
-    public AuthConfig(UserDat userRepo) {
+    public AuthConfig(UserRepository userRepo) {
         this.userRepo = userRepo;
     }
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-
-
-
         http
+                .csrf().and()
+                .headers().frameOptions().disable();
+        http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/","/home","/login","/register").permitAll()
                 //.antMatchers("/","/home","/login","/register").hasRole("ROLELOG")
                 .anyRequest().authenticated()
-                .and()
-                .httpBasic();
+                .and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
 

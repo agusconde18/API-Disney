@@ -178,6 +178,8 @@ public class RestExceptionController extends ResponseEntityExceptionHandler {
         );
     }
 
+
+
     @ExceptionHandler(value = {ParseException.class})
     protected ResponseEntity<Object> handleParseException(ParseException ex, WebRequest request){
         ExceptionDTO exceptionDTO = new ExceptionDTO(
