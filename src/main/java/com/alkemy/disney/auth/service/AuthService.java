@@ -3,11 +3,13 @@ package com.alkemy.disney.auth.service;
 import com.alkemy.disney.auth.dto.RoleDTO;
 import com.alkemy.disney.auth.dto.UserDTO;
 import com.alkemy.disney.auth.entity.UserDat;
+import org.springframework.stereotype.Service;
 
 import javax.management.relation.Role;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public interface AuthService {
     UserDTO saveUser (UserDTO user);
     RoleDTO saveRole (RoleDTO role);

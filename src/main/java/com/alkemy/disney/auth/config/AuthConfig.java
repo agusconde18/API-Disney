@@ -1,6 +1,8 @@
 package com.alkemy.disney.auth.config;
 
 import com.alkemy.disney.auth.repository.UserRepository;
+import com.alkemy.disney.auth.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,21 +21,18 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 //@RequiredArgsConstructor
 public class AuthConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    UserDetailsService authService;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    UserRepository userRepo;
 
-    private final UserDetailsService userDetailsService;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final UserRepository userRepo;
-
-    public AuthConfig(UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder, UserRepository userRepo) {
-        this.userDetailsService = userDetailsService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.userRepo = userRepo;
-    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService()
+        auth.userDetailsService(authService).passwordEncoder(bCryptPasswordEncoder);
     }
 
     @Override
@@ -49,7 +48,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/home","/login","/register").permitAll()
+                .antMatchers("/films/**","/auth/**","/characters/**","/genre/**","/series/**").permitAll()
                 //.antMatchers("/","/home","/login","/register").hasRole("ROLELOG")
                 .anyRequest().authenticated()
                 .and().sessionManagement()
