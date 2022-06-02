@@ -7,15 +7,18 @@ import com.alkemy.disney.auth.repository.UserRepository;
 
 import com.alkemy.disney.auth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.management.relation.Role;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
-public class AuthServiceImpl  implements AuthService {
+public class AuthServiceImpl  implements AuthService, UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
@@ -67,4 +70,20 @@ public class AuthServiceImpl  implements AuthService {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        Optional<UserDat> userDat = userRepository.findByUsername(userName);
+        if(userDat.isEmpty())
+            return null;
+        UserDat usuario = userDat.get();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        usuario.getRoles()
+                .forEach( rol -> authorities
+                        .add(
+                                new SimpleGrantedAuthority(rol.getRol())
+                        )
+                );
+
+        return new User(usuario.getUsername(), usuario.getPassword(),authorities);
+    }
 }
