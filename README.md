@@ -51,7 +51,8 @@
   </ol>
 </details>
 
-[Autores](##autores-%EF%B8%8F)
+[Uso](#uso-%EF%B8%8F)
+[Autores](#autores-%EF%B8%8F)
 
 
 <!-- ABOUT THE PROJECT -->
