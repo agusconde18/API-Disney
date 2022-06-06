@@ -181,20 +181,35 @@ A continuacion se encuentran los pasos para poder aprovechar las funcionalidades
 A continuacion se encuentran ejemplos de los casos de uso de los diferentes endpoints.
 <!--Additional screenshots, code examples and demos work well in this space. You may also link to more resources.-->
 
-| Metodos | Recurso | Endpoint | Respuesta | 
-|--------|:--------:|----------|-----------|
-| GET    | FILMS | /films | `list of films` | 
-| POST   |       | /films | `posted film data` | 
-| PUT    |       | /films/{id} | `updated film data` | 
-| DELETE |       | /films/{id} | `deleted film data` | 
-| GET    | CHARACTERS | /characters | `list of characters` | 
-| POST   |            | /characters | `posted character data` | 
-| PUT    |            | /characters/{id} | `updated character data` | 
-| DELETE |            | /characters/{id} | `deleted character data` | 
-| GET    | GENRES | /genre | `list of genres` | 
-| POST   |        | /genre | `posted genre data` | 
-| PUT    |        | /genre/{id}| `updated genre data` | 
+| Metodos | Recurso | Endpoint | Respuesta | Requerimiento |
+|--------|:--------:|----------|-----------|---------------|
+| GET    | FILMS | /films | `list of films` | |
+| POST   |       | /films | `posted film data` | title, rating, releaseDate, coverImage |
+| PUT    |       | /films/{id} | `updated film data` | id in parameters |
+| DELETE |       | /films/{id} | `deleted film data` | id in parameters |
+| GET    | CHARACTERS | /characters | `list of characters` | |
+| POST   |            | /characters | `posted character data` | name, age, image, weight, story |
+| PUT    |            | /characters/{id} | `updated character data` | id in parameters |
+| DELETE |            | /characters/{id} | `deleted character data` | id in parameters |
+| GET    | GENRES | /genre | `list of genres` | |
+| POST   |        | /genre | `posted genre data` | name |
+| PUT    |        | /genre/{id}| `updated genre data` | id in parameters |
+| POST   |  USER  | /auth/signup | `created user` | username, email, password, role (admin, user, mod) |
+| POST   |  USER  | /auth/signin | `user authentication token` | username, password |
 
+### Authentication Response
+```json
+{
+    "id": 1,
+    "username": "julia",
+    "email": "julia@admin.com",
+    "roles": [
+        "ROLE_ADMIN"
+    ],
+    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWxpYSIsImlhdCI6MTY1NDUzMDA3OSwiZXhwIjoxNjU0NjE2NDc5fQ.B2fEH90zsuEk5WVST-H4N3qm0ycrW1bb8CSvkZgFt7rojBV3XRVV9X2Lm6etmcJBNi1YNpCt57GcPsv-B6F25A",
+    "tokenType": "Bearer"
+}
+```
 
 ### Film Response in List
 ```javascript
@@ -272,7 +287,7 @@ A continuacion se encuentran ejemplos de los casos de uso de los diferentes endp
 }
 ```
 
-### Error Response
+### Generic Error Response
 ```json
 {
     "status": "BAD_REQUEST",
