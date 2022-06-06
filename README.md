@@ -1,253 +1,355 @@
 <div id="top"></div>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
 
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
-<!-- PROJECT LOGO -->
+<!-- PROJECT HEADER -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
-  <h3 align="center">Best-README-Template</h3>
-
-  <p align="center">
-    An awesome README template to jumpstart your projects!
+  <h1 align="center">Disney API</h1>
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://bbva-testja.herokuapp.com/">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/agusconde18/API-Disney/tree/main/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
-  </p>
+    <a href="https://github.com/agusconde18/API-Disney/tree/main/issues">Request Feature</a>
+    <br />
 </div>
 
 
 
 <!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
 
-
+### Tabla de Contenidos
+1. [Sobre El Proyecto](#sobre-el-proyecto-)
+1. [Construido con](#construido-con-%EF%B8%8F)
+2. [Comenzando](#comenzando-)
+3. [Uso](#uso-%EF%B8%8F)
+4. [Despliegue](#despliegue-)
+5. [Autores](#autores-%EF%B8%8F)
+6. [Contribuyendo](#contribuyendo-)
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Sobre El Proyecto 📖
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+El proyecto esta creado para satisfacer a medida de las necesidades del cliente. El requerimiento era desarrollar una apliacion que le permita a niños y niñas hispanohablantes explorar el mundo de Disney. Para hacer esto nos solicitaron que mediante la aplicacion se pueda conocer y modificar a personajes y entender en que peliculas participaron.
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+Objetivo 🎯
+* Utilizar Spring Boot.
+* Las rutas deberán seguir el patrón REST.
+* Utilizar la librería Spring Security.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+Utilizamos el patron MVC para diseñar las entidades (modelos) y manejar la interaccion de las mismas con la capa de datos y controladores mediante DTOs (data transfer objects).
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-### Built With
-
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+Testeo 🧰
+* Mediante postman
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- BUILD WITH -->
+## Construido con 🛠️
+
+Aplicamos las siguientes tecnologías para construir el proyecto.
+
+* [Maven](https://maven.apache.org/)
+* [MySQL](https://www.mysql.com/)
+* [Spring](https://spring.io/)
+* [Spring Boot](https://spring.io/projects/spring-boot)
+* [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
+* [Spring Security](https://spring.io/projects/spring-security)
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Comenzando 🚀
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Para poder levantar y compilar el proyecto localmente debes cumplir los siguientes requisitos y realizar las instalaciones pertinentes.
+A continuacion se encuentran los pasos para poder aprovechar las funcionalidades de la API.
 
-### Prerequisites
+### Prerequisitos 📋
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
+* Tener java 11 (como minimo) configurado
+  ```html
+    <properties>
+      <java.version>11</java.version>
+    </properties>
   ```
+* Tener maven configurado
 
-### Installation
+### Instalacion 🔧
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clona el repositorio
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/agusconde18/API-Disney.git
    ```
-3. Install NPM packages
-   ```sh
-   npm install
+2. Abre el proyecto con [IntelliJ IDEA](https://www.jetbrains.com/idea/)
+3. Instala las dependencias de maven
+    ```html
+    <dependencies>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <scope>runtime</scope>
+        <optional>true</optional>
+      </dependency>
+
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <optional>true</optional>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sendgrid</groupId>
+        <artifactId>sendgrid-java</artifactId>
+        <version>4.7.4</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-validation</artifactId>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-entitymanager</artifactId>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>2.5.3</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.modelmapper</groupId>
+        <artifactId>modelmapper</artifactId>
+        <version>2.4.5</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct</artifactId>
+        <version>1.4.2.Final</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+		  </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+      </dependency>
+
+    </dependencies>
+    ```
+
+4. Agrega las siguientes configuraciones a `application.properties`
+   ```javascript
+   spring.datasource.url=jdbc:mysql:
+   spring.datasource.username=bbvajatest
+   spring.datasource.password=bbvajatest
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+
+5. Compila el proyecto (puede demorar un poco la primera vez). Recomendamos usar la herramienta Postman para probar las requests a la API.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Uso ⚙️
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+A continuacion se encuentran ejemplos de los casos de uso de los diferentes endpoints.
+<!--Additional screenshots, code examples and demos work well in this space. You may also link to more resources.-->
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+| Metodos | Recurso | Endpoint | Respuesta | Requerimiento |
+|--------|:--------:|----------|-----------|---------------|
+| GET    | FILMS | /films | `list of films` | |
+| POST   |       | /films | `posted film data` | title, rating, releaseDate, coverImage |
+| PUT    |       | /films/{id} | `updated film data` | id in parameters |
+| DELETE |       | /films/{id} | `deleted film data` | id in parameters |
+| GET    | CHARACTERS | /characters | `list of characters` | |
+| POST   |            | /characters | `posted character data` | name, age, image, weight, story |
+| PUT    |            | /characters/{id} | `updated character data` | id in parameters |
+| DELETE |            | /characters/{id} | `deleted character data` | id in parameters |
+| GET    | GENRES | /genre | `list of genres` | |
+| POST   |        | /genre | `posted genre data` | name |
+| PUT    |        | /genre/{id}| `updated genre data` | id in parameters |
+| POST   |  USER  | /auth/signup | `created user` | username, email, password, role (admin, user, mod) |
+| POST   |  USER  | /auth/signin | `user authentication token` | username, password |
+
+### Authentication Response
+```json
+{
+    "id": 1,
+    "username": "julia",
+    "email": "julia@admin.com",
+    "roles": [
+        "ROLE_ADMIN"
+    ],
+    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWxpYSIsImlhdCI6MTY1NDUzMDA3OSwiZXhwIjoxNjU0NjE2NDc5fQ.B2fEH90zsuEk5WVST-H4N3qm0ycrW1bb8CSvkZgFt7rojBV3XRVV9X2Lm6etmcJBNi1YNpCt57GcPsv-B6F25A",
+    "tokenType": "Bearer"
+}
+```
+
+### Film Response in List
+```javascript
+{
+  id: 1,
+  title: "La obra maestra de mi vida",
+  releaseDate: "1998-07-12T00:00:00.000+00:00",
+  coverImage: "posterMaestro.png"
+}
+```
+
+### Film Response with id
+```javascript
+{
+  id: 1,
+  title: "La obra maestra de mi vida",
+  rating: 10,
+  releaseDate: "1998-07-12T00:00:00.000+00:00",
+  coverImage: "posterMaestro.png",
+  characters: [
+    {
+      id: 1,
+      name: "Cheesy",
+      age: 2,
+      image: "cheesy.png",
+      weight: 12,
+      story: "Perro callejero en busca de un dueño para toda la vida"
+    }
+  ],
+  genre: {
+    id: 4,
+    name: "infantil"
+  }
+}
+```
+### Character Response in List
+```javascript
+{
+  id: 1,
+  name: "Cheesy",
+  image: "cheesy.png"
+}
+```
+
+### Character Response with id
+
+```javascript
+{
+  id: 1,
+  name: "Cheesy",
+  age: 2,
+  image: "cheesy.png",
+  weight: 12,
+  story: "Perro callejero en busca de un dueño para toda la vida",
+  actFilm: [
+    {
+      id: 1,
+      title: "La obra maestra de mi vida",
+      rating: 10,
+      releaseDate: "1998-07-12T00:00:00.000+00:00",
+      coverImage: "posterMaestro.png",
+      genre: {
+        id: 4,
+        name: "infantil"
+      }
+    }
+  ]
+}
+```
+### Genres Response
+```javascript
+{
+  id: 1,
+  name: "aventuras"
+}
+```
+
+### Generic Error Response
+```json
+{
+    "status": "BAD_REQUEST",
+    "message": "Existe un problema con los datos enviados",
+    "errors": [
+        "El campo coverImage no puede ser nulo",
+        "El campo date no puede estar vacio",
+        "El campo title no puede ser nulo",
+        "El campo title no puede estar vacio",
+        "El campo date no puede ser nulo",
+        "El campo genre no puede ser nulo",
+        "El campo coverImage no puede estar vacio"
+    ]
+}
+```
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- DEPLOY -->
+## Despliegue 📦
+
+El proyecto fue desplegado a través de [Heroku](https://www.heroku.com/) 
+
+Link del proyecto: [https://bbva-testja.herokuapp.com/](https://bbva-testja.herokuapp.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+<!-- AUTHORS -->
+## Autores ✒️
 
-<!-- ROADMAP -->
-## Roadmap
-
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+- Agustin Conde - [@agusconde18](https://github.com/agusconde18) - [linkedin](https://www.linkedin.com/in/agustin-adrian-conde/) 
+- Julia Scodelari - [@juliascode96](https://github.com/juliascode96) - [linkedin](https://www.linkedin.com/in/julia-scodelari/)
+- Brian Ciszewski Alonso - [@BrianCiszewski-bbva](https://github.com/BrianCiszewski-bbva) - [linkedin](https://www.linkedin.com/in/brian-matias-ciszewski-alonso-938a47202/)
+- Iara Baya Vargas - [@iarabaya](https://github.com/iarabaya) - [linkedin](https://www.linkedin.com/in/iarabayavargas/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- CONTRIBUTING -->
-## Contributing
+## Contribuyendo 🤝
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Cualquier contribucion y mejora al proyecto es **muy apreciado** por nosotros.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+Si tienes alguna sugerencia que pueda mejorar este proyecto, por favor crea una rama del repositorio y un pull request. O simplemente abre un issue con la etiqueta "enhancement". Muchas gracias!
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+1. Haz una rama del Proyecto
+2. Crea una rama Feature (`git checkout -b feature/AmazingFeature`)
+3. Haz commit de tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Haz push de tu rama (`git push origin feature/AmazingFeature`)
+5. Abre una Pull Request
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+
+
