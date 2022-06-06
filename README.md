@@ -52,7 +52,6 @@ Here's why:
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
 <!-- BUILD WITH -->
 ## Construido con 🛠️
 
@@ -77,7 +76,6 @@ A continuacion se encuentran los pasos para poder aprovechar las funcionalidades
 
 ### Prerequisitos 📋
 
-This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
   npm install npm@latest -g
@@ -85,20 +83,23 @@ This is an example of how to list things you need to use the software and how to
 
 ### Instalacion 🔧
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clona el repositorio
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/agusconde18/API-Disney.git
    ```
-3. Install NPM packages
-   ```sh
-   npm install
+2. Abre el proyecto con [IntelliJ IDEA](https://www.jetbrains.com/idea/)
+3. Instala las dependencias de maven
+   ```html
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+4. Agrega las siguientes configuraciones a `application.properties`
+   ```
+   spring.datasource.url=jdbc:mysql:
+   spring.datasource.username=bbvajatest
+   spring.datasource.password=bbvajatest
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -110,32 +111,28 @@ _Below is an example of how you can instruct your audience on installing and set
 A continuacion se encuentran ejemplos de los casos de uso de los diferentes endpoints.
 <!--Additional screenshots, code examples and demos work well in this space. You may also link to more resources.-->
 
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
 | Metodos | Recurso | Endpoint | Respuesta | 
 |--------|:--------:|----------|-----------|
-| GET    | FILMS | /films | respuesta | 
-| POST   |       | /films | respuesta | 
-| PUT    |       | /films | respuesta | 
-| DELETE |       | /films | respuesta | 
-| GET    | CHARACTERS | /characters | respuesta | 
-| POST   |            | /characters | respuesta | 
-| PUT    |            | /characters | respuesta | 
-| DELETE |            | /characters | respuesta | 
-| GET    | GENRES | /genres | respuesta | 
-| POST   |        | /genres | respuesta | 
-| PUT    |        | /genres | respuesta | 
+| GET    | FILMS | /films | `list of films` | 
+| POST   |       | /films | `posted film data` | 
+| PUT    |       | /films/{id} | `updated film data` | 
+| DELETE |       | /films/{id} | `deleted film data` | 
+| GET    | CHARACTERS | /characters | `list of characters` | 
+| POST   |            | /characters | `posted character data` | 
+| PUT    |            | /characters/{id} | `updated character data` | 
+| DELETE |            | /characters/{id} | `deleted character data` | 
+| GET    | GENRES | /genres | `list of genres` | 
+| POST   |        | /genres | `posted genre data` | 
+| PUT    |        | /genres/{id}| `updated genre data` | 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- DEPLOY -->
 ## Despliegue 📦
 
+El proyecto fue desplegado a través de [Heroku](https://www.heroku.com/) 
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Link del proyecto: [https://bbva-testja.herokuapp.com/](https://bbva-testja.herokuapp.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -143,26 +140,25 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 <!-- AUTHORS -->
 ## Autores ✒️
 
-- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com 
-- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+- Agustin Conde - [@agusconde18](https://github.com/agusconde18) - [linkedin](https://www.linkedin.com/in/agustin-adrian-conde/) 
+- Julia Scodelari - [@juliascode96](https://github.com/juliascode96) - [linkedin](https://www.linkedin.com/in/julia-scodelari/)
+- Brian Ciszewski Alonso - [@BrianCiszewski-bbva](https://github.com/BrianCiszewski-bbva) - [linkedin](https://www.linkedin.com/in/brian-matias-ciszewski-alonso-938a47202/)
+- Iara Baya Vargas - [@iarabaya](https://github.com/iarabaya) - [linkedin](https://www.linkedin.com/in/iarabayavargas/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 ## Contribuyendo 🤝
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Cualquier contribucion y mejora al proyecto es **muy apreciado** por nosotros.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+Si tienes alguna sugerencia que pueda mejorar este proyecto, por favor crea una rama del repositorio y un pull request. O simplemente abre un issue con la etiqueta "enhancement". Muchas gracias!
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Haz una rama del Proyecto
+2. Crea una rama Feature (`git checkout -b feature/AmazingFeature`)
+3. Haz commit de tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Haz push de tu rama (`git push origin feature/AmazingFeature`)
+5. Abre una Pull Request
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
