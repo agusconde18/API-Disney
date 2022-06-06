@@ -18,38 +18,17 @@
 <div align="center">
   <h1 align="center">Disney API</h1>
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://bbva-testja.herokuapp.com/">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/agusconde18/API-Disney/tree/main/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/agusconde18/API-Disney/tree/main/issues">Request Feature</a>
     <br />
 </div>
 
 
 
 <!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Tabla de Contenidos</summary>
-  <ol>
-    <li>
-      <a href="#sobre-el-proyecto-📖">Sobre El Proyecto</a>
-      <ul>
-        <li><a href="#construido-con-🛠️">Construido con</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#comenzando-🚀">Comenzando</a>
-      <ul>
-        <li><a href="#prerequisitos-📋">Pre-requisitos</a></li>
-        <li><a href="#instalacion-🔧">Instalacion</a></li>
-      </ul>
-    </li>
-    <li><a href="#uso-⚙️">Uso</a></li>
-    <li><a href="#despliegue-📦">Despliegue</a></li>
-    <li><a href="#contribuyendo-🤝">Contribuyendo</a></li>
-  </ol>
-</details>
 
 ### Tabla de Contenidos
 1. [Sobre El Proyecto](#sobre-el-proyecto-)
@@ -63,14 +42,13 @@
 <!-- ABOUT THE PROJECT -->
 ## Sobre El Proyecto 📖
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+El proyecto esta creado para satisfacer las necesidades del cliente segun los objetivos del challenge.
 
 Here's why:
 * Your time should be focused on creating something amazing. A project that solves a problem and helps others
 * You shouldn't be doing the same tasks over and over like creating a README from scratch
 * You should implement DRY principles to the rest of your life :smile:
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -91,12 +69,11 @@ Aplicamos las siguientes tecnologías para construir el proyecto.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
 <!-- GETTING STARTED -->
 ## Comenzando 🚀
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Para poder levantar y compilar el proyecto localmente debes cumplir los siguientes requisitos y realizar las instalaciones pertinentes.
+A continuacion se encuentran los pasos para poder aprovechar las funcionalidades de la API.
 
 ### Prerequisitos 📋
 
@@ -127,21 +104,30 @@ _Below is an example of how you can instruct your audience on installing and set
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
 <!-- USAGE EXAMPLES -->
 ## Uso ⚙️
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+A continuacion se encuentran ejemplos de los casos de uso de los diferentes endpoints.
+<!--Additional screenshots, code examples and demos work well in this space. You may also link to more resources.-->
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-| Título | OTRA | respuesta | | |
-|:-------------------:|---|---|---|---|
-| Row1 | Row2 | respuesta | | |
-| Row2 | Row2 | respuesta | | |
+| Metodos | Recurso | Endpoint | Respuesta | 
+|--------|:--------:|----------|-----------|
+| GET    | FILMS | /films | respuesta | 
+| POST   |       | /films | respuesta | 
+| PUT    |       | /films | respuesta | 
+| DELETE |       | /films | respuesta | 
+| GET    | CHARACTERS | /characters | respuesta | 
+| POST   |            | /characters | respuesta | 
+| PUT    |            | /characters | respuesta | 
+| DELETE |            | /characters | respuesta | 
+| GET    | GENRES | /genres | respuesta | 
+| POST   |        | /genres | respuesta | 
+| PUT    |        | /genres | respuesta | 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
