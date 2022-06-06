@@ -51,9 +51,14 @@
   </ol>
 </details>
 
-[Uso](#uso-%EF%B8%8F)
-[Autores](#autores-%EF%B8%8F)
-
+### Tabla de Contenidos
+1. [Sobre El Proyecto](#sobre-el-proyecto-)
+1. [Construido con](#construido-con-%EF%B8%8F)
+2. [Comenzando](#comenzando-)
+3. [Uso](#uso-%EF%B8%8F)
+4. [Despliegue](#despliegue-)
+5. [Autores](#autores-%EF%B8%8F)
+6. [Contribuyendo](#contribuyendo-)
 
 <!-- ABOUT THE PROJECT -->
 ## Sobre El Proyecto 📖
@@ -148,6 +153,17 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+
+<!-- AUTHORS -->
+## Autores ✒️
+
+- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com 
+- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 <!-- CONTRIBUTING -->
 ## Contribuyendo 🤝
 
@@ -161,16 +177,6 @@ Don't forget to give the project a star! Thanks again!
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- AUTHORS -->
-## Autores ✒️
-
-- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com 
-- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
