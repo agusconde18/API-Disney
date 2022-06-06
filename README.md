@@ -160,6 +160,16 @@ A continuacion se encuentran los pasos para poder aprovechar las funcionalidades
         <version>1.4.2.Final</version>
       </dependency>
 
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+		  </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+      </dependency>
+
     </dependencies>
     ```
 
