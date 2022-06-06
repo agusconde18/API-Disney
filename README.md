@@ -48,7 +48,7 @@
     <li><a href="#uso-⚙️">Uso</a></li>
     <li><a href="#despliegue-📦">Despliegue</a></li>
     <li><a href="#contribuyendo-🤝">Contribuyendo</a></li>
-    <li><a href="#autores-✒️">Autores</a></li>
+    <li><a href="#autores-">Autores</a></li>
   </ol>
 </details>
 
