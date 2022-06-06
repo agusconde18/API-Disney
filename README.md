@@ -127,7 +127,7 @@ A continuacion se encuentran ejemplos de los casos de uso de los diferentes endp
 
 
 ### Film Response in List
-```json
+```javascript
 {
   id: 1,
   title: "La obra maestra de mi vida",
@@ -137,7 +137,7 @@ A continuacion se encuentran ejemplos de los casos de uso de los diferentes endp
 ```
 
 ### Film Response with id
-```json
+```javascript
 {
   id: 1,
   title: "La obra maestra de mi vida",
@@ -161,7 +161,7 @@ A continuacion se encuentran ejemplos de los casos de uso de los diferentes endp
 }
 ```
 ### Character Response in List
-```json
+```javascript
 {
   id: 1,
   name: "Cheesy",
@@ -171,7 +171,7 @@ A continuacion se encuentran ejemplos de los casos de uso de los diferentes endp
 
 ### Character Response with id
 
-```json
+```javascript
 {
   id: 1,
   name: "Cheesy",
@@ -195,7 +195,7 @@ A continuacion se encuentran ejemplos de los casos de uso de los diferentes endp
 }
 ```
 ### Genres Response
-```json
+```javascript
 {
   id: 1,
   name: "aventuras"
@@ -203,7 +203,7 @@ A continuacion se encuentran ejemplos de los casos de uso de los diferentes endp
 ```
 
 ### Error Response
-```json
+```javascript
 {
   status: "BAD_REQUEST",
   message: "No se pudo encontrar un personaje con dicho ID",
