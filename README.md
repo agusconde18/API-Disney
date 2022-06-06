@@ -51,7 +51,7 @@
   </ol>
 </details>
 
-[Autores](#autores-✒️)
+[Autores](##autores-%EF%B8%8F)
 
 
 <!-- ABOUT THE PROJECT -->
