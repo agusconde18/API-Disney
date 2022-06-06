@@ -194,7 +194,7 @@ A continuacion se encuentran ejemplos de los casos de uso de los diferentes endp
 | Metodos | Recurso | Endpoint | Respuesta | Requerimiento |
 |--------|:--------:|----------|-----------|---------------|
 | GET    | FILMS | /films | `list of films` | |
-| POST   |       | /films | `posted film data` | title, rating, releaseDate, coverImage |
+| POST   |       | /films | `posted film data` | title, rating, date, coverImage |
 | PUT    |       | /films/{id} | `updated film data` | id in parameters |
 | DELETE |       | /films/{id} | `deleted film data` | id in parameters |
 | GET    | CHARACTERS | /characters | `list of characters` | |
