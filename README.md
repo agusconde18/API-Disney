@@ -125,6 +125,93 @@ A continuacion se encuentran ejemplos de los casos de uso de los diferentes endp
 | POST   |        | /genres | `posted genre data` | 
 | PUT    |        | /genres/{id}| `updated genre data` | 
 
+
+### Film Response in List
+```json
+{
+  id: 1,
+  title: "La obra maestra de mi vida",
+  releaseDate: "1998-07-12T00:00:00.000+00:00",
+  coverImage: "posterMaestro.png"
+}
+```
+
+### Film Response with id
+```json
+{
+  id: 1,
+  title: "La obra maestra de mi vida",
+  rating: 10,
+  releaseDate: "1998-07-12T00:00:00.000+00:00",
+  coverImage: "posterMaestro.png",
+  characters: [
+    {
+      id: 1,
+      name: "Cheesy",
+      age: 2,
+      image: "cheesy.png",
+      weight: 12,
+      story: "Perro callejero en busca de un dueño para toda la vida"
+    }
+  ],
+  genre: {
+    id: 4,
+    name: "infantil"
+  }
+}
+```
+### Character Response in List
+```json
+{
+  id: 1,
+  name: "Cheesy",
+  image: "cheesy.png"
+}
+```
+
+### Character Response with id
+
+```json
+{
+  id: 1,
+  name: "Cheesy",
+  age: 2,
+  image: "cheesy.png",
+  weight: 12,
+  story: "Perro callejero en busca de un dueño para toda la vida",
+  actFilm: [
+    {
+      id: 1,
+      title: "La obra maestra de mi vida",
+      rating: 10,
+      releaseDate: "1998-07-12T00:00:00.000+00:00",
+      coverImage: "posterMaestro.png",
+      genre: {
+        id: 4,
+        name: "infantil"
+      }
+    }
+  ]
+}
+```
+### Genres Response
+```json
+{
+  id: 1,
+  name: "aventuras"
+}
+```
+
+### Error Response
+```json
+{
+  status: "BAD_REQUEST",
+  message: "No se pudo encontrar un personaje con dicho ID",
+  errors: [
+    ""
+  ]
+}
+```
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- DEPLOY -->
