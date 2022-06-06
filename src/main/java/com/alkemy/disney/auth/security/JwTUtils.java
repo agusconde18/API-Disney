@@ -1,6 +1,6 @@
 package com.alkemy.disney.auth.security;
 
-import com.alkemy.disney.auth.service.UserDetailsImpl;
+import com.alkemy.disney.auth.service.impl.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.slf4j.Logger;

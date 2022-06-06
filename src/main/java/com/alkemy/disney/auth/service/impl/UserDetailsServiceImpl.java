@@ -1,4 +1,4 @@
-package com.alkemy.disney.auth.service;
+package com.alkemy.disney.auth.service.impl;
 
 import com.alkemy.disney.auth.entity.User;
 import com.alkemy.disney.auth.repository.UserRepo;

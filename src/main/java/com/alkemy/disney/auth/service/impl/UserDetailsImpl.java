@@ -1,7 +1,5 @@
-package com.alkemy.disney.auth.service;
+package com.alkemy.disney.auth.service.impl;
 
-import com.alkemy.disney.auth.entity.EnumRole;
-import com.alkemy.disney.auth.entity.Role;
 import com.alkemy.disney.auth.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

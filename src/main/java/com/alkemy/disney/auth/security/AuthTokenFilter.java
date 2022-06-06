@@ -1,6 +1,6 @@
 package com.alkemy.disney.auth.security;
 
-import com.alkemy.disney.auth.service.UserDetailsServiceImpl;
+import com.alkemy.disney.auth.service.impl.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
