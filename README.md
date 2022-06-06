@@ -42,13 +42,17 @@
 <!-- ABOUT THE PROJECT -->
 ## Sobre El Proyecto 📖
 
-El proyecto esta creado para satisfacer las necesidades del cliente segun los objetivos del challenge.
+El proyecto esta creado para satisfacer a medida de las necesidades del cliente. El requerimiento era desarrollar una apliacion que le permita a niños y niñas hispanohablantes explorar el mundo de Disney. Para hacer esto nos solicitaron que mediante la aplicacion se pueda conocer y modificar a personajes y entender en que peliculas participaron.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+Objetivo 🎯
+* Utilizar Spring Boot.
+* Las rutas deberán seguir el patrón REST.
+* Utilizar la librería Spring Security.
 
+Utilizamos el patron MVC para diseñar las entidades (modelos) y manejar la interaccion de las mismas con la capa de datos y controladores mediante DTOs (data transfer objects).
+
+Testeo 🧰
+* Mediante postman
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -76,10 +80,13 @@ A continuacion se encuentran los pasos para poder aprovechar las funcionalidades
 
 ### Prerequisitos 📋
 
-* npm
-  ```sh
-  npm install npm@latest -g
+* Tener java 11 (como minimo) configurado
+  ```html
+    <properties>
+      <java.version>11</java.version>
+    </properties>
   ```
+* Tener maven configurado
 
 ### Instalacion 🔧
 
@@ -89,18 +96,94 @@ A continuacion se encuentran los pasos para poder aprovechar las funcionalidades
    ```
 2. Abre el proyecto con [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 3. Instala las dependencias de maven
-   ```html
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-   ```
+    ```html
+    <dependencies>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <scope>runtime</scope>
+        <optional>true</optional>
+      </dependency>
+
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <optional>true</optional>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sendgrid</groupId>
+        <artifactId>sendgrid-java</artifactId>
+        <version>4.7.4</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-validation</artifactId>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-entitymanager</artifactId>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>2.5.3</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.modelmapper</groupId>
+        <artifactId>modelmapper</artifactId>
+        <version>2.4.5</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct</artifactId>
+        <version>1.4.2.Final</version>
+      </dependency>
+
+    </dependencies>
+    ```
+
 4. Agrega las siguientes configuraciones a `application.properties`
-   ```
+   ```javascript
    spring.datasource.url=jdbc:mysql:
    spring.datasource.username=bbvajatest
    spring.datasource.password=bbvajatest
    ```
+
+5. Compila el proyecto (puede demorar un poco la primera vez). Recomendamos usar la herramienta Postman para probar las requests a la API.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -121,9 +204,9 @@ A continuacion se encuentran ejemplos de los casos de uso de los diferentes endp
 | POST   |            | /characters | `posted character data` | 
 | PUT    |            | /characters/{id} | `updated character data` | 
 | DELETE |            | /characters/{id} | `deleted character data` | 
-| GET    | GENRES | /genres | `list of genres` | 
-| POST   |        | /genres | `posted genre data` | 
-| PUT    |        | /genres/{id}| `updated genre data` | 
+| GET    | GENRES | /genre | `list of genres` | 
+| POST   |        | /genre | `posted genre data` | 
+| PUT    |        | /genre/{id}| `updated genre data` | 
 
 
 ### Film Response in List
@@ -203,13 +286,19 @@ A continuacion se encuentran ejemplos de los casos de uso de los diferentes endp
 ```
 
 ### Error Response
-```javascript
+```json
 {
-  status: "BAD_REQUEST",
-  message: "No se pudo encontrar un personaje con dicho ID",
-  errors: [
-    ""
-  ]
+    "status": "BAD_REQUEST",
+    "message": "Existe un problema con los datos enviados",
+    "errors": [
+        "El campo coverImage no puede ser nulo",
+        "El campo date no puede estar vacio",
+        "El campo title no puede ser nulo",
+        "El campo title no puede estar vacio",
+        "El campo date no puede ser nulo",
+        "El campo genre no puede ser nulo",
+        "El campo coverImage no puede estar vacio"
+    ]
 }
 ```
 <p align="right">(<a href="#top">back to top</a>)</p>
